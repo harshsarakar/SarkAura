@@ -824,3 +824,12 @@ nav a:hover {
         position: relative;
     }
 }
+.hero-btn {
+    display: inline-block;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.secondary-btn {
+    margin-left: 10px;
+    }
