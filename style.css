@@ -982,3 +982,74 @@ html {
     }
 
     }
+/* HOW IT WORKS */
+
+.how-it-works {
+    padding: 80px 20px;
+    text-align: center;
+}
+
+.section-heading {
+    max-width: 650px;
+    margin: 0 auto 40px;
+}
+
+.section-heading h2 {
+    font-size: 34px;
+    margin: 10px 0;
+}
+
+.section-heading p {
+    opacity: 0.75;
+}
+
+.steps {
+    max-width: 1000px;
+    margin: auto;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.step-card {
+    padding: 28px 22px;
+
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 20px;
+
+    background: rgba(255,255,255,0.03);
+}
+
+.step-number {
+    font-size: 14px;
+    font-weight: bold;
+    opacity: 0.6;
+    margin-bottom: 15px;
+}
+
+.step-card h3 {
+    margin-bottom: 10px;
+}
+
+.step-card p {
+    opacity: 0.7;
+    line-height: 1.6;
+}
+
+@media (max-width: 700px) {
+
+    .how-it-works {
+        padding: 60px 18px;
+    }
+
+    .section-heading h2 {
+        font-size: 28px;
+    }
+
+    .steps {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    }
