@@ -954,3 +954,6 @@ nav a:hover {
     transform: translateY(-2px);
     box-shadow: 0 12px 30px rgba(124, 60, 255, 0.35);
 }
+html {
+    scroll-behavior: smooth;
+    }
