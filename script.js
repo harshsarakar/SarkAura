@@ -48,17 +48,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     // Order button feedback
-    document.querySelectorAll(".order-btn").forEach(function (button) {
-
-        button.addEventListener("click", function () {
-
-            console.log("SarkAura order/enquiry button clicked.");
-
+    document.querySelectorAll(".order-btn")...
         });
-
-    });
-
-});
 // Mobile menu
 
 const menuBtn = document.getElementById("menuBtn");
