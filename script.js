@@ -2,28 +2,41 @@
 
 document.addEventListener("DOMContentLoaded", function () {
 
-    // Smooth scrolling
+    // =========================
+    // Smooth Scrolling
+    // =========================
+
     document.querySelectorAll('a[href^="#"]').forEach(function (link) {
+
         link.addEventListener("click", function (event) {
 
             const targetId = this.getAttribute("href");
 
-            if (targetId !== "#") {
+            if (targetId && targetId !== "#") {
+
                 const target = document.querySelector(targetId);
 
                 if (target) {
+
                     event.preventDefault();
 
                     target.scrollIntoView({
                         behavior: "smooth"
                     });
+
                 }
+
             }
+
         });
+
     });
 
 
-    // FAQ open / close
+    // =========================
+    // FAQ
+    // =========================
+
     document.querySelectorAll(".faq-item").forEach(function (item) {
 
         const question = item.querySelector("h3");
@@ -37,87 +50,132 @@ document.addEventListener("DOMContentLoaded", function () {
             question.addEventListener("click", function () {
 
                 if (answer.style.display === "none") {
+
                     answer.style.display = "block";
+
                 } else {
+
                     answer.style.display = "none";
+
                 }
 
             });
+
         }
+
     });
 
 
-    // Order button feedback
-    document.querySelectorAll(".order-btn")...
-        });
-// Mobile menu
+    // =========================
+    // Mobile Menu
+    // =========================
 
-const menuBtn = document.getElementById("menuBtn");
-const navLinks = document.querySelector(".nav-links");
+    const menuBtn = document.getElementById("menuBtn");
+    const navLinks = document.querySelector(".nav-links");
 
-if (menuBtn && navLinks) {
+    if (menuBtn && navLinks) {
 
-    menuBtn.addEventListener("click", function () {
-        navLinks.classList.toggle("active");
-    });
+        menuBtn.addEventListener("click", function () {
 
-    navLinks.querySelectorAll("a").forEach(function (link) {
+            navLinks.classList.toggle("active");
 
-        link.addEventListener("click", function () {
-            navLinks.classList.remove("active");
         });
 
+        navLinks.querySelectorAll("a").forEach(function (link) {
+
+            link.addEventListener("click", function () {
+
+                navLinks.classList.remove("active");
+
+            });
+
+        });
+
+    }
+
+
+    // =========================
+    // Order Popup
+    // =========================
+
+    const orderModal = document.getElementById("orderModal");
+    const closeOrder = document.getElementById("closeOrder");
+    const serviceSelect = document.getElementById("serviceSelect");
+    const dmOrderBtn = document.getElementById("dmOrderBtn");
+
+
+    // Order buttons
+
+    document.querySelectorAll(".order-btn").forEach(function (button) {
+
+        button.addEventListener("click", function (event) {
+
+            event.preventDefault();
+
+            if (orderModal) {
+
+                orderModal.classList.add("active");
+
+            }
+
+        });
+
     });
-}
-// Order popup
 
-const orderModal = document.getElementById("orderModal");
-const closeOrder = document.getElementById("closeOrder");
-const serviceSelect = document.getElementById("serviceSelect");
-const dmOrderBtn = document.getElementById("dmOrderBtn");
 
-document.querySelectorAll(".order-btn").forEach(function (button) {
+    // Close button
 
-    button.addEventListener("click", function (event) {
+    if (closeOrder && orderModal) {
 
-        event.preventDefault();
+        closeOrder.addEventListener("click", function () {
 
-        orderModal.classList.add("active");
+            orderModal.classList.remove("active");
 
-    });
+        });
+
+    }
+
+
+    // Close when clicking outside popup
+
+    if (orderModal) {
+
+        orderModal.addEventListener("click", function (event) {
+
+            if (event.target === orderModal) {
+
+                orderModal.classList.remove("active");
+
+            }
+
+        });
+
+    }
+
+
+    // Continue to Instagram
+
+    if (dmOrderBtn && serviceSelect) {
+
+        dmOrderBtn.addEventListener("click", function () {
+
+            const service = serviceSelect.value;
+
+            if (!service) {
+
+                alert("Please select a service first.");
+
+                return;
+
+            }
+
+            window.open(
+                "https://ig.me/m/harshyaduvancii",
+                "_blank"
+            );
+
+        });
+
+    }
 
 });
-
-if (closeOrder) {
-
-    closeOrder.addEventListener("click", function () {
-
-        orderModal.classList.remove("active");
-
-    });
-
-}
-
-if (dmOrderBtn) {
-
-    dmOrderBtn.addEventListener("click", function () {
-
-        const service = serviceSelect.value;
-
-        if (!service) {
-            alert("Please select a service first.");
-            return;
-        }
-
-        const message =
-            "Hello SarkAura 👋%0A" +
-            "I am interested in: " + encodeURIComponent(service);
-
-        window.open(
-            "https://ig.me/m/harshyaduvancii",
-            "_blank"
-        );
-
-    });
-
-                }
