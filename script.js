@@ -93,89 +93,83 @@ document.addEventListener("DOMContentLoaded", function () {
 
     }
 
+// =========================
+// Order Popup
+// =========================
 
-    // =========================
-    // Order Popup
-    // =========================
-
-    const orderModal = document.getElementById("orderModal");
-    const closeOrder = document.getElementById("closeOrder");
-    const serviceSelect = document.getElementById("serviceSelect");
-    const dmOrderBtn = document.getElementById("dmOrderBtn");
+const orderModal = document.getElementById("orderModal");
+const closeOrder = document.getElementById("closeOrder");
+const serviceSelect = document.getElementById("serviceSelect");
+const dmOrderBtn = document.getElementById("dmOrderBtn");
+const mainOrderBtn = document.getElementById("mainOrderBtn");
 
 
-    // Order buttons
+// Open Order Popup
 
-    document.querySelectorAll(".order-btn").forEach(function (button) {
+if (mainOrderBtn && orderModal) {
 
-        button.addEventListener("click", function (event) {
+    mainOrderBtn.addEventListener("click", function () {
 
-            event.preventDefault();
-
-            if (orderModal) {
-
-                orderModal.classList.add("active");
-
-            }
-
-        });
+        orderModal.classList.add("active");
 
     });
 
+}
 
-    // Close button
 
-    if (closeOrder && orderModal) {
+// Close button
 
-        closeOrder.addEventListener("click", function () {
+if (closeOrder && orderModal) {
+
+    closeOrder.addEventListener("click", function () {
+
+        orderModal.classList.remove("active");
+
+    });
+
+}
+
+
+// Close when clicking outside
+
+if (orderModal) {
+
+    orderModal.addEventListener("click", function (event) {
+
+        if (event.target === orderModal) {
 
             orderModal.classList.remove("active");
 
-        });
+        }
 
-    }
+    });
 
-
-    // Close when clicking outside popup
-
-    if (orderModal) {
-
-        orderModal.addEventListener("click", function (event) {
-
-            if (event.target === orderModal) {
-
-                orderModal.classList.remove("active");
-
-            }
-
-        });
-
-    }
+}
 
 
-    // Continue to Instagram
+// Continue to Instagram
 
-    if (dmOrderBtn && serviceSelect) {
+if (dmOrderBtn && serviceSelect) {
 
-        dmOrderBtn.addEventListener("click", function () {
+    dmOrderBtn.addEventListener("click", function () {
 
-            const service = serviceSelect.value;
+        const service = serviceSelect.value;
 
-            if (!service) {
+        if (!service) {
 
-                alert("Please select a service first.");
+            alert("Please select a service first.");
 
-                return;
+            return;
 
-            }
+        }
 
-            window.open(
-                "https://ig.me/m/harshyaduvancii",
-                "_blank"
-            );
+        window.open(
+            "https://ig.me/m/harshyaduvancii",
+            "_blank"
+        );
 
-        });
+    });
 
-    }
+}
 
 });
