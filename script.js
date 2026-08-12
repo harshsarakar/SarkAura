@@ -78,3 +78,55 @@ if (menuBtn && navLinks) {
 
     });
 }
+// Order popup
+
+const orderModal = document.getElementById("orderModal");
+const closeOrder = document.getElementById("closeOrder");
+const serviceSelect = document.getElementById("serviceSelect");
+const dmOrderBtn = document.getElementById("dmOrderBtn");
+
+document.querySelectorAll(".order-btn").forEach(function (button) {
+
+    button.addEventListener("click", function (event) {
+
+        event.preventDefault();
+
+        orderModal.classList.add("active");
+
+    });
+
+});
+
+if (closeOrder) {
+
+    closeOrder.addEventListener("click", function () {
+
+        orderModal.classList.remove("active");
+
+    });
+
+}
+
+if (dmOrderBtn) {
+
+    dmOrderBtn.addEventListener("click", function () {
+
+        const service = serviceSelect.value;
+
+        if (!service) {
+            alert("Please select a service first.");
+            return;
+        }
+
+        const message =
+            "Hello SarkAura 👋%0A" +
+            "I am interested in: " + encodeURIComponent(service);
+
+        window.open(
+            "https://ig.me/m/harshyaduvancii",
+            "_blank"
+        );
+
+    });
+
+                }
