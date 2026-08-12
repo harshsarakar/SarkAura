@@ -832,22 +832,24 @@ nav a:hover {
 
 .secondary-btn {
     margin-left: 10px;
-    /* ORDER POPUP */
+}
+
+
+/* =========================
+   ORDER POPUP
+========================= */
 
 .order-modal {
     display: none;
-
     position: fixed;
     inset: 0;
-
     z-index: 9999;
 
     align-items: center;
     justify-content: center;
 
     padding: 20px;
-
-    background: rgba(0,0,0,0.75);
+    background: rgba(0, 0, 0, 0.75);
 }
 
 .order-modal.active {
@@ -857,17 +859,14 @@ nav a:hover {
 .order-box {
     width: 100%;
     max-width: 420px;
-
     padding: 30px 22px;
 
     border-radius: 22px;
-
     background: #11111d;
 
-    border: 1px solid rgba(255,255,255,0.12);
+    border: 1px solid rgba(255, 255, 255, 0.12);
 
     text-align: center;
-
     position: relative;
 }
 
@@ -882,7 +881,6 @@ nav a:hover {
 
 .close-order {
     position: absolute;
-
     top: 10px;
     right: 15px;
 
@@ -890,43 +888,35 @@ nav a:hover {
     background: transparent;
 
     color: white;
-
     font-size: 28px;
-
     cursor: pointer;
 }
 
 #serviceSelect {
     width: 100%;
-
     padding: 14px;
 
     border-radius: 12px;
-
     border: 1px solid #333;
 
     background: #080812;
-
     color: white;
 
     margin-bottom: 18px;
+    box-sizing: border-box;
 }
 
 .dm-order-btn {
     width: 100%;
-
     padding: 14px;
 
     border: none;
-
     border-radius: 12px;
 
     background: linear-gradient(135deg, #ff2f92, #7c3cff);
 
     color: white;
-
     font-weight: bold;
 
     cursor: pointer;
-        }
     }
