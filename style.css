@@ -920,3 +920,37 @@ nav a:hover {
 
     cursor: pointer;
     }
+/* Main Order Button */
+
+.main-order {
+    text-align: center;
+    margin: 40px 0 20px;
+}
+
+.order-note {
+    margin-bottom: 15px;
+    opacity: 0.8;
+}
+
+.main-order-btn {
+    display: inline-block;
+    padding: 15px 35px;
+    border: none;
+    border-radius: 14px;
+
+    background: linear-gradient(135deg, #ff2f92, #7c3cff);
+    color: white;
+
+    font-size: 16px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    box-shadow: 0 8px 25px rgba(124, 60, 255, 0.25);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.main-order-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(124, 60, 255, 0.35);
+}
