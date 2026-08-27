@@ -5,6 +5,58 @@
 document.addEventListener("DOMContentLoaded", function () {
 
     // ================================
+    // CUSTOM ALERT POPUP
+    // ================================
+
+    const customAlert =
+        document.getElementById("customAlert");
+
+    const customAlertTitle =
+        document.getElementById("customAlertTitle");
+
+    const customAlertMessage =
+        document.getElementById("customAlertMessage");
+
+    const customAlertIcon =
+        document.getElementById("customAlertIcon");
+
+    const customAlertBtn =
+        document.getElementById("customAlertBtn");
+
+
+    window.showAlert = function (
+        message,
+        title = "Notice",
+        icon = "⚠️"
+    ) {
+
+        if (!customAlert) return;
+
+        customAlertTitle.textContent = title;
+
+        customAlertMessage.textContent = message;
+
+        customAlertIcon.textContent = icon;
+
+        customAlert.classList.add("active");
+
+    };
+
+
+    if (customAlertBtn) {
+
+        customAlertBtn.addEventListener(
+            "click",
+            function () {
+
+                customAlert.classList.remove("active");
+
+            }
+        );
+
+    }
+    
+    // ================================
     // DATA
     // ================================
 
