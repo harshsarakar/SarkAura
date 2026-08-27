@@ -1105,8 +1105,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 
-    //
-       ================================
+    // ================================
     // INITIAL LOAD
     // ================================
 
