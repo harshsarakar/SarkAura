@@ -1091,4 +1091,404 @@
 
             <option
                 value="Instagram Saves"
-    
+                data-price="25">
+
+                Instagram Saves — ₹25 / 1K
+
+            </option>
+
+
+            <option
+                value="Views Only"
+                data-price="4">
+
+                Views Only — ₹4 / 1K
+
+            </option>
+
+        </select>
+
+
+        <!-- LINK -->
+
+        <input
+            type="url"
+            id="orderLink"
+            placeholder="Instagram post/profile link">
+
+
+        <!-- QUANTITY -->
+
+        <input
+            type="number"
+            id="orderQuantity"
+            placeholder="Quantity (e.g. 1000)"
+            min="1">
+
+
+        <!-- PRICE -->
+
+        <div class="order-price-box">
+
+            <span>Total Price</span>
+
+            ₹<span id="orderPrice">0.00</span>
+
+        </div>
+
+
+        <!-- BALANCE -->
+
+        <div class="order-balance-box">
+
+            Available Balance:
+            ₹<span id="orderBalance">0.00</span>
+
+        </div>
+
+
+        <!-- PLACE ORDER -->
+
+        <button
+            class="dm-order-btn"
+            id="placeOrderBtn">
+
+            🛒 Place Order
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     ADD FUNDS MODAL
+========================= -->
+
+<div
+    class="order-modal"
+    id="fundsModal">
+
+    <div class="order-box">
+
+        <button
+            class="close-order"
+            id="closeFunds">
+
+            ×
+
+        </button>
+
+        <h2>
+            💰 Add Funds
+        </h2>
+
+        <p>
+            Enter the amount you want to add.
+        </p>
+
+        <input
+            type="number"
+            id="depositAmount"
+            placeholder="Enter amount ₹"
+            min="1">
+
+
+        <button
+            class="dm-order-btn"
+            id="proceedPayBtn">
+
+            💳 Proceed to Pay
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     PAYMENT PAGE
+========================= -->
+
+<div
+    class="order-modal"
+    id="paymentModal">
+
+    <div class="order-box payment-box">
+
+        <button
+            class="close-order"
+            id="closePayment">
+
+            ×
+
+        </button>
+
+
+        <h2>
+            💳 Complete Payment
+        </h2>
+
+        <p>
+            Scan the QR code to pay
+        </p>
+
+
+        <!-- PAYMENT QR -->
+
+        <div class="qr-container">
+
+            <img
+                src="qr.png"
+                alt="SarkAura Payment QR"
+                class="payment-qr">
+
+        </div>
+
+
+        <!-- AMOUNT -->
+
+        <div class="payment-amount">
+
+            ₹<span id="paymentAmount">
+                0.00
+            </span>
+
+        </div>
+
+
+        <!-- TIMER -->
+
+        <p class="timer-text">
+            QR expires in
+        </p>
+
+        <div
+            class="payment-timer"
+            id="paymentTimer">
+
+            05:00
+
+        </div>
+
+
+        <div
+            id="paymentExpired"
+            class="payment-expired">
+
+            ⏱️ QR expired. Please create a new payment.
+
+        </div>
+
+
+        <p class="payment-note">
+
+            Payment complete karne ke baad
+            payment verification ki jayegi.
+
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     SUCCESS PAGE
+========================= -->
+
+<div
+    class="order-modal"
+    id="successModal">
+
+    <div class="order-box success-box">
+
+        <div class="success-icon">
+            ✓
+        </div>
+
+
+        <h2 id="successTitle">
+            Deposit Successful
+        </h2>
+
+
+        <p id="successMessage">
+
+            Your deposit has been successfully
+            submitted.
+
+        </p>
+
+
+        <button
+            class="dm-order-btn"
+            id="successCloseBtn">
+
+            Continue
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     ACCOUNT PAGE
+========================= -->
+
+<section
+    class="account-page"
+    id="accountPage"
+    style="display:none;">
+
+    <div class="account-container">
+
+        <p class="small-title">
+            MY ACCOUNT
+        </p>
+
+        <h2>
+            Account
+        </h2>
+
+
+        <!-- BALANCE -->
+
+        <div class="balance-card">
+
+            <p>
+                Available Balance
+            </p>
+
+            <h1>
+                ₹<span id="accountBalance">
+                    0.00
+                </span>
+            </h1>
+
+
+            <button
+                id="accountAddFunds"
+                class="main-order-btn">
+
+                + Add Funds
+
+            </button>
+
+        </div>
+
+
+        <!-- ORDER HISTORY -->
+
+        <div class="history-section">
+
+            <h3>
+                📦 Order History
+            </h3>
+
+
+            <div id="orderHistory">
+
+                <div class="empty-history">
+                    No orders yet.
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- DEPOSIT HISTORY -->
+
+        <div class="history-section">
+
+            <h3>
+                💳 Deposit History
+            </h3>
+
+
+            <div id="depositHistory">
+
+                <div class="empty-history">
+                    No deposits yet.
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     BOTTOM NAVIGATION
+========================= -->
+
+<div class="bottom-nav">
+
+
+    <button
+        class="bottom-nav-item active"
+        data-page="home">
+
+        <span>⌂</span>
+
+        <small>
+            Home
+        </small>
+
+    </button>
+
+
+    <button
+        class="bottom-nav-item"
+        data-page="services">
+
+        <span>▣</span>
+
+        <small>
+            Services
+        </small>
+
+    </button>
+
+
+    <button
+        class="bottom-nav-item"
+        data-page="account">
+
+        <span>👤</span>
+
+        <small>
+            Account
+        </small>
+
+    </button>
+
+
+    <button
+        class="bottom-nav-item"
+        data-page="funds">
+
+        <span>💰</span>
+
+        <small>
+            Add Funds
+        </small>
+
+    </button>
+
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+
+            </html>
