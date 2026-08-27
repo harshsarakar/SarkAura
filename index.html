@@ -2,13 +2,17 @@
 <html lang="en">
 
 <head>
+    <meta name="google-site-verification"
+        content="e1BpQKxikm-fX03QkvZktuP5YFy0X7byHEnXrVl1_yQ" />
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
     <title>SarkAura</title>
 
     <meta name="description"
-        content="SarkAura - Simple digital services platform.">
+        content="SarkAura - Instagram services, easy ordering and account balance.">
 
     <link rel="stylesheet" href="style.css">
 
@@ -20,7 +24,7 @@
 <body>
 
 <!-- =========================
-     TOP NAVBAR
+     NAVBAR
 ========================= -->
 
 <header class="navbar">
@@ -39,11 +43,15 @@
 
         <a href="#contact">Contact</a>
 
-        <a href="#order">🛒 Order Now</a>
+        <a href="#services">
+            🛒 Order Now
+        </a>
 
     </nav>
 
-    <button class="menu-btn" id="menuBtn">
+    <button
+        class="menu-btn"
+        id="menuBtn">
         ☰
     </button>
 
@@ -51,17 +59,16 @@
 
 
 <!-- =========================
-     MAIN
+     MAIN WEBSITE
 ========================= -->
 
-<main>
+<main id="mainWebsite">
 
+<!-- HERO -->
 
-<!-- =========================
-     HOME
-========================= -->
-
-<section class="hero" id="home">
+<section
+    class="hero"
+    id="home">
 
     <div class="hero-text">
 
@@ -76,18 +83,21 @@
 
         <p class="description">
             Simple, fast aur affordable digital services —
-            apni requirement choose karein aur easy steps ke
-            through order karein.
+            apni requirement choose karein aur easy process
+            ke through order karein.
         </p>
 
         <div class="hero-buttons">
 
-            <a href="#services" class="hero-btn">
+            <a
+                href="#services"
+                class="hero-btn">
                 Explore Services
             </a>
 
-            <a href="#how-it-works"
-               class="hero-btn secondary-btn">
+            <a
+                href="#how-it-works"
+                class="hero-btn secondary-btn">
                 How It Works
             </a>
 
@@ -99,7 +109,7 @@
 
             <span>✓ Easy Payment</span>
 
-            <span>✓ Order Tracking</span>
+            <span>✓ Fast Support</span>
 
         </div>
 
@@ -108,12 +118,13 @@
 </section>
 
 
-
 <!-- =========================
      SERVICES
 ========================= -->
 
-<section class="services" id="services">
+<section
+    class="services"
+    id="services">
 
     <div class="section-title">
 
@@ -135,9 +146,11 @@
     <div class="service-grid">
 
 
-        <div class="service-card"
-             data-service="Reels Views"
-             data-price="1">
+        <!-- 1 -->
+
+        <div
+            class="service-card"
+            data-service="Reels Views">
 
             <div class="service-icon">
                 🎬
@@ -155,18 +168,20 @@
                 ₹1 <small>/ 1K</small>
             </div>
 
-            <button class="order-btn"
-                    data-service="Reels Views">
+            <button
+                class="order-btn"
+                onclick="openOrder('Reels Views')">
                 Order Now
             </button>
 
         </div>
 
 
+        <!-- 2 -->
 
-        <div class="service-card"
-             data-service="Photo / Carousel Views"
-             data-price="4">
+        <div
+            class="service-card"
+            data-service="Photo / Carousel Views">
 
             <div class="service-icon">
                 🖼️
@@ -184,18 +199,20 @@
                 ₹4 <small>/ 1K</small>
             </div>
 
-            <button class="order-btn"
-                    data-service="Photo / Carousel Views">
+            <button
+                class="order-btn"
+                onclick="openOrder('Photo / Carousel Views')">
                 Order Now
             </button>
 
         </div>
 
 
+        <!-- 3 -->
 
-        <div class="service-card"
-             data-service="Indian Followers - Low Drop"
-             data-price="70">
+        <div
+            class="service-card"
+            data-service="Indian Followers - Low Drop">
 
             <div class="service-icon">
                 👥
@@ -213,18 +230,20 @@
                 ₹70 <small>/ 1K</small>
             </div>
 
-            <button class="order-btn"
-                    data-service="Indian Followers - Low Drop">
+            <button
+                class="order-btn"
+                onclick="openOrder('Indian Followers - Low Drop')">
                 Order Now
             </button>
 
         </div>
 
 
+        <!-- 4 -->
 
-        <div class="service-card"
-             data-service="Indian Followers - Real Accounts"
-             data-price="100">
+        <div
+            class="service-card"
+            data-service="Indian Followers - Real Accounts">
 
             <div class="service-icon">
                 👤
@@ -242,18 +261,20 @@
                 ₹100 <small>/ 1K</small>
             </div>
 
-            <button class="order-btn"
-                    data-service="Indian Followers - Real Accounts">
+            <button
+                class="order-btn"
+                onclick="openOrder('Indian Followers - Real Accounts')">
                 Order Now
             </button>
 
         </div>
 
 
+        <!-- 5 -->
 
-        <div class="service-card"
-             data-service="Instagram Shares"
-             data-price="5">
+        <div
+            class="service-card"
+            data-service="Instagram Shares">
 
             <div class="service-icon">
                 ↗️
@@ -264,25 +285,27 @@
             </h3>
 
             <p class="hindi">
-                Instagram content ke shares ke liye.
+                Instagram content ke shares badhane ke liye.
             </p>
 
             <div class="price">
                 ₹5 <small>/ 1K</small>
             </div>
 
-            <button class="order-btn"
-                    data-service="Instagram Shares">
+            <button
+                class="order-btn"
+                onclick="openOrder('Instagram Shares')">
                 Order Now
             </button>
 
         </div>
 
 
+        <!-- 6 -->
 
-        <div class="service-card"
-             data-service="Instagram Repost"
-             data-price="100">
+        <div
+            class="service-card"
+            data-service="Instagram Repost">
 
             <div class="service-icon">
                 🔁
@@ -300,18 +323,20 @@
                 ₹100 <small>/ 1K</small>
             </div>
 
-            <button class="order-btn"
-                    data-service="Instagram Repost">
+            <button
+                class="order-btn"
+                onclick="openOrder('Instagram Repost')">
                 Order Now
             </button>
 
         </div>
 
 
+        <!-- 7 -->
 
-        <div class="service-card"
-             data-service="Reach + Impressions"
-             data-price="6">
+        <div
+            class="service-card"
+            data-service="Reach + Impressions">
 
             <div class="service-icon">
                 📊
@@ -329,18 +354,20 @@
                 ₹6 <small>/ 1K</small>
             </div>
 
-            <button class="order-btn"
-                    data-service="Reach + Impressions">
+            <button
+                class="order-btn"
+                onclick="openOrder('Reach + Impressions')">
                 Order Now
             </button>
 
         </div>
 
 
+        <!-- 8 -->
 
-        <div class="service-card"
-             data-service="Instagram Likes"
-             data-price="15">
+        <div
+            class="service-card"
+            data-service="Instagram Likes">
 
             <div class="service-icon">
                 ❤️
@@ -358,18 +385,20 @@
                 ₹15 <small>/ 1K</small>
             </div>
 
-            <button class="order-btn"
-                    data-service="Instagram Likes">
+            <button
+                class="order-btn"
+                onclick="openOrder('Instagram Likes')">
                 Order Now
             </button>
 
         </div>
 
 
+        <!-- 9 -->
 
-        <div class="service-card"
-             data-service="Trending Indian Comments"
-             data-price="64">
+        <div
+            class="service-card"
+            data-service="Trending Indian Comments">
 
             <div class="service-icon">
                 💬
@@ -387,18 +416,20 @@
                 ₹64 <small>/ 1K</small>
             </div>
 
-            <button class="order-btn"
-                    data-service="Trending Indian Comments">
+            <button
+                class="order-btn"
+                onclick="openOrder('Trending Indian Comments')">
                 Order Now
             </button>
 
         </div>
 
 
+        <!-- 10 -->
 
-        <div class="service-card"
-             data-service="Custom Comments"
-             data-price="125">
+        <div
+            class="service-card"
+            data-service="Custom Comments">
 
             <div class="service-icon">
                 ✍️
@@ -416,18 +447,20 @@
                 ₹125 <small>/ 1K</small>
             </div>
 
-            <button class="order-btn"
-                    data-service="Custom Comments">
+            <button
+                class="order-btn"
+                onclick="openOrder('Custom Comments')">
                 Order Now
             </button>
 
         </div>
 
 
+        <!-- 11 -->
 
-        <div class="service-card"
-             data-service="Instagram Saves"
-             data-price="25">
+        <div
+            class="service-card"
+            data-service="Instagram Saves">
 
             <div class="service-icon">
                 🔖
@@ -445,18 +478,20 @@
                 ₹25 <small>/ 1K</small>
             </div>
 
-            <button class="order-btn"
-                    data-service="Instagram Saves">
+            <button
+                class="order-btn"
+                onclick="openOrder('Instagram Saves')">
                 Order Now
             </button>
 
         </div>
 
 
+        <!-- 12 -->
 
-        <div class="service-card"
-             data-service="Views Only"
-             data-price="4">
+        <div
+            class="service-card"
+            data-service="Views Only">
 
             <div class="service-icon">
                 👁️
@@ -474,8 +509,9 @@
                 ₹4 <small>/ 1K</small>
             </div>
 
-            <button class="order-btn"
-                    data-service="Views Only">
+            <button
+                class="order-btn"
+                onclick="openOrder('Views Only')">
                 Order Now
             </button>
 
@@ -486,13 +522,13 @@
 </section>
 
 
-
 <!-- =========================
      HOW IT WORKS
 ========================= -->
 
-<section class="how-it-works"
-         id="how-it-works">
+<section
+    class="how-it-works"
+    id="how-it-works">
 
     <div class="section-heading">
 
@@ -524,7 +560,7 @@
             </h3>
 
             <p>
-                Apne account me required balance add karein.
+                Apne account mein required balance add karein.
             </p>
 
         </div>
@@ -541,7 +577,7 @@
             </h3>
 
             <p>
-                Apni required service select karein.
+                Apni required service aur quantity select karein.
             </p>
 
         </div>
@@ -558,7 +594,7 @@
             </h3>
 
             <p>
-                Link aur quantity enter karke order place karein.
+                Payment ke baad order place karein.
             </p>
 
         </div>
@@ -568,12 +604,110 @@
 </section>
 
 
+<!-- =========================
+     WHY SARKAURA
+========================= -->
+
+<section class="why-sarkAura">
+
+    <div class="section-heading">
+
+        <p class="small-title">
+            WHY SARKAURA
+        </p>
+
+        <h2>
+            Simple. Clear. Easy.
+        </h2>
+
+        <p>
+            SarkAura ko simple aur easy experience ke liye design kiya gaya hai.
+        </p>
+
+    </div>
+
+
+    <div class="why-grid">
+
+        <div class="why-card">
+
+            <div class="why-icon">
+                ⚡
+            </div>
+
+            <h3>
+                Simple Process
+            </h3>
+
+            <p>
+                Service choose karein aur easy steps follow karein.
+            </p>
+
+        </div>
+
+
+        <div class="why-card">
+
+            <div class="why-icon">
+                💰
+            </div>
+
+            <h3>
+                Clear Pricing
+            </h3>
+
+            <p>
+                Services ke saath pricing clearly displayed hai.
+            </p>
+
+        </div>
+
+
+        <div class="why-card">
+
+            <div class="why-icon">
+                💳
+            </div>
+
+            <h3>
+                Easy Payment
+            </h3>
+
+            <p>
+                Account balance ke through order place karein.
+            </p>
+
+        </div>
+
+
+        <div class="why-card">
+
+            <div class="why-icon">
+                📱
+            </div>
+
+            <h3>
+                Mobile Friendly
+            </h3>
+
+            <p>
+                Website mobile users ke liye optimized hai.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
 
 <!-- =========================
      FAQ
 ========================= -->
 
-<section class="faq" id="faq">
+<section
+    class="faq"
+    id="faq">
 
     <div class="section-title">
 
@@ -585,6 +719,10 @@
             Frequently Asked
             <span>Questions</span>
         </h2>
+
+        <p>
+            SarkAura ke baare mein common questions.
+        </p>
 
     </div>
 
@@ -599,7 +737,7 @@
 
             <p>
                 SarkAura ek digital services platform hai
-                jahan users available services ko explore
+                jahan users available services ko easily explore
                 aur order kar sakte hain.
             </p>
 
@@ -609,13 +747,12 @@
         <div class="faq-item">
 
             <h3>
-                💰 Balance kaise add karein?
+                💰 Price kaise calculate hota hai?
             </h3>
 
             <p>
-                Add Funds section me jaakar amount select
-                karke available payment method se deposit
-                kiya ja sakta hai.
+                Service ki listed rate aur selected quantity
+                ke according total price automatically calculate hota hai.
             </p>
 
         </div>
@@ -624,12 +761,12 @@
         <div class="faq-item">
 
             <h3>
-                📦 Order ka status kaise dekhein?
+                📱 Order kaise karein?
             </h3>
 
             <p>
-                Account ke Order History section me
-                order ka current status dekha ja sakta hai.
+                Pehle account mein funds add karein,
+                phir service select karke quantity aur link enter karein.
             </p>
 
         </div>
@@ -642,8 +779,8 @@
             </h3>
 
             <p>
-                Order successful hone ke baad service
-                generally 24 hours ke andar process ki jayegi.
+                Order successfully place hone ke baad
+                service ko 24 hours ke andar process kiya jayega.
             </p>
 
         </div>
@@ -653,12 +790,13 @@
 </section>
 
 
-
 <!-- =========================
      CONTACT
 ========================= -->
 
-<section class="contact" id="contact">
+<section
+    class="contact"
+    id="contact">
 
     <div class="contact-box">
 
@@ -692,335 +830,19 @@
 
 </section>
 
-
 </main>
-
-
-
-<!-- =========================
-     ORDER MODAL
-========================= -->
-
-<div class="order-modal"
-     id="orderModal">
-
-    <div class="order-box">
-
-        <button class="close-order"
-                id="closeOrder">
-            ×
-        </button>
-
-
-        <h2>
-            🛒 Place Your Order
-        </h2>
-
-        <p>
-            Service ki details fill karein.
-        </p>
-
-
-        <!-- SERVICE -->
-
-        <label>
-            Select Service
-        </label>
-
-        <select id="serviceSelect">
-
-            <option value="">
-                Choose a service
-            </option>
-
-            <option value="Reels Views"
-                    data-price="1">
-                Reels Views
-            </option>
-
-            <option value="Photo / Carousel Views"
-                    data-price="4">
-                Photo / Carousel Views
-            </option>
-
-            <option value="Indian Followers - Low Drop"
-                    data-price="70">
-                Indian Followers - Low Drop
-            </option>
-
-            <option value="Indian Followers - Real Accounts"
-                    data-price="100">
-                Indian Followers - Real Accounts
-            </option>
-
-            <option value="Instagram Shares"
-                    data-price="5">
-                Instagram Shares
-            </option>
-
-            <option value="Instagram Repost"
-                    data-price="100">
-                Instagram Repost
-            </option>
-
-            <option value="Reach + Impressions"
-                    data-price="6">
-                Reach + Impressions
-            </option>
-
-            <option value="Instagram Likes"
-                    data-price="15">
-                Instagram Likes
-            </option>
-
-            <option value="Trending Indian Comments"
-                    data-price="64">
-                Trending Indian Comments
-            </option>
-
-            <option value="Custom Comments"
-                    data-price="125">
-                Custom Comments
-            </option>
-
-            <option value="Instagram Saves"
-                    data-price="25">
-                Instagram Saves
-            </option>
-
-            <option value="Views Only"
-                    data-price="4">
-                Views Only
-            </option>
-
-        </select>
-
-
-        <!-- LINK -->
-
-        <label>
-            Instagram Link
-        </label>
-
-        <input
-            type="url"
-            id="orderLink"
-            placeholder="https://instagram.com/...">
-
-
-        <!-- QUANTITY -->
-
-        <label>
-            Quantity
-        </label>
-
-        <input
-            type="number"
-            id="orderQuantity"
-            placeholder="Enter quantity"
-            min="1">
-
-
-        <!-- PRICE -->
-
-        <label>
-            Total Price
-        </label>
-
-        <div class="order-price-box">
-
-            <span>
-                ₹
-            </span>
-
-            <strong id="orderPrice">
-                0.00
-            </strong>
-
-        </div>
-
-
-        <!-- BALANCE -->
-
-        <div class="balance-preview">
-
-            Available Balance:
-            <strong id="orderBalance">
-                ₹0.00
-            </strong>
-
-        </div>
-
-
-        <button
-            class="place-order-btn"
-            id="placeOrderBtn">
-
-            Place Order
-
-        </button>
-
-    </div>
-
-</div>
-
-
-
-<!-- =========================
-     ADD FUNDS MODAL
-========================= -->
-
-<div class="payment-modal"
-     id="fundsModal">
-
-    <div class="payment-box">
-
-        <button class="close-payment"
-                id="closeFunds">
-            ×
-        </button>
-
-        <h2>
-            💰 Add Funds
-        </h2>
-
-        <p>
-            Apne account me balance add karein.
-        </p>
-
-
-        <label>
-            Enter Amount
-        </label>
-
-        <input
-            type="number"
-            id="depositAmount"
-            placeholder="₹ Enter amount"
-            min="1">
-
-
-        <button
-            class="proceed-pay-btn"
-            id="proceedPayBtn">
-
-            Proceed to Pay
-
-        </button>
-
-    </div>
-
-</div>
-
-
-
-<!-- =========================
-     PAYMENT PAGE
-========================= -->
-
-<div class="payment-modal"
-     id="paymentModal">
-
-    <div class="payment-box">
-
-        <button class="close-payment"
-                id="closePayment">
-            ×
-        </button>
-
-        <h2>
-            Scan & Pay
-        </h2>
-
-        <p>
-            Payable Amount
-        </p>
-
-        <div class="payment-amount"
-             id="paymentAmount">
-            ₹0.00
-        </div>
-
-
-        <div class="qr-placeholder">
-
-            <div>
-                QR CODE
-            </div>
-
-            <small>
-                Dynamic QR will appear here
-            </small>
-
-        </div>
-
-
-        <div class="timer-title">
-            QR expires in
-        </div>
-
-        <div class="payment-timer"
-             id="paymentTimer">
-            05:00
-        </div>
-
-
-        <div class="payment-expired"
-             id="paymentExpired">
-
-            QR Expired
-
-        </div>
-
-    </div>
-
-</div>
-
-
-
-<!-- =========================
-     SUCCESS MODAL
-========================= -->
-
-<div class="success-modal"
-     id="successModal">
-
-    <div class="success-box">
-
-        <div class="success-icon">
-            ✓
-        </div>
-
-        <h2 id="successTitle">
-            Payment Successful
-        </h2>
-
-        <p id="successMessage">
-            Your service will be delivered within 24 hours.
-        </p>
-
-        <button
-            class="success-close-btn"
-            id="successCloseBtn">
-
-            Continue
-
-        </button>
-
-    </div>
-
-</div>
-
 
 
 <!-- =========================
      ACCOUNT PAGE
 ========================= -->
 
-<section class="account-page"
-         id="accountPage">
+<section
+    class="account-page"
+    id="accountPage"
+    style="display:none;">
 
-    <div class="account-header">
+    <div class="account-container">
 
         <p class="small-title">
             MY ACCOUNT
@@ -1030,43 +852,62 @@
             Account
         </h2>
 
-    </div>
+
+        <div class="balance-card">
+
+            <p>
+                Available Balance
+            </p>
+
+            <h1>
+                ₹<span id="accountBalance">
+                    0.00
+                </span>
+            </h1>
+
+            <button
+                id="accountAddFunds"
+                class="main-order-btn">
+
+                + Add Funds
+
+            </button>
+
+        </div>
 
 
-    <div class="balance-card">
+        <!-- ORDERS -->
 
-        <span>
-            Available Balance
-        </span>
-
-        <strong id="accountBalance">
-            ₹0.00
-        </strong>
-
-        <button id="accountAddFunds">
-            + Add Funds
-        </button>
-
-    </div>
-
-
-    <!-- ORDER HISTORY -->
-
-    <div class="history-section">
-
-        <div class="history-heading">
+        <div class="history-section">
 
             <h3>
                 📦 Order History
             </h3>
 
+            <div id="orderHistory">
+
+                <div class="empty-history">
+                    No orders yet.
+                </div>
+
+            </div>
+
         </div>
 
-        <div id="orderHistory">
 
-            <div class="empty-history">
+        <!-- DEPOSITS -->
 
-                No orders yet.
+        <div class="history-section">
+
+            <h3>
+                💳 Deposit History
+            </h3>
+
+            <div id="depositHistory">
+
+                <div class="empty-history">
+                    No deposits yet.
+                </div>
 
             </div>
 
@@ -1074,5 +915,180 @@
 
     </div>
 
+</section>
 
-                
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer class="footer">
+
+    <div class="footer-logo">
+
+        <span>S</span> SarkAura
+
+    </div>
+
+    <p>
+        Simple. Fast. Digital.
+    </p>
+
+
+    <div class="footer-links">
+
+        <a href="#home">
+            Home
+        </a>
+
+        <a href="#services">
+            Services
+        </a>
+
+        <a href="#faq">
+            FAQ
+        </a>
+
+        <a
+            href="https://www.instagram.com/harshyaduvancii/"
+            target="_blank">
+
+            Instagram
+
+        </a>
+
+    </div>
+
+
+    <p class="copyright">
+        © 2026 SarkAura. All rights reserved.
+    </p>
+
+</footer>
+
+
+<!-- =========================
+     ORDER MODAL
+========================= -->
+
+<div
+    class="order-modal"
+    id="orderModal">
+
+    <div class="order-box">
+
+        <button
+            class="close-order"
+            id="closeOrder">
+
+            ×
+
+        </button>
+
+
+        <h2>
+            🛒 Place Your Order
+        </h2>
+
+
+        <p>
+            Service details enter karein.
+        </p>
+
+
+        <!-- SERVICE -->
+
+        <select
+            id="serviceSelect">
+
+            <option
+                value=""
+                data-price="0">
+
+                Choose a service
+
+            </option>
+
+            <option
+                value="Reels Views"
+                data-price="1">
+
+                Reels Views — ₹1 / 1K
+
+            </option>
+
+            <option
+                value="Photo / Carousel Views"
+                data-price="4">
+
+                Photo / Carousel Views — ₹4 / 1K
+
+            </option>
+
+            <option
+                value="Indian Followers - Low Drop"
+                data-price="70">
+
+                Indian Followers - Low Drop — ₹70 / 1K
+
+            </option>
+
+            <option
+                value="Indian Followers - Real Accounts"
+                data-price="100">
+
+                Indian Followers - Real Accounts — ₹100 / 1K
+
+            </option>
+
+            <option
+                value="Instagram Shares"
+                data-price="5">
+
+                Instagram Shares — ₹5 / 1K
+
+            </option>
+
+            <option
+                value="Instagram Repost"
+                data-price="100">
+
+                Instagram Repost — ₹100 / 1K
+
+            </option>
+
+            <option
+                value="Reach + Impressions"
+                data-price="6">
+
+                Reach + Impressions — ₹6 / 1K
+
+            </option>
+
+            <option
+                value="Instagram Likes"
+                data-price="15">
+
+                Instagram Likes — ₹15 / 1K
+
+            </option>
+
+            <option
+                value="Trending Indian Comments"
+                data-price="64">
+
+                Trending Indian Comments — ₹64 / 1K
+
+            </option>
+
+            <option
+                value="Custom Comments"
+                data-price="125">
+
+                Custom Comments — ₹125 / 1K
+
+            </option>
+
+            <option
+                value="Instagram Saves"
+    
