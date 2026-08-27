@@ -1,86 +1,123 @@
-// SarkAura - Website Interactions
+// ================================
+// SarkAura - Main Script
+// ================================
+
 document.addEventListener("DOMContentLoaded", function () {
 
-    /* =========================
-       BASIC ELEMENTS
-    ========================= */
+    // ================================
+    // DATA
+    // ================================
 
-    const menuBtn = document.getElementById("menuBtn");
-    const navLinks = document.querySelector(".nav-links");
+    const servicePrices = {
+        "Reels Views": 1,
+        "Photo / Carousel Views": 4,
+        "Indian Followers - Low Drop": 70,
+        "Indian Followers - Real Accounts": 100,
+        "Instagram Shares": 5,
+        "Instagram Repost": 100,
+        "Reach + Impressions": 6,
+        "Instagram Likes": 15,
+        "Trending Indian Comments": 64,
+        "Custom Comments": 125,
+        "Instagram Saves": 25,
+        "Views Only": 4
+    };
 
-    const orderModal = document.getElementById("orderModal");
-    const closeOrder = document.getElementById("closeOrder");
+    let balance = Number(
+        localStorage.getItem("sarkaura_balance") || 0
+    );
 
-    const serviceSelect = document.getElementById("serviceSelect");
-    const orderLink = document.getElementById("orderLink");
-    const orderQuantity = document.getElementById("orderQuantity");
-    const orderPrice = document.getElementById("orderPrice");
-    const orderBalance = document.getElementById("orderBalance");
+    let orders = JSON.parse(
+        localStorage.getItem("sarkaura_orders") || "[]"
+    );
 
-    const placeOrderBtn = document.getElementById("placeOrderBtn");
+    let deposits = JSON.parse(
+        localStorage.getItem("sarkaura_deposits") || "[]"
+    );
 
-    const fundsModal = document.getElementById("fundsModal");
-    const closeFunds = document.getElementById("closeFunds");
-
-    const depositAmount = document.getElementById("depositAmount");
-    const proceedPayBtn = document.getElementById("proceedPayBtn");
-
-    const paymentModal = document.getElementById("paymentModal");
-    const closePayment = document.getElementById("closePayment");
-
-    const paymentAmount = document.getElementById("paymentAmount");
-    const paymentTimer = document.getElementById("paymentTimer");
-    const paymentExpired = document.getElementById("paymentExpired");
-
-    const successModal = document.getElementById("successModal");
-    const successTitle = document.getElementById("successTitle");
-    const successMessage = document.getElementById("successMessage");
-    const successCloseBtn = document.getElementById("successCloseBtn");
-
-    const accountPage = document.getElementById("accountPage");
-    const accountBalance = document.getElementById("accountBalance");
-    const accountAddFunds = document.getElementById("accountAddFunds");
-
-    const orderHistory = document.getElementById("orderHistory");
-    const depositHistory = document.getElementById("depositHistory");
-
-    const bottomNavItems =
-        document.querySelectorAll(".bottom-nav-item");
-
-    const serviceCards =
-        document.querySelectorAll(".service-card");
+    let paymentTimerInterval = null;
 
 
-    /* =========================
-       DEMO LOCAL DATA
-       =========================
-       IMPORTANT:
-       This is temporary frontend storage.
-       Real payment + balance will later
-       be moved to secure backend/database.
-    */
+    // ================================
+    // ELEMENTS
+    // ================================
 
-    let balance =
-        Number(localStorage.getItem("sarkaura_balance")) || 0;
+    const orderModal =
+        document.getElementById("orderModal");
 
-    let orders =
-        JSON.parse(
-            localStorage.getItem("sarkaura_orders") || "[]"
-        );
+    const fundsModal =
+        document.getElementById("fundsModal");
 
-    let deposits =
-        JSON.parse(
-            localStorage.getItem("sarkaura_deposits") || "[]"
-        );
+    const paymentModal =
+        document.getElementById("paymentModal");
 
-    let selectedDepositAmount = 0;
+    const successModal =
+        document.getElementById("successModal");
 
-    let paymentCountdown = null;
+    const closeOrder =
+        document.getElementById("closeOrder");
+
+    const closeFunds =
+        document.getElementById("closeFunds");
+
+    const closePayment =
+        document.getElementById("closePayment");
+
+    const successCloseBtn =
+        document.getElementById("successCloseBtn");
+
+    const serviceSelect =
+        document.getElementById("serviceSelect");
+
+    const orderLink =
+        document.getElementById("orderLink");
+
+    const orderQuantity =
+        document.getElementById("orderQuantity");
+
+    const orderPrice =
+        document.getElementById("orderPrice");
+
+    const orderBalance =
+        document.getElementById("orderBalance");
+
+    const placeOrderBtn =
+        document.getElementById("placeOrderBtn");
+
+    const depositAmount =
+        document.getElementById("depositAmount");
+
+    const proceedPayBtn =
+        document.getElementById("proceedPayBtn");
+
+    const paymentAmount =
+        document.getElementById("paymentAmount");
+
+    const paymentTimer =
+        document.getElementById("paymentTimer");
+
+    const paymentExpired =
+        document.getElementById("paymentExpired");
+
+    const accountBalance =
+        document.getElementById("accountBalance");
+
+    const orderHistory =
+        document.getElementById("orderHistory");
+
+    const depositHistory =
+        document.getElementById("depositHistory");
+
+    const mainWebsite =
+        document.getElementById("mainWebsite");
+
+    const accountPage =
+        document.getElementById("accountPage");
 
 
-    /* =========================
-       SAVE DATA
-    ========================= */
+    // ================================
+    // SAVE DATA
+    // ================================
 
     function saveData() {
 
@@ -101,282 +138,254 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-    /* =========================
-       FORMAT MONEY
-    ========================= */
-
-    function money(amount) {
-
-        return "₹" + Number(amount).toFixed(2);
-
-    }
-
-
-    /* =========================
-       UPDATE BALANCE UI
-    ========================= */
+    // ================================
+    // UPDATE BALANCE
+    // ================================
 
     function updateBalance() {
 
         if (accountBalance) {
-
             accountBalance.textContent =
-                money(balance);
-
+                balance.toFixed(2);
         }
 
         if (orderBalance) {
-
             orderBalance.textContent =
-                money(balance);
-
+                balance.toFixed(2);
         }
-
     }
 
 
-    /* =========================
-       MOBILE MENU
-    ========================= */
+    // ================================
+    // FAQ
+    // ================================
 
-    if (menuBtn && navLinks) {
+    document.querySelectorAll(".faq-item")
+        .forEach(function (item) {
 
-        menuBtn.addEventListener("click", function () {
+            const question =
+                item.querySelector("h3");
 
-            navLinks.classList.toggle("active");
+            const answer =
+                item.querySelector("p");
 
-        });
+            if (question && answer) {
 
+                answer.style.display = "none";
 
-        navLinks.querySelectorAll("a").forEach(function (link) {
+                question.addEventListener(
+                    "click",
+                    function () {
 
-            link.addEventListener("click", function () {
+                        answer.style.display =
+                            answer.style.display === "none"
+                                ? "block"
+                                : "none";
 
-                navLinks.classList.remove("active");
-
-            });
-
-        });
-
-    }
-
-
-    /* =========================
-       SMOOTH SCROLL
-    ========================= */
-
-    document.querySelectorAll('a[href^="#"]').forEach(function (link) {
-
-        link.addEventListener("click", function (event) {
-
-            const targetId =
-                this.getAttribute("href");
-
-            if (
-                targetId &&
-                targetId !== "#"
-            ) {
-
-                const target =
-                    document.querySelector(targetId);
-
-                if (target) {
-
-                    event.preventDefault();
-
-                    target.scrollIntoView({
-                        behavior: "smooth"
-                    });
-
-                }
-
+                    }
+                );
             }
 
         });
 
-    });
 
+    // ================================
+    // MOBILE MENU
+    // ================================
 
-    /* =========================
-       FAQ
-    ========================= */
+    const menuBtn =
+        document.getElementById("menuBtn");
 
-    document.querySelectorAll(".faq-item").forEach(function (item) {
+    const navLinks =
+        document.querySelector(".nav-links");
 
-        const question =
-            item.querySelector("h3");
+    if (menuBtn && navLinks) {
 
-        const answer =
-            item.querySelector("p");
+        menuBtn.addEventListener(
+            "click",
+            function () {
 
-        if (question && answer) {
+                navLinks.classList.toggle("active");
 
-            answer.style.display = "none";
+            }
+        );
 
-            question.addEventListener("click", function () {
+        navLinks.querySelectorAll("a")
+            .forEach(function (link) {
 
-                if (
-                    answer.style.display === "none"
-                ) {
+                link.addEventListener(
+                    "click",
+                    function () {
 
-                    answer.style.display = "block";
+                        navLinks.classList.remove(
+                            "active"
+                        );
 
-                } else {
-
-                    answer.style.display = "none";
-
-                }
+                    }
+                );
 
             });
-
-        }
-
-    });
+    }
 
 
-    /* =========================
-       OPEN ORDER FORM
-    ========================= */
+    // ================================
+    // OPEN ORDER
+    // ================================
 
-    function openOrder(serviceName = "") {
+    window.openOrder = function (service = "") {
 
         if (!orderModal) return;
 
         orderModal.classList.add("active");
 
-        if (serviceSelect && serviceName) {
+        if (serviceSelect && service) {
 
-            serviceSelect.value =
-                serviceName;
+            serviceSelect.value = service;
 
         }
 
-        updateOrderPrice();
+        updatePrice();
 
         updateBalance();
-
-    }
-
-
-    /* =========================
-       SERVICE CARD BUTTONS
-    ========================= */
-
-    serviceCards.forEach(function (card) {
-
-        const button =
-            card.querySelector(".order-btn");
-
-        if (!button) return;
-
-        button.addEventListener("click", function () {
-
-            const service =
-                card.dataset.service || "";
-
-            openOrder(service);
-
-        });
-
-    });
+    };
 
 
-    /* =========================
-       MAIN ORDER BUTTON
-    ========================= */
-
-    const mainOrderBtn =
-        document.getElementById("mainOrderBtn");
-
-    if (mainOrderBtn) {
-
-        mainOrderBtn.addEventListener("click", function () {
-
-            openOrder();
-
-        });
-
-    }
-
-
-    /* =========================
-       CLOSE ORDER
-    ========================= */
+    // ================================
+    // CLOSE ORDER
+    // ================================
 
     if (closeOrder) {
 
-        closeOrder.addEventListener("click", function () {
+        closeOrder.addEventListener(
+            "click",
+            function () {
 
-            orderModal.classList.remove("active");
-
-        });
-
-    }
-
-
-    if (orderModal) {
-
-        orderModal.addEventListener("click", function (event) {
-
-            if (event.target === orderModal) {
-
-                orderModal.classList.remove("active");
+                orderModal.classList.remove(
+                    "active"
+                );
 
             }
-
-        });
-
+        );
     }
 
 
-    /* =========================
-       PRICE CALCULATION
-       PRICE IS PER 1000
-    ========================= */
+    // ================================
+    // CLOSE MODALS
+    // ================================
 
-    function updateOrderPrice() {
+    if (closeFunds) {
 
-        if (
-            !serviceSelect ||
+        closeFunds.addEventListener(
+            "click",
+            function () {
+
+                fundsModal.classList.remove(
+                    "active"
+                );
+
+            }
+        );
+    }
+
+
+    if (closePayment) {
+
+        closePayment.addEventListener(
+            "click",
+            function () {
+
+                paymentModal.classList.remove(
+                    "active"
+                );
+
+                stopPaymentTimer();
+
+            }
+        );
+    }
+
+
+    if (successCloseBtn) {
+
+        successCloseBtn.addEventListener(
+            "click",
+            function () {
+
+                successModal.classList.remove(
+                    "active"
+                );
+
+            }
+        );
+    }
+
+
+    // ================================
+    // CLICK OUTSIDE MODAL
+    // ================================
+
+    document.querySelectorAll(".order-modal")
+        .forEach(function (modal) {
+
+            modal.addEventListener(
+                "click",
+                function (event) {
+
+                    if (event.target === modal) {
+
+                        modal.classList.remove(
+                            "active"
+                        );
+
+                    }
+
+                }
+            );
+
+        });
+
+
+    // ================================
+    // PRICE CALCULATION
+    // ================================
+
+    function updatePrice() {
+
+        if (!serviceSelect ||
             !orderQuantity ||
-            !orderPrice
-        ) return;
+            !orderPrice) return;
 
+        const service =
+            serviceSelect.value;
 
-        const selectedOption =
-            serviceSelect.options[
-                serviceSelect.selectedIndex
-            ];
+        const quantity =
+            Number(orderQuantity.value);
 
+        const pricePer1K =
+            servicePrices[service] || 0;
 
-        if (!selectedOption) {
+        if (!quantity || quantity <= 0) {
 
             orderPrice.textContent =
                 "0.00";
 
             return;
-
         }
 
+        /*
+          Quantity is treated as actual quantity.
 
-        const pricePer1000 =
-            Number(
-                selectedOption.dataset.price
-            ) || 0;
-
-
-        const quantity =
-            Number(orderQuantity.value) || 0;
-
+          Example:
+          1000 = 1K
+          5000 = 5K
+        */
 
         const total =
             (quantity / 1000) *
-            pricePer1000;
-
+            pricePer1K;
 
         orderPrice.textContent =
             total.toFixed(2);
-
     }
 
 
@@ -384,9 +393,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
         serviceSelect.addEventListener(
             "change",
-            updateOrderPrice
+            updatePrice
         );
-
     }
 
 
@@ -394,142 +402,172 @@ document.addEventListener("DOMContentLoaded", function () {
 
         orderQuantity.addEventListener(
             "input",
-            updateOrderPrice
+            updatePrice
         );
-
     }
 
 
-    /* =========================
-       ADD FUNDS
-    ========================= */
+    // ================================
+    // PLACE ORDER
+    // ================================
+
+    if (placeOrderBtn) {
+
+        placeOrderBtn.addEventListener(
+            "click",
+            function () {
+
+                const service =
+                    serviceSelect.value;
+
+                const link =
+                    orderLink.value.trim();
+
+                const quantity =
+                    Number(orderQuantity.value);
+
+                const pricePer1K =
+                    servicePrices[service] || 0;
+
+                const total =
+                    (quantity / 1000) *
+                    pricePer1K;
+
+
+                if (!service) {
+
+                    alert(
+                        "Please select a service."
+                    );
+
+                    return;
+                }
+
+
+                if (!link) {
+
+                    alert(
+                        "Please enter the Instagram link."
+                    );
+
+                    return;
+                }
+
+
+                if (!quantity ||
+                    quantity <= 0) {
+
+                    alert(
+                        "Please enter a valid quantity."
+                    );
+
+                    return;
+                }
+
+
+                if (total <= 0) {
+
+                    alert(
+                        "Invalid order amount."
+                    );
+
+                    return;
+                }
+
+
+                if (balance < total) {
+
+                    alert(
+                        "Insufficient balance. Please add funds first."
+                    );
+
+                    return;
+                }
+
+
+                // Deduct balance
+
+                balance -= total;
+
+
+                const order = {
+
+                    id:
+                        "ORD-" +
+                        Date.now(),
+
+                    service:
+                        service,
+
+                    link:
+                        link,
+
+                    quantity:
+                        quantity,
+
+                    amount:
+                        Number(total.toFixed(2)),
+
+                    status:
+                        "Pending",
+
+                    date:
+                        new Date().toLocaleString()
+
+                };
+
+
+                orders.unshift(order);
+
+                saveData();
+
+                updateBalance();
+
+                renderHistory();
+
+
+                orderModal.classList.remove(
+                    "active"
+                );
+
+
+                showSuccess(
+                    "Order Successful",
+                    "Your service order has been placed successfully. Your service will be delivered within 24 hours."
+                );
+
+            }
+        );
+    }
+
+
+    // ================================
+    // ADD FUNDS
+    // ================================
 
     function openFunds() {
 
         if (!fundsModal) return;
 
-        fundsModal.classList.add("active");
+        fundsModal.classList.add(
+            "active"
+        );
+
+        if (depositAmount) {
+
+            depositAmount.value = "";
+
+        }
 
     }
 
 
-    bottomNavItems.forEach(function (item) {
+    // Account Add Funds
 
-        item.addEventListener("click", function () {
-
-            const page =
-                this.dataset.page;
-
-
-            bottomNavItems.forEach(function (nav) {
-
-                nav.classList.remove("active");
-
-            });
-
-            this.classList.add("active");
-
-
-            if (page === "home") {
-
-                if (accountPage) {
-
-                    accountPage.style.display =
-                        "none";
-
-                }
-
-                document
-                    .getElementById("home")
-                    ?.scrollIntoView({
-                        behavior: "smooth"
-                    });
-
-            }
-
-
-            if (page === "services") {
-
-                if (accountPage) {
-
-                    accountPage.style.display =
-                        "none";
-
-                }
-
-                document
-                    .getElementById("services")
-                    ?.scrollIntoView({
-                        behavior: "smooth"
-                    });
-
-            }
-
-
-            if (page === "funds") {
-
-                openFunds();
-
-            }
-
-
-            if (page === "account") {
-
-                if (accountPage) {
-
-                    accountPage.style.display =
-                        "block";
-
-                    accountPage.scrollIntoView({
-                        behavior: "smooth"
-                    });
-
-                }
-
-                renderOrderHistory();
-
-                renderDepositHistory();
-
-            }
-
-        });
-
-    });
-
-
-    /* =========================
-       CLOSE FUNDS
-    ========================= */
-
-    if (closeFunds) {
-
-        closeFunds.addEventListener("click", function () {
-
-            fundsModal.classList.remove("active");
-
-        });
-
-    }
-
-
-    if (fundsModal) {
-
-        fundsModal.addEventListener("click", function (event) {
-
-            if (event.target === fundsModal) {
-
-                fundsModal.classList.remove("active");
-
-            }
-
-        });
-
-    }
-
-
-    /* =========================
-       ACCOUNT ADD FUNDS
-    ========================= */
+    const accountAddFunds =
+        document.getElementById(
+            "accountAddFunds"
+        );
 
     if (accountAddFunds) {
 
@@ -541,68 +579,115 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-    /* =========================
-       PROCEED TO PAYMENT
-    ========================= */
+    // Bottom Add Funds
+
+    document.querySelectorAll(
+        '[data-page="funds"]'
+    ).forEach(function (button) {
+
+        button.addEventListener(
+            "click",
+            openFunds
+        );
+
+    });
+
+
+    // ================================
+    // PROCEED TO PAYMENT
+    // ================================
 
     if (proceedPayBtn) {
 
-        proceedPayBtn.addEventListener("click", function () {
+        proceedPayBtn.addEventListener(
+            "click",
+            function () {
 
-            const amount =
-                Number(depositAmount.value);
+                const amount =
+                    Number(
+                        depositAmount.value
+                    );
 
 
-            if (
-                !amount ||
-                amount <= 0
-            ) {
+                if (!amount ||
+                    amount <= 0) {
 
-                alert(
-                    "Please enter a valid amount."
+                    alert(
+                        "Please enter a valid amount."
+                    );
+
+                    return;
+                }
+
+
+                /*
+                  Deposit is initially Pending.
+
+                  IMPORTANT:
+                  Real bank/payment verification
+                  must happen on a secure backend.
+                */
+
+                const deposit = {
+
+                    id:
+                        "DEP-" +
+                        Date.now(),
+
+                    amount:
+                        Number(
+                            amount.toFixed(2)
+                        ),
+
+                    status:
+                        "Pending",
+
+                    date:
+                        new Date().toLocaleString()
+
+                };
+
+
+                deposits.unshift(
+                    deposit
                 );
 
-                return;
+                saveData();
+
+                fundsModal.classList.remove(
+                    "active"
+                );
+
+
+                openPayment(
+                    amount,
+                    deposit.id
+                );
 
             }
-
-
-            selectedDepositAmount =
-                Number(amount.toFixed(2));
-
-
-            fundsModal.classList.remove(
-                "active"
-            );
-
-
-            openPaymentPage(
-                selectedDepositAmount
-            );
-
-        });
-
+        );
     }
 
 
-    /* =========================
-       PAYMENT PAGE
-    ========================= */
+    // ================================
+    // PAYMENT SCREEN
+    // ================================
 
-    function openPaymentPage(amount) {
+    function openPayment(
+        amount,
+        depositId
+    ) {
 
         if (!paymentModal) return;
-
 
         paymentModal.classList.add(
             "active"
         );
 
-
         if (paymentAmount) {
 
             paymentAmount.textContent =
-                money(amount);
+                amount.toFixed(2);
 
         }
 
@@ -615,23 +700,25 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
 
-        startPaymentTimer();
+        startPaymentTimer(
+            depositId
+        );
 
     }
 
 
-    /* =========================
-       5 MINUTE TIMER
-    ========================= */
+    // ================================
+    // 5 MINUTE TIMER
+    // ================================
 
-    function startPaymentTimer() {
+    function startPaymentTimer(
+        depositId
+    ) {
 
-        clearInterval(
-            paymentCountdown
-        );
+        stopPaymentTimer();
 
-
-        let seconds = 5 * 60;
+        let remaining =
+            5 * 60;
 
 
         if (paymentTimer) {
@@ -642,349 +729,86 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
 
-        paymentCountdown =
-            setInterval(function () {
+        paymentTimerInterval =
+            setInterval(
+                function () {
 
-                seconds--;
-
-
-                const minutes =
-                    Math.floor(
-                        seconds / 60
-                    );
+                    remaining--;
 
 
-                const remainingSeconds =
-                    seconds % 60;
+                    const minutes =
+                        Math.floor(
+                            remaining / 60
+                        );
 
-
-                if (paymentTimer) {
-
-                    paymentTimer.textContent =
-                        String(minutes).padStart(2, "0")
-                        + ":" +
-                        String(
-                            remainingSeconds
-                        ).padStart(2, "0");
-
-                }
-
-
-                if (seconds <= 0) {
-
-                    clearInterval(
-                        paymentCountdown
-                    );
+                    const seconds =
+                        remaining % 60;
 
 
                     if (paymentTimer) {
 
                         paymentTimer.textContent =
-                            "00:00";
+                            String(minutes)
+                                .padStart(2, "0")
+                            + ":" +
+                            String(seconds)
+                                .padStart(2, "0");
 
                     }
 
 
-                    if (paymentExpired) {
+                    if (remaining <= 0) {
 
-                        paymentExpired.style.display =
-                            "block";
+                        stopPaymentTimer();
+
+                        if (paymentExpired) {
+
+                            paymentExpired.style.display =
+                                "block";
+
+                        }
 
                     }
 
-                }
-
-            }, 1000);
-
+                },
+                1000
+            );
     }
 
 
-    /* =========================
-       CLOSE PAYMENT
-    ========================= */
+    function stopPaymentTimer() {
 
-    if (closePayment) {
-
-        closePayment.addEventListener("click", function () {
+        if (paymentTimerInterval) {
 
             clearInterval(
-                paymentCountdown
+                paymentTimerInterval
             );
 
-            paymentModal.classList.remove(
-                "active"
-            );
+            paymentTimerInterval = null;
 
-        });
+        }
 
     }
 
 
-    /* =========================
-       DEMO PAYMENT SUCCESS
-       =========================
-
-       Temporary only.
-
-       Real payment verification
-       will replace this section.
-    */
-
-    function depositSuccess(amount) {
-
-        balance += amount;
-
-
-        const deposit = {
-
-            id:
-                "DEP-" +
-                Date.now(),
-
-            amount:
-                amount,
-
-            status:
-                "success",
-
-            date:
-                new Date().toLocaleString()
-
-        };
-
-
-        deposits.unshift(
-            deposit
-        );
-
-
-        saveData();
-
-        updateBalance();
-
-        renderDepositHistory();
-
-
-        showSuccess(
-            "Deposit Successful",
-            "Your balance has been updated successfully."
-        );
-
-    }
-
-
-    /* =========================
-       TEMPORARY PAYMENT TEST
-    =========================
-
-       Double-click on payment amount
-       to test success during development.
-
-       This MUST NOT be used as real
-       payment verification.
-    */
-
-    if (paymentAmount) {
-
-        paymentAmount.addEventListener(
-            "dblclick",
-            function () {
-
-                if (
-                    selectedDepositAmount > 0
-                ) {
-
-                    clearInterval(
-                        paymentCountdown
-                    );
-
-                    paymentModal.classList.remove(
-                        "active"
-                    );
-
-                    depositSuccess(
-                        selectedDepositAmount
-                    );
-
-                }
-
-            }
-        );
-
-    }
-
-
-    /* =========================
-       PLACE ORDER
-    ========================= */
-
-    if (placeOrderBtn) {
-
-        placeOrderBtn.addEventListener("click", function () {
-
-            const service =
-                serviceSelect.value.trim();
-
-
-            const link =
-                orderLink.value.trim();
-
-
-            const quantity =
-                Number(
-                    orderQuantity.value
-                );
-
-
-            const selectedOption =
-                serviceSelect.options[
-                    serviceSelect.selectedIndex
-                ];
-
-
-            const pricePer1000 =
-                Number(
-                    selectedOption?.dataset.price
-                ) || 0;
-
-
-            const total =
-                (quantity / 1000) *
-                pricePer1000;
-
-
-            if (!service) {
-
-                alert(
-                    "Please select a service."
-                );
-
-                return;
-
-            }
-
-
-            if (!link) {
-
-                alert(
-                    "Please enter your Instagram link."
-                );
-
-                return;
-
-            }
-
-
-            if (
-                !quantity ||
-                quantity <= 0
-            ) {
-
-                alert(
-                    "Please enter a valid quantity."
-                );
-
-                return;
-
-            }
-
-
-            if (total <= 0) {
-
-                alert(
-                    "Invalid order amount."
-                );
-
-                return;
-
-            }
-
-
-            if (balance < total) {
-
-                alert(
-                    "Insufficient balance. Please add funds first."
-                );
-
-                return;
-
-            }
-
-
-            const order = {
-
-                id:
-                    "ORD-" +
-                    Date.now(),
-
-                service:
-                    service,
-
-                link:
-                    link,
-
-                quantity:
-                    quantity,
-
-                amount:
-                    Number(
-                        total.toFixed(2)
-                    ),
-
-                status:
-                    "pending",
-
-                date:
-                    new Date().toLocaleString()
-
-            };
-
-
-            balance -= total;
-
-
-            orders.unshift(
-                order
+    // ================================
+    // SUCCESS MESSAGE
+    // ================================
+
+    function showSuccess(
+        title,
+        message
+    ) {
+
+        const successTitle =
+            document.getElementById(
+                "successTitle"
             );
 
-
-            saveData();
-
-            updateBalance();
-
-            renderOrderHistory();
-
-
-            orderModal.classList.remove(
-                "active"
+        const successMessage =
+            document.getElementById(
+                "successMessage"
             );
-
-
-            showSuccess(
-                "Order Successful",
-                "Your service will be delivered within 24 hours."
-            );
-
-
-            /*
-                Later:
-                Secure backend will send
-                the order details to your
-                WhatsApp automatically.
-            */
-
-        });
-
-    }
-
-
-    /* =========================
-       SUCCESS MESSAGE
-    ========================= */
-
-    function showSuccess(title, message) {
-
-        if (!successModal) return;
 
 
         if (successTitle) {
@@ -1003,71 +827,291 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
 
-        successModal.classList.add(
-            "active"
-        );
+        if (successModal) {
+
+            successModal.classList.add(
+                "active"
+            );
+
+        }
 
     }
 
 
-    if (successCloseBtn) {
+    // ================================
+    // HISTORY
+    // ================================
 
-        successCloseBtn.addEventListener(
-            "click",
-            function () {
+    function renderHistory() {
 
-                successModal.classList.remove(
-                    "active"
-                );
+        // Orders
 
-                renderOrderHistory();
+        if (orderHistory) {
 
-                renderDepositHistory();
+            if (orders.length === 0) {
+
+                orderHistory.innerHTML =
+                    '<div class="empty-history">No orders yet.</div>';
+
+            } else {
+
+                orderHistory.innerHTML =
+                    orders.map(function (order) {
+
+                        const statusClass =
+                            order.status
+                                .toLowerCase();
+
+                        return `
+                            <div class="history-item">
+
+                                <div class="history-top">
+
+                                    <div class="history-service">
+                                        ${escapeHTML(order.service)}
+                                    </div>
+
+                                    <div class="history-status ${statusClass}">
+                                        ${escapeHTML(order.status)}
+                                    </div>
+
+                                </div>
+
+                                <div class="history-details">
+
+                                    Quantity:
+                                    ${Number(order.quantity).toLocaleString()}
+
+                                    <br>
+
+                                    Amount:
+                                    ₹${Number(order.amount).toFixed(2)}
+
+                                    <br>
+
+                                    Link:
+                                    ${escapeHTML(order.link)}
+
+                                    <br>
+
+                                    ${escapeHTML(order.date)}
+
+                                </div>
+
+                            </div>
+                        `;
+
+                    }).join("");
 
             }
-        );
-
-    }
-
-
-    /* =========================
-       ORDER HISTORY
-    ========================= */
-
-    function renderOrderHistory() {
-
-        if (!orderHistory) return;
-
-
-        if (!orders.length) {
-
-            orderHistory.innerHTML =
-                '<div class="empty-history">No orders yet.</div>';
-
-            return;
 
         }
 
 
-        orderHistory.innerHTML =
-            orders.map(function (order) {
+        // Deposits
 
-                return `
+        if (depositHistory) {
 
-                <div class="history-item">
+            if (deposits.length === 0) {
 
-                    <h4>
-                        ${escapeHtml(order.service)}
-                    </h4>
+                depositHistory.innerHTML =
+                    '<div class="empty-history">No deposits yet.</div>';
 
-                    <p>
-                        Quantity:
-                        ${Number(order.quantity).toLocaleString()}
-                    </p>
+            } else {
 
-                    <p>
-                        Amount:
-                        ${money(order.amount)}
-                    </p>
+                depositHistory.innerHTML =
+                    deposits.map(function (deposit) {
 
-                    <
+                        const statusClass =
+                            deposit.status
+                                .toLowerCase();
+
+                        return `
+                            <div class="history-item">
+
+                                <div class="history-top">
+
+                                    <div class="history-service">
+                                        Deposit
+                                    </div>
+
+                                    <div class="history-status ${statusClass}">
+                                        ${escapeHTML(deposit.status)}
+                                    </div>
+
+                                </div>
+
+                                <div class="history-details">
+
+                                    Amount:
+                                    ₹${Number(deposit.amount).toFixed(2)}
+
+                                    <br>
+
+                                    ${escapeHTML(deposit.date)}
+
+                                </div>
+
+                            </div>
+                        `;
+
+                    }).join("");
+
+            }
+
+        }
+
+    }
+
+
+    // ================================
+    // BASIC HTML ESCAPE
+    // ================================
+
+    function escapeHTML(value) {
+
+        return String(value)
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+
+    }
+
+
+    // ================================
+    // BOTTOM NAVIGATION
+    // ================================
+
+    const bottomItems =
+        document.querySelectorAll(
+            ".bottom-nav-item"
+        );
+
+
+    bottomItems.forEach(function (item) {
+
+        item.addEventListener(
+            "click",
+            function () {
+
+                bottomItems.forEach(
+                    function (btn) {
+
+                        btn.classList.remove(
+                            "active"
+                        );
+
+                    }
+                );
+
+
+                item.classList.add(
+                    "active"
+                );
+
+
+                const page =
+                    item.dataset.page;
+
+
+                if (page === "home") {
+
+                    if (mainWebsite) {
+
+                        mainWebsite.style.display =
+                            "block";
+
+                    }
+
+                    if (accountPage) {
+
+                        accountPage.style.display =
+                            "none";
+
+                    }
+
+                    window.scrollTo({
+                        top: 0,
+                        behavior: "smooth"
+                    });
+
+                }
+
+
+                if (page === "services") {
+
+                    if (mainWebsite) {
+
+                        mainWebsite.style.display =
+                            "block";
+
+                    }
+
+                    if (accountPage) {
+
+                        accountPage.style.display =
+                            "none";
+
+                    }
+
+                    const services =
+                        document.getElementById(
+                            "services"
+                        );
+
+                    if (services) {
+
+                        services.scrollIntoView({
+                            behavior: "smooth"
+                        });
+
+                    }
+
+                }
+
+
+                if (page === "account") {
+
+                    if (mainWebsite) {
+
+                        mainWebsite.style.display =
+                            "none";
+
+                    }
+
+                    if (accountPage) {
+
+                        accountPage.style.display =
+                            "block";
+
+                    }
+
+                    updateBalance();
+
+                    renderHistory();
+
+                    window.scrollTo({
+                        top: 0,
+                        behavior: "smooth"
+                    });
+
+                }
+
+            }
+        );
+
+    });
+
+
+    //
+       ================================
+    // INITIAL LOAD
+    // ================================
+
+    updateBalance();
+
+    renderHistory();
+
+});
