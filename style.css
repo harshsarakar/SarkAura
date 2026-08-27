@@ -22,29 +22,34 @@ select {
     font-family: inherit;
 }
 
+button {
+    cursor: pointer;
+}
+
 
 /* =========================
    NAVBAR
 ========================= */
 
 .navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
     width: 100%;
     max-width: 1100px;
     margin: auto;
+
     padding: 15px 25px;
 
     display: flex;
     align-items: center;
     justify-content: space-between;
 
-    background: rgba(10, 10, 18, 0.94);
-    border-bottom: 1px solid rgba(255,255,255,0.08);
-
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-
+    background: rgba(8, 8, 18, 0.94);
     backdrop-filter: blur(12px);
+
+    border-bottom: 1px solid rgba(255,255,255,0.08);
 }
 
 .logo {
@@ -68,18 +73,20 @@ select {
 }
 
 .nav-links a:hover {
-    color: #ff2f92;
+    color: #ff2b8a;
 }
 
 .menu-btn {
     display: none;
+
+    border: none;
     background: #7c3cff;
     color: white;
-    border: none;
+
     padding: 8px 12px;
     border-radius: 8px;
+
     font-size: 20px;
-    cursor: pointer;
 }
 
 
@@ -90,7 +97,9 @@ select {
 .hero {
     max-width: 1000px;
     margin: auto;
+
     padding: 90px 10px 70px;
+
     text-align: center;
 }
 
@@ -138,6 +147,7 @@ select {
 
 .hero-btn {
     display: inline-block;
+
     padding: 14px 22px;
 
     border-radius: 12px;
@@ -145,7 +155,7 @@ select {
     background: linear-gradient(
         135deg,
         #ff2f92,
-        #8b45ff
+        #7c3cff
     );
 
     color: white;
@@ -155,19 +165,50 @@ select {
 
 .secondary-btn {
     background: transparent;
-    border: 1px solid #444;
+    border: 1px solid #555;
 }
 
 .hero-trust {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+
     gap: 10px 18px;
 
     margin-top: 22px;
 
+    color: #aaa;
     font-size: 13px;
-    opacity: 0.8;
+}
+
+
+/* =========================
+   SECTION TITLE
+========================= */
+
+.section-title,
+.section-heading {
+    text-align: center;
+}
+
+.section-title {
+    margin-bottom: 35px;
+}
+
+.section-title h2,
+.section-heading h2 {
+    font-size: 34px;
+    margin: 10px 0;
+}
+
+.section-title h2 span {
+    color: #ff2f92;
+}
+
+.section-title > p:last-child,
+.section-heading > p:last-child {
+    color: #888;
+    font-size: 14px;
 }
 
 
@@ -181,45 +222,28 @@ select {
     padding: 20px 5px;
 }
 
-.section-title,
-.section-heading {
-    text-align: center;
-    max-width: 650px;
-    margin: 0 auto 40px;
-}
-
-.section-title h2,
-.section-heading h2 {
-    font-size: 34px;
-    margin: 10px 0;
-}
-
-.section-title h2 span {
-    color: #ff2f92;
-}
-
-.section-title p:last-child,
-.section-heading p {
-    color: #888;
-    font-size: 14px;
-}
-
 .service-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
     gap: 18px;
 }
 
 .service-card {
     padding: 24px;
 
-    background: linear-gradient(
-        145deg,
-        rgba(255,255,255,0.06),
-        rgba(255,255,255,0.02)
-    );
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,0.06),
+            rgba(255,255,255,0.02)
+        );
 
-    border: 1px solid rgba(255,255,255,0.10);
+    border: 1px solid
+        rgba(255,255,255,0.10);
+
     border-radius: 20px;
 
     transition: 0.3s;
@@ -231,7 +255,8 @@ select {
     border-color: #ff2f92;
 
     box-shadow:
-        0 0 25px rgba(255,47,146,0.15);
+        0 0 25px
+        rgba(255,47,146,0.15);
 }
 
 .service-icon {
@@ -244,9 +269,11 @@ select {
 
     border-radius: 16px;
 
-    background: rgba(255,47,146,0.12);
+    background:
+        rgba(255,47,146,0.12);
 
     font-size: 26px;
+
     margin-bottom: 18px;
 }
 
@@ -257,16 +284,23 @@ select {
 
 .service-card .hindi {
     color: #999;
+
     font-size: 13px;
+
     line-height: 1.6;
+
     text-align: left;
+
     margin-bottom: 20px;
 }
 
 .price {
     color: #ff4b9b;
+
     font-size: 24px;
+
     font-weight: bold;
+
     margin-bottom: 18px;
 }
 
@@ -280,19 +314,19 @@ select {
     width: 100%;
 
     margin: 0;
+
     padding: 12px;
 
     border-radius: 10px;
+
     border: 1px solid #ff2f92;
 
     background: transparent;
+
     color: white;
 
     font-size: 14px;
     font-weight: bold;
-
-    cursor: pointer;
-    transition: 0.2s;
 }
 
 .order-btn:hover {
@@ -305,34 +339,39 @@ select {
 ========================= */
 
 .how-it-works {
-    max-width: 1100px;
-    margin: auto;
-    padding: 70px 20px;
+    padding: 80px 20px;
     text-align: center;
 }
 
 .steps {
     max-width: 1000px;
-    margin: auto;
+    margin: 40px auto 0;
 
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
     gap: 20px;
 }
 
 .step-card {
     padding: 28px 22px;
 
-    border: 1px solid rgba(255,255,255,0.1);
+    border: 1px solid
+        rgba(255,255,255,0.1);
+
     border-radius: 20px;
 
-    background: rgba(255,255,255,0.03);
+    background:
+        rgba(255,255,255,0.03);
 }
 
 .step-number {
     font-size: 14px;
     font-weight: bold;
     opacity: 0.6;
+
     margin-bottom: 15px;
 }
 
@@ -341,7 +380,56 @@ select {
 }
 
 .step-card p {
-    color: #999;
+    color: #888;
+    line-height: 1.6;
+}
+
+
+/* =========================
+   WHY SARKAURA
+========================= */
+
+.why-sarkAura {
+    padding: 80px 20px;
+    text-align: center;
+}
+
+.why-grid {
+    max-width: 1000px;
+
+    margin: 40px auto 0;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 18px;
+}
+
+.why-card {
+    padding: 26px 20px;
+
+    border: 1px solid
+        rgba(255,255,255,0.1);
+
+    border-radius: 20px;
+
+    background:
+        rgba(255,255,255,0.03);
+}
+
+.why-icon {
+    font-size: 28px;
+    margin-bottom: 15px;
+}
+
+.why-card h3 {
+    margin-bottom: 10px;
+}
+
+.why-card p {
+    color: #888;
     line-height: 1.6;
 }
 
@@ -352,7 +440,9 @@ select {
 
 .faq {
     max-width: 900px;
+
     margin: 20px auto 80px;
+
     padding: 30px 20px;
 }
 
@@ -364,16 +454,18 @@ select {
 .faq-item {
     padding: 22px;
 
-    background: rgba(255,255,255,0.04);
+    background:
+        rgba(255,255,255,0.04);
 
-    border: 1px solid rgba(255,255,255,0.10);
+    border: 1px solid
+        rgba(255,255,255,0.10);
+
     border-radius: 16px;
 }
 
 .faq-item h3 {
     font-size: 17px;
     margin-bottom: 10px;
-    cursor: pointer;
 }
 
 .faq-item p {
@@ -393,6 +485,7 @@ select {
 
 .contact-box {
     max-width: 800px;
+
     margin: auto;
 
     padding: 50px 25px;
@@ -401,13 +494,15 @@ select {
 
     border-radius: 25px;
 
-    background: linear-gradient(
-        135deg,
-        rgba(255,47,146,0.12),
-        rgba(139,69,255,0.10)
-    );
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,47,146,0.12),
+            rgba(139,69,255,0.10)
+        );
 
-    border: 1px solid rgba(255,255,255,0.10);
+    border: 1px solid
+        rgba(255,255,255,0.10);
 }
 
 .contact-box h2 {
@@ -431,18 +526,22 @@ select {
 
     border-radius: 12px;
 
-    background: linear-gradient(
-        135deg,
-        #ff2f92,
-        #8b45ff
-    );
+    background:
+        linear-gradient(
+            135deg,
+            #ff2f92,
+            #8b45ff
+        );
 
     color: white;
+
     text-decoration: none;
+
     font-weight: bold;
 }
 
 .instagram-id {
+    margin-top: 18px;
     color: #aaa;
     font-size: 14px;
 }
@@ -457,9 +556,11 @@ select {
 
     padding: 40px 20px;
 
-    border-top: 1px solid rgba(255,255,255,0.08);
+    border-top: 1px solid
+        rgba(255,255,255,0.08);
 
-    background: rgba(0,0,0,0.2);
+    background:
+        rgba(0,0,0,0.2);
 }
 
 .footer-logo {
@@ -469,6 +570,7 @@ select {
 
 .footer-logo span {
     color: #ff2f92;
+    font-size: 30px;
 }
 
 .footer > p {
@@ -479,34 +581,37 @@ select {
 .footer-links {
     display: flex;
     justify-content: center;
+
     gap: 22px;
+
     flex-wrap: wrap;
 }
 
 .footer-links a {
     color: #aaa;
     text-decoration: none;
+    font-size: 14px;
 }
 
 .footer-links a:hover {
     color: #ff2f92;
 }
 
-.copyright {
+.footer .copyright {
+    margin-top: 25px;
     font-size: 12px;
 }
 
 
 /* =========================
-   MODALS
+   ORDER / FUNDS MODAL
 ========================= */
 
-.order-modal,
-.payment-modal,
-.success-modal {
+.order-modal {
     display: none;
 
     position: fixed;
+
     inset: 0;
 
     z-index: 9999;
@@ -516,18 +621,17 @@ select {
 
     padding: 20px;
 
-    background: rgba(0,0,0,0.78);
+    background:
+        rgba(0,0,0,0.78);
+
+    overflow-y: auto;
 }
 
-.order-modal.active,
-.payment-modal.active,
-.success-modal.active {
+.order-modal.active {
     display: flex;
 }
 
-.order-box,
-.payment-box,
-.success-box {
+.order-box {
     width: 100%;
     max-width: 430px;
 
@@ -537,62 +641,46 @@ select {
 
     background: #11111d;
 
-    border: 1px solid rgba(255,255,255,0.12);
+    border: 1px solid
+        rgba(255,255,255,0.12);
 
     text-align: center;
 
     position: relative;
 
-    box-shadow: 0 20px 60px rgba(0,0,0,0.45);
+    box-shadow:
+        0 20px 70px
+        rgba(0,0,0,0.5);
 }
 
-.order-box h2,
-.payment-box h2,
-.success-box h2 {
+.order-box h2 {
     margin-bottom: 10px;
 }
 
-.order-box p,
-.payment-box p,
-.success-box p {
+.order-box > p {
     color: #999;
-    line-height: 1.5;
     margin-bottom: 20px;
 }
 
-.close-order,
-.close-payment {
+.close-order {
     position: absolute;
 
     top: 8px;
-    right: 14px;
+    right: 13px;
 
     border: none;
+
     background: transparent;
 
     color: white;
 
     font-size: 28px;
-    cursor: pointer;
 }
 
 
 /* =========================
    FORM
 ========================= */
-
-.order-box label,
-.payment-box label {
-    display: block;
-
-    text-align: left;
-
-    color: #bbb;
-
-    font-size: 13px;
-
-    margin: 12px 0 7px;
-}
 
 #serviceSelect,
 #orderLink,
@@ -601,6 +689,8 @@ select {
     width: 100%;
 
     padding: 14px;
+
+    margin-bottom: 14px;
 
     border-radius: 12px;
 
@@ -620,52 +710,59 @@ select {
     border-color: #ff2f92;
 }
 
-.order-price-box {
-    width: 100%;
+#orderLink::placeholder,
+#orderQuantity::placeholder,
+#depositAmount::placeholder {
+    color: #666;
+}
+
+
+/* =========================
+   CALCULATED PRICE
+========================= */
+
+.calculated-price {
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
 
     padding: 15px;
 
-    border-radius: 12px;
+    margin: 5px 0 12px;
 
-    background: rgba(255,47,146,0.08);
+    border-radius: 13px;
 
-    border: 1px solid rgba(255,47,146,0.25);
+    background:
+        rgba(255,47,146,0.08);
 
-    text-align: center;
-
-    color: #ff4b9b;
-
-    font-size: 22px;
-
-    margin-bottom: 12px;
+    border: 1px solid
+        rgba(255,47,146,0.18);
 }
 
-.balance-preview {
-    padding: 12px;
+.calculated-price span {
+    color: #aaa;
+}
 
-    border-radius: 10px;
+.calculated-price strong {
+    color: #ff4b9b;
+    font-size: 22px;
+}
 
-    background: rgba(255,255,255,0.04);
-
-    color: #999;
+.balance-small {
+    color: #888;
 
     font-size: 13px;
 
     margin-bottom: 18px;
 }
 
-.balance-preview strong {
+.balance-small span {
     color: white;
+    font-weight: bold;
 }
 
-
-/* =========================
-   BUTTONS
-========================= */
-
-.place-order-btn,
-.proceed-pay-btn,
-.success-close-btn {
+.dm-order-btn {
     width: 100%;
 
     padding: 14px;
@@ -674,24 +771,18 @@ select {
 
     border-radius: 12px;
 
-    background: linear-gradient(
-        135deg,
-        #ff2f92,
-        #7c3cff
-    );
+    background:
+        linear-gradient(
+            135deg,
+            #ff2f92,
+            #7c3cff
+        );
 
     color: white;
 
-    font-size: 15px;
     font-weight: bold;
 
-    cursor: pointer;
-}
-
-.place-order-btn:hover,
-.proceed-pay-btn:hover,
-.success-close-btn:hover {
-    opacity: 0.9;
+    font-size: 15px;
 }
 
 
@@ -699,64 +790,69 @@ select {
    PAYMENT
 ========================= */
 
-.payment-amount {
-    color: #ff4b9b;
-
-    font-size: 30px;
-
-    font-weight: bold;
-
-    margin-bottom: 20px;
+.payment-box {
+    max-width: 400px;
 }
 
-.qr-placeholder {
+.qr-container {
     width: 230px;
     height: 230px;
 
-    margin: 0 auto 20px;
+    margin: 20px auto;
 
-    border-radius: 15px;
+    padding: 10px;
 
     background: white;
 
-    color: #111;
+    border-radius: 15px;
 
     display: flex;
+
     align-items: center;
     justify-content: center;
-
-    flex-direction: column;
-
-    font-size: 20px;
-    font-weight: bold;
 }
 
-.qr-placeholder small {
-    font-size: 10px;
-    color: #666;
-    margin-top: 8px;
+.qr-container img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+
+    border-radius: 8px;
 }
 
-.timer-title {
-    color: #888;
-    font-size: 13px;
+.payment-amount {
+    color: #ff4b9b;
+    font-size: 28px;
+    margin: 10px 0;
 }
 
-.payment-timer {
-    font-size: 30px;
-    font-weight: bold;
-    color: #ff2f92;
-    margin-top: 5px;
+.payment-timer-box {
+    padding: 12px;
+
+    margin: 15px 0;
+
+    border-radius: 12px;
+
+    background:
+        rgba(255,255,255,0.05);
+
+    color: #aaa;
+}
+
+.payment-timer-box strong {
+    color: white;
+    margin-left: 5px;
 }
 
 .payment-expired {
-    display: none;
+    color: #ff5555 !important;
+}
 
-    margin-top: 15px;
-
-    color: #ff4b4b;
-
-    font-weight: bold;
+.payment-note {
+    color: #777 !important;
+    font-size: 12px;
+    line-height: 1.5;
 }
 
 
@@ -768,183 +864,202 @@ select {
     width: 70px;
     height: 70px;
 
-    margin: 0 auto 18px;
-
-    border-radius: 50%;
+    margin: 0 auto 20px;
 
     display: flex;
+
     align-items: center;
     justify-content: center;
 
-    background: rgba(0,255,150,0.12);
+    border-radius: 50%;
 
-    border: 1px solid rgba(0,255,150,0.3);
+    background:
+        rgba(0,220,130,0.12);
 
-    color: #35e89a;
+    border: 2px solid
+        #00dc82;
+
+    color: #00dc82;
 
     font-size: 38px;
     font-weight: bold;
 }
 
+.success-box h2 {
+    margin-bottom: 12px;
+}
+
 .success-box p {
-    margin-bottom: 25px;
+    color: #999;
+
+    line-height: 1.6;
+
+    margin-bottom: 22px;
 }
 
 
 /* =========================
-   ACCOUNT
+   ACCOUNT PAGE
 ========================= */
 
 .account-page {
     max-width: 900px;
 
-    margin: 40px auto 80px;
+    margin: auto;
 
-    padding: 30px 10px;
+    padding: 60px 15px 100px;
 
-    display: none;
+    min-height: 75vh;
 }
 
-.account-header {
+.account-container > h2 {
     text-align: center;
-    margin-bottom: 30px;
-}
 
-.account-header h2 {
-    font-size: 32px;
+    font-size: 34px;
+
+    margin-bottom: 30px;
 }
 
 .balance-card {
-    padding: 28px;
+    max-width: 500px;
 
-    border-radius: 22px;
+    margin: auto;
 
-    background: linear-gradient(
-        135deg,
-        rgba(255,47,146,0.14),
-        rgba(124,60,255,0.14)
-    );
-
-    border: 1px solid rgba(255,255,255,0.1);
+    padding: 30px 25px;
 
     text-align: center;
 
-    margin-bottom: 30px;
+    border-radius: 22px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,47,146,0.13),
+            rgba(124,60,255,0.13)
+        );
+
+    border: 1px solid
+        rgba(255,255,255,0.1);
 }
 
-.balance-card span {
-    display: block;
-
-    color: #999;
-
-    font-size: 14px;
-
+.balance-card p {
+    color: #888;
     margin-bottom: 8px;
 }
 
-.balance-card strong {
-    display: block;
+.balance-card h1 {
+    margin: 0 0 10px;
 
     font-size: 38px;
 
     color: white;
-
-    margin-bottom: 18px;
 }
 
-.balance-card button {
-    padding: 11px 20px;
-
-    border: 1px solid #ff2f92;
-
-    border-radius: 10px;
-
-    background: transparent;
-
-    color: white;
-
-    cursor: pointer;
-}
-
-.history-section {
-    margin-top: 25px;
-}
-
-.history-heading {
-    margin-bottom: 15px;
-}
-
-.history-heading h3 {
-    font-size: 20px;
-}
-
-.empty-history {
-    padding: 25px;
-
-    border-radius: 15px;
-
-    background: rgba(255,255,255,0.04);
-
-    color: #777;
-
-    text-align: center;
-}
-
-.history-item {
-    padding: 18px;
-
-    margin-bottom: 12px;
-
-    border-radius: 15px;
-
-    background: rgba(255,255,255,0.04);
-
-    border: 1px solid rgba(255,255,255,0.08);
-}
-
-.history-item h4 {
-    margin-bottom: 8px;
-}
-
-.history-item p {
-    color: #999;
-    text-align: left;
-    margin: 5px 0;
-    font-size: 13px;
-}
-
-.status {
-    display: inline-block;
-
-    padding: 5px 10px;
-
-    border-radius: 20px;
-
-    font-size: 11px;
-
-    font-weight: bold;
-
-    margin-top: 8px;
-}
-
-.status.pending {
-    background: rgba(255,190,0,0.12);
-    color: #ffc400;
-}
-
-.status.success {
-    background: rgba(0,255,150,0.12);
-    color: #35e89a;
-}
-
-.status.rejected {
-    background: rgba(255,50,50,0.12);
-    color: #ff5757;
+.balance-card .main-order-btn {
+    margin-top: 15px;
 }
 
 
 /* =========================
-   BOTTOM NAVIGATION
+   HISTORY
+========================= */
+
+.history-section {
+    margin-top: 35px;
+
+    padding: 22px;
+
+    border-radius: 18px;
+
+    background:
+        rgba(255,255,255,0.03);
+
+    border: 1px solid
+        rgba(255,255,255,0.08);
+}
+
+.history-section h3 {
+    margin-bottom: 18px;
+}
+
+.empty-history {
+    padding: 20px;
+
+    text-align: center;
+
+    color: #666;
+}
+
+.history-item {
+    padding: 15px;
+
+    margin-bottom: 10px;
+
+    border-radius: 13px;
+
+    background:
+        rgba(255,255,255,0.04);
+
+    border: 1px solid
+        rgba(255,255,255,0.06);
+}
+
+.history-item:last-child {
+    margin-bottom: 0;
+}
+
+.history-top {
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 10px;
+
+    margin-bottom: 8px;
+}
+
+.history-service {
+    font-weight: bold;
+}
+
+.history-status {
+    font-size: 12px;
+
+    padding: 5px 9px;
+
+    border-radius: 20px;
+
+    background:
+        rgba(255,193,7,0.12);
+
+    color: #ffc107;
+}
+
+.history-status.success {
+    background:
+        rgba(0,220,130,0.12);
+
+    color: #00dc82;
+}
+
+.history-status.rejected {
+    background:
+        rgba(255,70,70,0.12);
+
+    color: #ff5555;
+}
+
+.history-details {
+    color: #777;
+
+    font-size: 13px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================
+   BOTTOM NAV
 ========================= */
 
 .bottom-nav {
@@ -957,25 +1072,28 @@ select {
 
     width: min(500px, calc(100% - 24px));
 
-    padding: 9px 8px;
+    z-index: 10000;
 
     display: grid;
 
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns:
+        repeat(4, 1fr);
 
-    gap: 5px;
-
-    background: rgba(17,17,29,0.95);
-
-    border: 1px solid rgba(255,255,255,0.1);
+    padding: 8px;
 
     border-radius: 20px;
 
+    background:
+        rgba(18,18,30,0.95);
+
     backdrop-filter: blur(15px);
 
-    z-index: 5000;
+    border: 1px solid
+        rgba(255,255,255,0.1);
 
-    box-shadow: 0 10px 40px rgba(0,0,0,0.45);
+    box-shadow:
+        0 10px 40px
+        rgba(0,0,0,0.5);
 }
 
 .bottom-nav-item {
@@ -989,15 +1107,17 @@ select {
 
     border-radius: 14px;
 
-    cursor: pointer;
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 3px;
 }
 
 .bottom-nav-item span {
-    display: block;
-
     font-size: 20px;
-
-    margin-bottom: 3px;
 }
 
 .bottom-nav-item small {
@@ -1007,7 +1127,8 @@ select {
 .bottom-nav-item.active {
     color: #ff4b9b;
 
-    background: rgba(255,47,146,0.08);
+    background:
+        rgba(255,47,146,0.08);
 }
 
 
@@ -1020,10 +1141,11 @@ select {
     body {
         padding-left: 12px;
         padding-right: 12px;
+        padding-bottom: 90px;
     }
 
     .navbar {
-        padding: 14px 18px;
+        padding: 14px 16px;
     }
 
     .menu-btn {
@@ -1037,17 +1159,19 @@ select {
 
         top: 100%;
         left: 0;
+
         width: 100%;
 
         flex-direction: column;
 
         gap: 0;
 
+        padding: 8px 0;
+
         background: #080812;
 
-        padding: 10px 0;
-
-        border-bottom: 1px solid #29294a;
+        border-bottom: 1px solid
+            #29294a;
     }
 
     .nav-links.active {
@@ -1063,7 +1187,7 @@ select {
     }
 
     .hero h1 {
-        font-size: 37px;
+        font-size: 38px;
     }
 
     .hero-buttons {
@@ -1074,6 +1198,10 @@ select {
         width: 100%;
     }
 
+    .secondary-btn {
+        margin-left: 0;
+    }
+
     .service-grid {
         grid-template-columns: 1fr;
     }
@@ -1082,16 +1210,47 @@ select {
         grid-template-columns: 1fr;
     }
 
+    .why-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
     .section-title h2,
     .section-heading h2 {
         font-size: 28px;
     }
 
     .account-page {
-        padding-bottom: 30px;
+        padding-top: 40px;
     }
 
-    .balance-card strong {
-        font-size: 32px;
+}
+
+
+/* =========================
+   SMALL MOBILE
+========================= */
+
+@media (max-width: 420px) {
+
+    .why-grid {
+        grid-template-columns: 1fr;
     }
+
+    .bottom-nav-item span {
+        font-size: 18px;
+    }
+
+    .bottom-nav-item small {
+        font-size: 9px;
+    }
+
+    .order-box {
+        padding: 27px 17px;
+    }
+
+    .qr-container {
+        width: 210px;
+        height: 210px;
+    }
+
     }
