@@ -469,6 +469,14 @@ document.addEventListener("DOMContentLoaded", function () {
             "click",
             function () {
 
+                showAlert(
+    "Ye custom popup test hai.",
+    "SarkAura",
+    "✨"
+);
+
+return;
+
                 const service =
                     serviceSelect.value;
 
