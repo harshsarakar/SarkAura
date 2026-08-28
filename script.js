@@ -1,12 +1,3 @@
-const SUPABASE_URL = "https://xikxviwdkfccfkebdwye.supabase.co";
-const SUPABASE_KEY = "sb_publishable_eZD2D4vPSDcFYZo8es-vWA_3zZEcwC_";
-
-const supabaseClient = supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
-);
-console.log("Supabase connected:", supabaseClient);
-
 // ================================
 // SarkAura - Main Script
 // ================================
