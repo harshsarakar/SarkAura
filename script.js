@@ -1145,37 +1145,50 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
 
 
-                if (page === "account") {
+               if (page === "account") {
 
-                    if (mainWebsite) {
+    supabaseClient.auth.getSession().then(function(result) {
 
-                        mainWebsite.style.display =
-                            "none";
+        const session = result.data.session;
 
-                    }
+        if (!session) {
 
-                    if (accountPage) {
-
-                        accountPage.style.display =
-                            "block";
-
-                    }
-
-                    updateBalance();
-
-                    renderHistory();
-
-                    window.scrollTo({
-                        top: 0,
-                        behavior: "smooth"
-                    });
-
-                }
-
+            // User logged out → login popup open karo
+            if (accountPage) {
+                accountPage.style.display = "none";
             }
-        );
+
+            if (mainWebsite) {
+                mainWebsite.style.display = "block";
+            }
+
+            if (authModal) {
+                authModal.classList.add("active");
+            }
+
+            return;
+        }
+
+        // User logged in → Account page dikhao
+        if (mainWebsite) {
+            mainWebsite.style.display = "none";
+        }
+
+        if (accountPage) {
+            accountPage.style.display = "block";
+        }
+
+        updateBalance();
+        renderHistory();
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
 
     });
+
+                        } 
 
     // ================================
     // INITIAL LOAD
