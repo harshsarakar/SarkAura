@@ -1195,6 +1195,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const accountEmail =
         document.getElementById("accountEmail");
 
+    const logoutBtn =
+        document.getElementById("logoutBtn");
+
     const authModal =
         document.getElementById("authModal");
 
@@ -1250,6 +1253,57 @@ async function checkLogin() {
         }
     
 checkLogin();
+
+    // ================================
+// LOGOUT
+// ================================
+
+if (logoutBtn) {
+
+    logoutBtn.addEventListener(
+        "click",
+        async function () {
+
+            const { error } =
+                await supabaseClient.auth.signOut();
+
+            if (error) {
+
+                showAlert(
+                    error.message,
+                    "Logout Error",
+                    "❌"
+                );
+
+                return;
+            }
+
+            if (accountBtn) {
+                accountBtn.style.display = "block";
+            }
+
+            if (accountEmail) {
+                accountEmail.textContent = "";
+            }
+
+            if (accountPage) {
+                accountPage.style.display = "none";
+            }
+
+            if (mainWebsite) {
+                mainWebsite.style.display = "block";
+            }
+
+            showAlert(
+                "Aap successfully logout ho gaye.",
+                "Logout Successful",
+                "✅"
+            );
+
+        }
+    );
+
+                    }
 
     // OPEN LOGIN
 
