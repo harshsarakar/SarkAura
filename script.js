@@ -1052,195 +1052,181 @@ document.addEventListener("DOMContentLoaded", function () {
 
     }
 
-
     // ================================
-    // BOTTOM NAVIGATION
-    // ================================
+// BOTTOM NAVIGATION
+// ================================
 
-    const bottomItems =
-        document.querySelectorAll(
-            ".bottom-nav-item"
-        );
+const bottomItems =
+    document.querySelectorAll(".bottom-nav-item");
 
 
-    bottomItems.forEach(function (item) {
+// ================================
+// SUPABASE LOGIN ELEMENTS
+// ================================
 
-        item.addEventListener(
-            "click",
-            function () {
+const accountBtn =
+    document.getElementById("accountBtn");
 
-                bottomItems.forEach(
-                    function (btn) {
+const accountEmail =
+    document.getElementById("accountEmail");
 
-                        btn.classList.remove(
-                            "active"
-                        );
+const logoutBtn =
+    document.getElementById("logoutBtn");
 
-                    }
-                );
+const authModal =
+    document.getElementById("authModal");
 
+const authClose =
+    document.getElementById("authClose");
 
-                item.classList.add(
-                    "active"
-                );
+const authTitle =
+    document.getElementById("authTitle");
 
+const authSubtitle =
+    document.getElementById("authSubtitle");
 
-                const page =
-                    item.dataset.page;
+const authEmail =
+    document.getElementById("authEmail");
 
+const authPassword =
+    document.getElementById("authPassword");
 
-                if (page === "home") {
+const authSubmit =
+    document.getElementById("authSubmit");
 
-                    if (mainWebsite) {
+const authSwitch =
+    document.getElementById("authSwitch");
 
-                        mainWebsite.style.display =
-                            "block";
+const authSwitchText =
+    document.getElementById("authSwitchText");
 
-                    }
-
-                    if (accountPage) {
-
-                        accountPage.style.display =
-                            "none";
-
-                    }
-
-                    window.scrollTo({
-                        top: 0,
-                        behavior: "smooth"
-                    });
-
-                }
+let authMode = "login";
 
 
-                if (page === "services") {
+// ================================
+// BOTTOM NAVIGATION
+// ================================
 
-                    if (mainWebsite) {
+bottomItems.forEach(function (item) {
 
-                        mainWebsite.style.display =
-                            "block";
+    item.addEventListener("click", async function () {
 
-                    }
+        bottomItems.forEach(function (btn) {
+            btn.classList.remove("active");
+        });
 
-                    if (accountPage) {
+        item.classList.add("active");
 
-                        accountPage.style.display =
-                            "none";
-
-                    }
-
-                    const services =
-                        document.getElementById(
-                            "services"
-                        );
-
-                    if (services) {
-
-                        services.scrollIntoView({
-                            behavior: "smooth"
-                        });
-
-                    }
-
-                }
+        const page = item.dataset.page;
 
 
-               if (page === "account") {
-
-    supabaseClient.auth.getSession().then(function(result) {
-
-        const session = result.data.session;
-
-        if (!session) {
-
-            // User logged out → login popup open karo
-            if (accountPage) {
-                accountPage.style.display = "none";
-            }
+        // HOME
+        if (page === "home") {
 
             if (mainWebsite) {
                 mainWebsite.style.display = "block";
             }
 
-            if (authModal) {
-                authModal.classList.add("active");
+            if (accountPage) {
+                accountPage.style.display = "none";
             }
 
-            return;
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+
         }
 
-        // User logged in → Account page dikhao
-        if (mainWebsite) {
-            mainWebsite.style.display = "none";
+
+        // SERVICES
+        if (page === "services") {
+
+            if (mainWebsite) {
+                mainWebsite.style.display = "block";
+            }
+
+            if (accountPage) {
+                accountPage.style.display = "none";
+            }
+
+            const services =
+                document.getElementById("services");
+
+            if (services) {
+                services.scrollIntoView({
+                    behavior: "smooth"
+                });
+            }
+
         }
 
-        if (accountPage) {
-            accountPage.style.display = "block";
+
+        // ACCOUNT
+        if (page === "account") {
+
+            const {
+                data: { session }
+            } = await supabaseClient.auth.getSession();
+
+
+            // NOT LOGGED IN
+            if (!session) {
+
+                if (accountPage) {
+                    accountPage.style.display = "none";
+                }
+
+                if (mainWebsite) {
+                    mainWebsite.style.display = "block";
+                }
+
+                if (authModal) {
+                    authModal.classList.add("active");
+                }
+
+                return;
+            }
+
+
+            // LOGGED IN
+            if (mainWebsite) {
+                mainWebsite.style.display = "none";
+            }
+
+            if (accountPage) {
+                accountPage.style.display = "block";
+            }
+
+            if (accountEmail) {
+                accountEmail.textContent =
+                    session.user.email || "";
+            }
+
+            updateBalance();
+            renderHistory();
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+
         }
-
-        updateBalance();
-        renderHistory();
-
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
 
     });
 
-                        } 
+});
 
-    // ================================
-    // INITIAL LOAD
-    // ================================
 
-        updateBalance();
+// ================================
+// INITIAL LOAD
+// ================================
 
-    renderHistory();
+updateBalance();
+renderHistory();
 
-    // ================================
-    // SUPABASE LOGIN / SIGN UP
-    // ================================
 
-    const accountBtn =
-        document.getElementById("accountBtn");
-
-    const accountEmail =
-        document.getElementById("accountEmail");
-
-    const logoutBtn =
-        document.getElementById("logoutBtn");
-
-    const authModal =
-        document.getElementById("authModal");
-
-    const authClose =
-        document.getElementById("authClose");
-
-    const authTitle =
-        document.getElementById("authTitle");
-
-    const authSubtitle =
-        document.getElementById("authSubtitle");
-
-    const authEmail =
-        document.getElementById("authEmail");
-
-    const authPassword =
-        document.getElementById("authPassword");
-
-    const authSubmit =
-        document.getElementById("authSubmit");
-
-    const authSwitch =
-        document.getElementById("authSwitch");
-
-    const authSwitchText =
-        document.getElementById("authSwitchText");
-
-    let authMode = "login";
-
-    // ================================
+// ================================
 // CHECK EXISTING LOGIN
 // ================================
 
@@ -1250,24 +1236,26 @@ async function checkLogin() {
         data: { session }
     } = await supabaseClient.auth.getSession();
 
-    if (session && session.user) {
 
-        if (accountBtn) {
-            accountBtn.style.display = "none";
-        }
+    if (session && session.user) {
 
         if (accountEmail) {
             accountEmail.textContent =
                 session.user.email || "";
         }
 
+        // Login hone par account button
+        // ko hide nahi karenge.
+        // Neeche wala Account button hi rahega.
+
     }
 
-        }
-    
+}
+
 checkLogin();
 
-    // ================================
+
+// ================================
 // LOGOUT
 // ================================
 
@@ -1280,6 +1268,7 @@ if (logoutBtn) {
             const { error } =
                 await supabaseClient.auth.signOut();
 
+
             if (error) {
 
                 showAlert(
@@ -1291,9 +1280,6 @@ if (logoutBtn) {
                 return;
             }
 
-            if (accountBtn) {
-                accountBtn.style.display = "block";
-            }
 
             if (accountEmail) {
                 accountEmail.textContent = "";
@@ -1307,6 +1293,23 @@ if (logoutBtn) {
                 mainWebsite.style.display = "block";
             }
 
+
+            // Home ko active karo
+            bottomItems.forEach(function (btn) {
+                btn.classList.remove("active");
+            });
+
+
+            const homeBtn =
+                document.querySelector(
+                    '.bottom-nav-item[data-page="home"]'
+                );
+
+            if (homeBtn) {
+                homeBtn.classList.add("active");
+            }
+
+
             showAlert(
                 "Aap successfully logout ho gaye.",
                 "Logout Successful",
@@ -1316,11 +1319,14 @@ if (logoutBtn) {
         }
     );
 
-                    }
+}
 
-    // OPEN LOGIN
 
-    if (accountBtn) {
+// ================================
+// TOP LOGIN BUTTON
+// ================================
+
+if (accountBtn) {
 
     accountBtn.addEventListener(
         "click",
@@ -1330,6 +1336,8 @@ if (logoutBtn) {
                 data: { session }
             } = await supabaseClient.auth.getSession();
 
+
+            // Logged in hai
             if (session && session.user) {
 
                 if (mainWebsite) {
@@ -1353,221 +1361,247 @@ if (logoutBtn) {
                     behavior: "smooth"
                 });
 
+                return;
+            }
+
+
+            // Logged out hai
+            if (authModal) {
+                authModal.classList.add("active");
+            }
+
+        }
+    );
+
+}
+
+
+// ================================
+// CLOSE LOGIN
+// ================================
+
+if (authClose) {
+
+    authClose.addEventListener(
+        "click",
+        function () {
+
+            if (authModal) {
+                authModal.classList.remove("active");
+            }
+
+        }
+    );
+
+}
+
+
+// ================================
+// LOGIN / SIGN UP SWITCH
+// ================================
+
+if (authSwitch) {
+
+    authSwitch.addEventListener(
+        "click",
+        function () {
+
+            if (authMode === "login") {
+
+                authMode = "signup";
+
+                authTitle.textContent =
+                    "Sign Up";
+
+                authSubtitle.textContent =
+                    "Apna SarkAura account banayein.";
+
+                authSubmit.textContent =
+                    "Create Account";
+
+                authSwitchText.textContent =
+                    "Already have an account?";
+
+                authSwitch.textContent =
+                    "Login";
+
             } else {
 
-                authModal.classList.add("active");
+                authMode = "login";
+
+                authTitle.textContent =
+                    "Login";
+
+                authSubtitle.textContent =
+                    "Apne SarkAura account mein login karein.";
+
+                authSubmit.textContent =
+                    "Login";
+
+                authSwitchText.textContent =
+                    "Account nahi hai?";
+
+                authSwitch.textContent =
+                    "Sign Up";
 
             }
 
         }
     );
 
-    }
-
-
-    // CLOSE LOGIN
-
-    if (authClose) {
-
-        authClose.addEventListener(
-            "click",
-            function () {
-
-                authModal.classList.remove("active");
-
-            }
-        );
-
-    }
-
-
-    // LOGIN / SIGN UP SWITCH
-
-    if (authSwitch) {
-
-        authSwitch.addEventListener(
-            "click",
-            function () {
-
-                if (authMode === "login") {
-
-                    authMode = "signup";
-
-                    authTitle.textContent =
-                        "Sign Up";
-
-                    authSubtitle.textContent =
-                        "Apna SarkAura account banayein.";
-
-                    authSubmit.textContent =
-                        "Create Account";
-
-                    authSwitchText.textContent =
-                        "Already have an account?";
-
-                    authSwitch.textContent =
-                        "Login";
-
-                } else {
-
-                    authMode = "login";
-
-                    authTitle.textContent =
-                        "Login";
-
-                    authSubtitle.textContent =
-                        "Apne SarkAura account mein login karein.";
-
-                    authSubmit.textContent =
-                        "Login";
-
-                    authSwitchText.textContent =
-                        "Account nahi hai?";
-
-                    authSwitch.textContent =
-                        "Sign Up";
-
-                }
-
-            }
-        );
-
-    }
-
-
-    // LOGIN / SIGN UP
-
-    if (authSubmit) {
-
-        authSubmit.addEventListener(
-            "click",
-            async function () {
-
-                const email =
-                    authEmail.value.trim();
-
-                const password =
-                    authPassword.value;
-
-
-                if (!email || !password) {
-
-                    showAlert(
-                        "Email aur password dono enter karein.",
-                        "Details Required",
-                        "⚠️"
-                    );
-
-                    return;
-
-                }
-
-
-                if (password.length < 6) {
-
-                    showAlert(
-                        "Password kam se kam 6 characters ka hona chahiye.",
-                        "Password Too Short",
-                        "🔐"
-                    );
-
-                    return;
-
-                }
-
-
-                authSubmit.disabled = true;
-
-                authSubmit.textContent =
-                    "Please wait...";
-
-
-                try {
-
-                    if (authMode === "login") {
-
-                        const { error } =
-                            await supabaseClient.auth.signInWithPassword({
-                                email: email,
-                                password: password
-                            });
-
-
-                        if (error) {
-
-                            throw error;
-
-                        }
-
-
-                        authModal.classList.remove(
-                            "active"
-                        );
-                        
-                        accountBtn.style.display = "none";
-
-const {
-    data: { user }
-} = await supabaseClient.auth.getUser();
-
-if (user && accountEmail) {
-    accountEmail.textContent =
-        user.email || "";
 }
 
-                        showAlert(
-                            "Login successful!",
-                            "Welcome",
-                            "✅"
-                        );
+
+// ================================
+// LOGIN / SIGN UP
+// ================================
+
+if (authSubmit) {
+
+    authSubmit.addEventListener(
+        "click",
+        async function () {
+
+            const email =
+                authEmail.value.trim();
+
+            const password =
+                authPassword.value;
 
 
-                    } else {
+            if (!email || !password) {
 
-                        const { error } =
-                            await supabaseClient.auth.signUp({
-                                email: email,
-                                password: password
-                            });
+                showAlert(
+                    "Email aur password dono enter karein.",
+                    "Details Required",
+                    "⚠️"
+                );
 
-
-                        if (error) {
-
-                            throw error;
-
-                        }
+                return;
+            }
 
 
-                        showAlert(
-                            "Account create ho gaya. Agar email confirmation enabled hai to email verify karein.",
-                            "Sign Up Successful",
-                            "✅"
-                        );
+            if (password.length < 6) {
+
+                showAlert(
+                    "Password kam se kam 6 characters ka hona chahiye.",
+                    "Password Too Short",
+                    "🔐"
+                );
+
+                return;
+            }
+
+
+            authSubmit.disabled = true;
+
+            authSubmit.textContent =
+                "Please wait...";
+
+
+            try {
+
+                // LOGIN
+                if (authMode === "login") {
+
+                    const { error } =
+                        await supabaseClient.auth.signInWithPassword({
+                            email: email,
+                            password: password
+                        });
+
+
+                    if (error) {
+                        throw error;
+                    }
+
+
+                    const {
+                        data: { user }
+                    } =
+                        await supabaseClient.auth.getUser();
+
+
+                    if (user && accountEmail) {
+
+                        accountEmail.textContent =
+                            user.email || "";
 
                     }
 
 
-                } catch (error) {
+                    if (authModal) {
+                        authModal.classList.remove("active");
+                    }
+
+
+                    // Account page directly open
+                    if (mainWebsite) {
+                        mainWebsite.style.display = "none";
+                    }
+
+                    if (accountPage) {
+                        accountPage.style.display = "block";
+                    }
+
+
+                    updateBalance();
+                    renderHistory();
+
 
                     showAlert(
-                        error.message,
-                        "Authentication Error",
-                        "❌"
+                        "Login successful!",
+                        "Welcome",
+                        "✅"
                     );
 
                 }
 
 
-                authSubmit.disabled = false;
+                // SIGN UP
+                else {
 
-                authSubmit.textContent =
-                    authMode === "login"
-                        ? "Login"
-                        : "Create Account";
+                    const { error } =
+                        await supabaseClient.auth.signUp({
+                            email: email,
+                            password: password
+                        });
+
+
+                    if (error) {
+                        throw error;
+                    }
+
+
+                    showAlert(
+                        "Account create ho gaya. Agar email confirmation enabled hai to email verify karein.",
+                        "Sign Up Successful",
+                        "✅"
+                    );
+
+                }
+
+
+            } catch (error) {
+
+                showAlert(
+                    error.message,
+                    "Authentication Error",
+                    "❌"
+                );
 
             }
-        );
 
-    }
 
-});
+            authSubmit.disabled = false;
+
+            authSubmit.textContent =
+                authMode === "login"
+                    ? "Login"
+                    : "Create Account";
+
+        }
+    );
+
+            }
+            
