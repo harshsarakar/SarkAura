@@ -1177,13 +1177,261 @@ document.addEventListener("DOMContentLoaded", function () {
 
     });
 
-
     // ================================
     // INITIAL LOAD
     // ================================
 
-    updateBalance();
+        updateBalance();
 
     renderHistory();
+
+
+    // ================================
+    // SUPABASE LOGIN / SIGN UP
+    // ================================
+
+    const accountBtn =
+        document.getElementById("accountBtn");
+
+    const authModal =
+        document.getElementById("authModal");
+
+    const authClose =
+        document.getElementById("authClose");
+
+    const authTitle =
+        document.getElementById("authTitle");
+
+    const authSubtitle =
+        document.getElementById("authSubtitle");
+
+    const authEmail =
+        document.getElementById("authEmail");
+
+    const authPassword =
+        document.getElementById("authPassword");
+
+    const authSubmit =
+        document.getElementById("authSubmit");
+
+    const authSwitch =
+        document.getElementById("authSwitch");
+
+    const authSwitchText =
+        document.getElementById("authSwitchText");
+
+    let authMode = "login";
+
+
+    // OPEN LOGIN
+
+    if (accountBtn) {
+
+        accountBtn.addEventListener(
+            "click",
+            function () {
+
+                authModal.classList.add("active");
+
+            }
+        );
+
+    }
+
+
+    // CLOSE LOGIN
+
+    if (authClose) {
+
+        authClose.addEventListener(
+            "click",
+            function () {
+
+                authModal.classList.remove("active");
+
+            }
+        );
+
+    }
+
+
+    // LOGIN / SIGN UP SWITCH
+
+    if (authSwitch) {
+
+        authSwitch.addEventListener(
+            "click",
+            function () {
+
+                if (authMode === "login") {
+
+                    authMode = "signup";
+
+                    authTitle.textContent =
+                        "Sign Up";
+
+                    authSubtitle.textContent =
+                        "Apna SarkAura account banayein.";
+
+                    authSubmit.textContent =
+                        "Create Account";
+
+                    authSwitchText.textContent =
+                        "Already have an account?";
+
+                    authSwitch.textContent =
+                        "Login";
+
+                } else {
+
+                    authMode = "login";
+
+                    authTitle.textContent =
+                        "Login";
+
+                    authSubtitle.textContent =
+                        "Apne SarkAura account mein login karein.";
+
+                    authSubmit.textContent =
+                        "Login";
+
+                    authSwitchText.textContent =
+                        "Account nahi hai?";
+
+                    authSwitch.textContent =
+                        "Sign Up";
+
+                }
+
+            }
+        );
+
+    }
+
+
+    // LOGIN / SIGN UP
+
+    if (authSubmit) {
+
+        authSubmit.addEventListener(
+            "click",
+            async function () {
+
+                const email =
+                    authEmail.value.trim();
+
+                const password =
+                    authPassword.value;
+
+
+                if (!email || !password) {
+
+                    showAlert(
+                        "Email aur password dono enter karein.",
+                        "Details Required",
+                        "⚠️"
+                    );
+
+                    return;
+
+                }
+
+
+                if (password.length < 6) {
+
+                    showAlert(
+                        "Password kam se kam 6 characters ka hona chahiye.",
+                        "Password Too Short",
+                        "🔐"
+                    );
+
+                    return;
+
+                }
+
+
+                authSubmit.disabled = true;
+
+                authSubmit.textContent =
+                    "Please wait...";
+
+
+                try {
+
+                    if (authMode === "login") {
+
+                        const { error } =
+                            await supabaseClient.auth.signInWithPassword({
+                                email: email,
+                                password: password
+                            });
+
+
+                        if (error) {
+
+                            throw error;
+
+                        }
+
+
+                        authModal.classList.remove(
+                            "active"
+                        );
+
+
+                        showAlert(
+                            "Login successful!",
+                            "Welcome",
+                            "✅"
+                        );
+
+
+                    } else {
+
+                        const { error } =
+                            await supabaseClient.auth.signUp({
+                                email: email,
+                                password: password
+                            });
+
+
+                        if (error) {
+
+                            throw error;
+
+                        }
+
+
+                        showAlert(
+                            "Account create ho gaya. Agar email confirmation enabled hai to email verify karein.",
+                            "Sign Up Successful",
+                            "✅"
+                        );
+
+                    }
+
+
+                } catch (error) {
+
+                    showAlert(
+                        error.message,
+                        "Authentication Error",
+                        "❌"
+                    );
+
+                }
+
+
+                authSubmit.disabled = false;
+
+                authSubmit.textContent =
+                    authMode === "login"
+                        ? "Login"
+                        : "Create Account";
+
+            }
+        );
+
+    }
 
 });
