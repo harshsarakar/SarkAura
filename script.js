@@ -985,4 +985,205 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (depositHistory) {
 
-       
+       if (deposits.length === 0) {
+
+                depositHistory.innerHTML =
+                    '<div class="empty-history">No deposits yet.</div>';
+
+            } else {
+
+                depositHistory.innerHTML =
+                    deposits.map(function (deposit) {
+
+                        const statusClass =
+                            deposit.status
+                                .toLowerCase();
+
+                        return `
+                            <div class="history-item">
+
+                                <div class="history-top">
+
+                                    <div class="history-service">
+                                        Deposit
+                                    </div>
+
+                                    <div class="history-status ${statusClass}">
+                                        ${escapeHTML(deposit.status)}
+                                    </div>
+
+                                </div>
+
+                                <div class="history-details">
+
+                                    Amount:
+                                    ₹${Number(deposit.amount).toFixed(2)}
+
+                                    <br>
+
+                                    ${escapeHTML(deposit.date)}
+
+                                </div>
+
+                            </div>
+                        `;
+
+                    }).join("");
+
+            }
+
+        }
+
+    }
+
+
+    // ================================
+    // BASIC HTML ESCAPE
+    // ================================
+
+    function escapeHTML(value) {
+
+        return String(value)
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+
+    }
+
+
+    // ================================
+    // BOTTOM NAVIGATION
+    // ================================
+
+    const bottomItems =
+        document.querySelectorAll(
+            ".bottom-nav-item"
+        );
+
+
+    bottomItems.forEach(function (item) {
+
+        item.addEventListener(
+            "click",
+            function () {
+
+                bottomItems.forEach(
+                    function (btn) {
+
+                        btn.classList.remove(
+                            "active"
+                        );
+
+                    }
+                );
+
+
+                item.classList.add(
+                    "active"
+                );
+
+
+                const page =
+                    item.dataset.page;
+
+
+                if (page === "home") {
+
+                    if (mainWebsite) {
+
+                        mainWebsite.style.display =
+                            "block";
+
+                    }
+
+                    if (accountPage) {
+
+                        accountPage.style.display =
+                            "none";
+
+                    }
+
+                    window.scrollTo({
+                        top: 0,
+                        behavior: "smooth"
+                    });
+
+                }
+
+
+                if (page === "services") {
+
+                    if (mainWebsite) {
+
+                        mainWebsite.style.display =
+                            "block";
+
+                    }
+
+                    if (accountPage) {
+
+                        accountPage.style.display =
+                            "none";
+
+                    }
+
+                    const services =
+                        document.getElementById(
+                            "services"
+                        );
+
+                    if (services) {
+
+                        services.scrollIntoView({
+                            behavior: "smooth"
+                        });
+
+                    }
+
+                }
+
+
+                if (page === "account") {
+
+                    if (mainWebsite) {
+
+                        mainWebsite.style.display =
+                            "none";
+
+                    }
+
+                    if (accountPage) {
+
+                        accountPage.style.display =
+                            "block";
+
+                    }
+
+                    updateBalance();
+
+                    renderHistory();
+
+                    window.scrollTo({
+                        top: 0,
+                        behavior: "smooth"
+                    });
+
+                }
+
+            }
+        );
+
+    });
+
+
+    // ================================
+    // INITIAL LOAD
+    // ================================
+
+    updateBalance();
+
+    renderHistory();
+
+});
