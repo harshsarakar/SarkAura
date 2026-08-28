@@ -672,7 +672,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
                 if (!amount ||
-    amount <= 0) {
+    amount <= 9) {
 
     showAlert(
         "Please enter a valid amount.",
