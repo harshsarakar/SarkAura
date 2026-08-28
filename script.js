@@ -1600,8 +1600,8 @@ if (authSubmit) {
                     ? "Login"
                     : "Create Account";
 
-        }
+                }
     );
 
-            }
+});
             
