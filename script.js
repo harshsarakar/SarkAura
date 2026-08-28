@@ -1179,4 +1179,6 @@ return;
 
     renderHistory();
 
+    alert("SCRIPT.JS LOADED");
+
 });
