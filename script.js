@@ -1255,14 +1255,45 @@ checkLogin();
 
     if (accountBtn) {
 
-        accountBtn.addEventListener(
-            "click",
-            function () {
+    accountBtn.addEventListener(
+        "click",
+        async function () {
+
+            const {
+                data: { session }
+            } = await supabaseClient.auth.getSession();
+
+            if (session && session.user) {
+
+                if (mainWebsite) {
+                    mainWebsite.style.display = "none";
+                }
+
+                if (accountPage) {
+                    accountPage.style.display = "block";
+                }
+
+                if (accountEmail) {
+                    accountEmail.textContent =
+                        session.user.email || "";
+                }
+
+                updateBalance();
+                renderHistory();
+
+                window.scrollTo({
+                    top: 0,
+                    behavior: "smooth"
+                });
+
+            } else {
 
                 authModal.classList.add("active");
 
             }
-        );
+
+        }
+    );
 
     }
 
