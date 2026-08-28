@@ -1380,7 +1380,17 @@ document.addEventListener("DOMContentLoaded", function () {
                         authModal.classList.remove(
                             "active"
                         );
+                        
+                        accountBtn.style.display = "none";
 
+const {
+    data: { user }
+} = await supabaseClient.auth.getUser();
+
+if (user && accountEmail) {
+    accountEmail.textContent =
+        user.email || "";
+}
 
                         showAlert(
                             "Login successful!",
