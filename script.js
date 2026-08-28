@@ -1193,6 +1193,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const accountBtn =
         document.getElementById("accountBtn");
 
+    const accountEmail =
+        document.getElementById("accountEmail");
+
     const authModal =
         document.getElementById("authModal");
 
