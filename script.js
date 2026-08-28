@@ -488,9 +488,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 if (!service) {
 
-                    alert(
-                        "Please select a service."
-                    );
+             showAlert(
+                       "Please select a service.",
+                       "Select Service",
+                               "🛒"
+                     );
 
                     return;
                 }
@@ -498,9 +500,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 if (!link) {
 
-                    alert(
-                        "Please enter the Instagram link."
-                    );
+                    showAlert(
+                              "Please enter the Instagram link.",
+                              "Link Required",
+                              "🔗"
+                             );
 
                     return;
                 }
@@ -529,9 +533,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 if (balance < total) {
 
-                    alert(
-                        "Insufficient balance. Please add funds first."
-                    );
+                    showAlert(
+                              "Your balance is too low. Please add funds first.",
+                              "Insufficient Balance",
+                              "💰"
+                             );
 
                     return;
                 }
