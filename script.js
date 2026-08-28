@@ -1185,7 +1185,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     renderHistory();
 
-
     // ================================
     // SUPABASE LOGIN / SIGN UP
     // ================================
@@ -1225,6 +1224,32 @@ document.addEventListener("DOMContentLoaded", function () {
 
     let authMode = "login";
 
+    // ================================
+// CHECK EXISTING LOGIN
+// ================================
+
+async function checkLogin() {
+
+    const {
+        data: { session }
+    } = await supabaseClient.auth.getSession();
+
+    if (session && session.user) {
+
+        if (accountBtn) {
+            accountBtn.style.display = "none";
+        }
+
+        if (accountEmail) {
+            accountEmail.textContent =
+                session.user.email || "";
+        }
+
+    }
+
+        }
+    
+checkLogin();
 
     // OPEN LOGIN
 
