@@ -1169,37 +1169,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
     
     // ================================
-    // LOGIN BUTTON
-    // ================================
-
-    const accountBtn =
-        document.getElementById("accountBtn");
-
-    if (accountBtn) {
-
-        accountBtn.addEventListener(
-            "click",
-            function () {
-
-                if (mainWebsite) {
-                    mainWebsite.style.display = "none";
-                }
-
-                if (accountPage) {
-                    accountPage.style.display = "block";
-                }
-
-                window.scrollTo({
-                    top: 0,
-                    behavior: "smooth"
-                });
-
-            }
-        );
-
-            }
-
-    // ================================
     // INITIAL LOAD
     // ================================
 
