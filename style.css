@@ -1468,3 +1468,114 @@ button {
 .floating-contact:hover {
     transform: translateY(-2px);
     }
+
+/* ================================
+   AUTH LOGIN / SIGN UP
+================================ */
+
+.account-btn {
+    border: none;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+}
+
+.auth-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+
+    display: none;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(0, 0, 0, 0.65);
+    padding: 20px;
+}
+
+.auth-modal.active {
+    display: flex;
+}
+
+.auth-box {
+    position: relative;
+    width: 100%;
+    max-width: 380px;
+
+    padding: 30px 24px;
+    border-radius: 20px;
+
+    background: #fff;
+    color: #111;
+
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+}
+
+.auth-box h2 {
+    margin-bottom: 8px;
+    font-size: 28px;
+}
+
+.auth-box > p {
+    margin-bottom: 20px;
+    color: #666;
+    font-size: 14px;
+}
+
+.auth-box input {
+    width: 100%;
+    padding: 13px 14px;
+    margin-bottom: 12px;
+
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    outline: none;
+
+    font-size: 15px;
+}
+
+.auth-box input:focus {
+    border-color: #111;
+}
+
+.auth-submit {
+    width: 100%;
+    padding: 13px;
+
+    border: none;
+    border-radius: 10px;
+
+    background: #111;
+    color: #fff;
+
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.auth-close {
+    position: absolute;
+    top: 12px;
+    right: 15px;
+
+    border: none;
+    background: none;
+
+    font-size: 28px;
+    cursor: pointer;
+}
+
+.auth-switch {
+    text-align: center;
+    margin-top: 18px;
+    margin-bottom: 0 !important;
+}
+
+.auth-switch button {
+    border: none;
+    background: none;
+    color: #111;
+    font-weight: 700;
+    cursor: pointer;
+}
