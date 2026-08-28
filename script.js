@@ -1,11 +1,13 @@
 const SUPABASE_URL = "https://xikxviwdkfccfkebdwye.supabase.co";
-const SUPABASE_KEY = "sb_publishable_eZD2D4vPSDcFYZo8es-vWA_3zZEcwC_";
+const SUPABASE_KEY = "sb_publishable_eZD2D4vPSDcFYZo8es-vWA_3zZEcwCw_";
 
 const supabaseClient = supabase.createClient(
     SUPABASE_URL,
     SUPABASE_KEY
 );
+
 console.log("Supabase connected:", supabaseClient);
+
 
 // ================================
 // SarkAura - Main Script
@@ -14,24 +16,14 @@ console.log("Supabase connected:", supabaseClient);
 document.addEventListener("DOMContentLoaded", function () {
 
     // ================================
-    // CUSTOM ALERT POPUP
+    // CUSTOM ALERT
     // ================================
 
-    const customAlert =
-        document.getElementById("customAlert");
-
-    const customAlertTitle =
-        document.getElementById("customAlertTitle");
-
-    const customAlertMessage =
-        document.getElementById("customAlertMessage");
-
-    const customAlertIcon =
-        document.getElementById("customAlertIcon");
-
-    const customAlertBtn =
-        document.getElementById("customAlertBtn");
-
+    const customAlert = document.getElementById("customAlert");
+    const customAlertTitle = document.getElementById("customAlertTitle");
+    const customAlertMessage = document.getElementById("customAlertMessage");
+    const customAlertIcon = document.getElementById("customAlertIcon");
+    const customAlertBtn = document.getElementById("customAlertBtn");
 
     window.showAlert = function (
         message,
@@ -41,30 +33,33 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (!customAlert) return;
 
-        customAlertTitle.textContent = title;
+        if (customAlertTitle) {
+            customAlertTitle.textContent = title;
+        }
 
-        customAlertMessage.textContent = message;
+        if (customAlertMessage) {
+            customAlertMessage.textContent = message;
+        }
 
-        customAlertIcon.textContent = icon;
+        if (customAlertIcon) {
+            customAlertIcon.textContent = icon;
+        }
 
         customAlert.classList.add("active");
-
     };
 
 
     if (customAlertBtn) {
 
-        customAlertBtn.addEventListener(
-            "click",
-            function () {
+        customAlertBtn.addEventListener("click", function () {
 
-                customAlert.classList.remove("active");
+            customAlert.classList.remove("active");
 
-            }
-        );
+        });
 
     }
-    
+
+
     // ================================
     // DATA
     // ================================
@@ -83,6 +78,7 @@ document.addEventListener("DOMContentLoaded", function () {
         "Instagram Saves": 25,
         "Views Only": 4
     };
+
 
     let balance = Number(
         localStorage.getItem("sarkaura_balance") || 0
@@ -103,77 +99,61 @@ document.addEventListener("DOMContentLoaded", function () {
     // ELEMENTS
     // ================================
 
-    const orderModal =
-        document.getElementById("orderModal");
+    const orderModal = document.getElementById("orderModal");
+    const fundsModal = document.getElementById("fundsModal");
+    const paymentModal = document.getElementById("paymentModal");
+    const successModal = document.getElementById("successModal");
 
-    const fundsModal =
-        document.getElementById("fundsModal");
+    const closeOrder = document.getElementById("closeOrder");
+    const closeFunds = document.getElementById("closeFunds");
+    const closePayment = document.getElementById("closePayment");
+    const successCloseBtn = document.getElementById("successCloseBtn");
 
-    const paymentModal =
-        document.getElementById("paymentModal");
+    const serviceSelect = document.getElementById("serviceSelect");
+    const orderLink = document.getElementById("orderLink");
+    const orderQuantity = document.getElementById("orderQuantity");
+    const orderPrice = document.getElementById("orderPrice");
+    const orderBalance = document.getElementById("orderBalance");
+    const placeOrderBtn = document.getElementById("placeOrderBtn");
 
-    const successModal =
-        document.getElementById("successModal");
+    const depositAmount = document.getElementById("depositAmount");
+    const proceedPayBtn = document.getElementById("proceedPayBtn");
 
-    const closeOrder =
-        document.getElementById("closeOrder");
+    const paymentAmount = document.getElementById("paymentAmount");
+    const paymentTimer = document.getElementById("paymentTimer");
+    const paymentExpired = document.getElementById("paymentExpired");
 
-    const closeFunds =
-        document.getElementById("closeFunds");
+    const accountBalance = document.getElementById("accountBalance");
+    const orderHistory = document.getElementById("orderHistory");
+    const depositHistory = document.getElementById("depositHistory");
 
-    const closePayment =
-        document.getElementById("closePayment");
+    const mainWebsite = document.getElementById("mainWebsite");
+    const accountPage = document.getElementById("accountPage");
 
-    const successCloseBtn =
-        document.getElementById("successCloseBtn");
 
-    const serviceSelect =
-        document.getElementById("serviceSelect");
+    // ================================
+    // AUTH ELEMENTS
+    // ================================
 
-    const orderLink =
-        document.getElementById("orderLink");
+    const accountBtn = document.getElementById("accountBtn");
+    const accountEmail = document.getElementById("accountEmail");
+    const logoutBtn = document.getElementById("logoutBtn");
 
-    const orderQuantity =
-        document.getElementById("orderQuantity");
+    const authModal = document.getElementById("authModal");
+    const authClose = document.getElementById("authClose");
 
-    const orderPrice =
-        document.getElementById("orderPrice");
+    const authTitle = document.getElementById("authTitle");
+    const authSubtitle = document.getElementById("authSubtitle");
 
-    const orderBalance =
-        document.getElementById("orderBalance");
+    const authEmail = document.getElementById("authEmail");
+    const authPassword = document.getElementById("authPassword");
 
-    const placeOrderBtn =
-        document.getElementById("placeOrderBtn");
+    const authSubmit = document.getElementById("authSubmit");
 
-    const depositAmount =
-        document.getElementById("depositAmount");
+    const authSwitch = document.getElementById("authSwitch");
+    const authSwitchText = document.getElementById("authSwitchText");
 
-    const proceedPayBtn =
-        document.getElementById("proceedPayBtn");
-
-    const paymentAmount =
-        document.getElementById("paymentAmount");
-
-    const paymentTimer =
-        document.getElementById("paymentTimer");
-
-    const paymentExpired =
-        document.getElementById("paymentExpired");
-
-    const accountBalance =
-        document.getElementById("accountBalance");
-
-    const orderHistory =
-        document.getElementById("orderHistory");
-
-    const depositHistory =
-        document.getElementById("depositHistory");
-
-    const mainWebsite =
-        document.getElementById("mainWebsite");
-
-    const accountPage =
-        document.getElementById("accountPage");
+    let authMode = "login";
 
 
     // ================================
@@ -196,6 +176,7 @@ document.addEventListener("DOMContentLoaded", function () {
             "sarkaura_deposits",
             JSON.stringify(deposits)
         );
+
     }
 
 
@@ -214,6 +195,7 @@ document.addEventListener("DOMContentLoaded", function () {
             orderBalance.textContent =
                 balance.toFixed(2);
         }
+
     }
 
 
@@ -221,76 +203,59 @@ document.addEventListener("DOMContentLoaded", function () {
     // FAQ
     // ================================
 
-    document.querySelectorAll(".faq-item")
-        .forEach(function (item) {
+    document.querySelectorAll(".faq-item").forEach(function (item) {
 
-            const question =
-                item.querySelector("h3");
+        const question = item.querySelector("h3");
+        const answer = item.querySelector("p");
 
-            const answer =
-                item.querySelector("p");
+        if (question && answer) {
 
-            if (question && answer) {
+            answer.style.display = "none";
 
-                answer.style.display = "none";
+            question.addEventListener("click", function () {
 
-                question.addEventListener(
-                    "click",
-                    function () {
+                answer.style.display =
+                    answer.style.display === "none"
+                        ? "block"
+                        : "none";
 
-                        answer.style.display =
-                            answer.style.display === "none"
-                                ? "block"
-                                : "none";
+            });
 
-                    }
-                );
-            }
+        }
 
-        });
+    });
 
 
     // ================================
     // MOBILE MENU
     // ================================
 
-    const menuBtn =
-        document.getElementById("menuBtn");
-
-    const navLinks =
-        document.querySelector(".nav-links");
+    const menuBtn = document.getElementById("menuBtn");
+    const navLinks = document.querySelector(".nav-links");
 
     if (menuBtn && navLinks) {
 
-        menuBtn.addEventListener(
-            "click",
-            function () {
+        menuBtn.addEventListener("click", function () {
 
-                navLinks.classList.toggle("active");
+            navLinks.classList.toggle("active");
 
-            }
-        );
+        });
 
-        navLinks.querySelectorAll("a")
-            .forEach(function (link) {
+        navLinks.querySelectorAll("a").forEach(function (link) {
 
-                link.addEventListener(
-                    "click",
-                    function () {
+            link.addEventListener("click", function () {
 
-                        navLinks.classList.remove(
-                            "active"
-                        );
-
-                    }
-                );
+                navLinks.classList.remove("active");
 
             });
+
+        });
+
     }
 
 
     // ================================
-    // OPEN ORDER
+    // ORDER
     // ================================
 
     window.openOrder = function (service = "") {
@@ -300,114 +265,28 @@ document.addEventListener("DOMContentLoaded", function () {
         orderModal.classList.add("active");
 
         if (serviceSelect && service) {
-
             serviceSelect.value = service;
-
         }
 
         updatePrice();
-
         updateBalance();
+
     };
 
 
-    // ================================
-    // CLOSE ORDER
-    // ================================
-
     if (closeOrder) {
 
-        closeOrder.addEventListener(
-            "click",
-            function () {
+        closeOrder.addEventListener("click", function () {
 
-                orderModal.classList.remove(
-                    "active"
-                );
-
-            }
-        );
-    }
-
-
-    // ================================
-    // CLOSE MODALS
-    // ================================
-
-    if (closeFunds) {
-
-        closeFunds.addEventListener(
-            "click",
-            function () {
-
-                fundsModal.classList.remove(
-                    "active"
-                );
-
-            }
-        );
-    }
-
-
-    if (closePayment) {
-
-        closePayment.addEventListener(
-            "click",
-            function () {
-
-                paymentModal.classList.remove(
-                    "active"
-                );
-
-                stopPaymentTimer();
-
-            }
-        );
-    }
-
-
-    if (successCloseBtn) {
-
-        successCloseBtn.addEventListener(
-            "click",
-            function () {
-
-                successModal.classList.remove(
-                    "active"
-                );
-
-            }
-        );
-    }
-
-
-    // ================================
-    // CLICK OUTSIDE MODAL
-    // ================================
-
-    document.querySelectorAll(".order-modal")
-        .forEach(function (modal) {
-
-            modal.addEventListener(
-                "click",
-                function (event) {
-
-                    if (event.target === modal) {
-
-                        modal.classList.remove(
-                            "active"
-                        );
-
-                    }
-
-                }
-            );
+            orderModal.classList.remove("active");
 
         });
 
+    }
+
 
     // ================================
-    // PRICE CALCULATION
+    // PRICE
     // ================================
 
     function updatePrice() {
@@ -416,42 +295,29 @@ document.addEventListener("DOMContentLoaded", function () {
             !orderQuantity ||
             !orderPrice) return;
 
-        const service =
-            serviceSelect.value;
-
-        const quantity =
-            Number(orderQuantity.value);
+        const service = serviceSelect.value;
+        const quantity = Number(orderQuantity.value);
 
         const pricePer1K =
             servicePrices[service] || 0;
 
         if (!quantity || quantity <= 0) {
 
-            orderPrice.textContent =
-                "0.00";
-
+            orderPrice.textContent = "0.00";
             return;
+
         }
 
-        /*
-          Quantity is treated as actual quantity.
-
-          Example:
-          1000 = 1K
-          5000 = 5K
-        */
-
         const total =
-            (quantity / 1000) *
-            pricePer1K;
+            (quantity / 1000) * pricePer1K;
 
         orderPrice.textContent =
             total.toFixed(2);
+
     }
 
 
     if (serviceSelect) {
-
         serviceSelect.addEventListener(
             "change",
             updatePrice
@@ -460,7 +326,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     if (orderQuantity) {
-
         orderQuantity.addEventListener(
             "input",
             updatePrice
@@ -479,29 +344,28 @@ document.addEventListener("DOMContentLoaded", function () {
             function () {
 
                 const service =
-                    serviceSelect.value;
+                    serviceSelect ? serviceSelect.value : "";
 
                 const link =
-                    orderLink.value.trim();
+                    orderLink ? orderLink.value.trim() : "";
 
                 const quantity =
-                    Number(orderQuantity.value);
+                    orderQuantity ? Number(orderQuantity.value) : 0;
 
                 const pricePer1K =
                     servicePrices[service] || 0;
 
                 const total =
-                    (quantity / 1000) *
-                    pricePer1K;
+                    (quantity / 1000) * pricePer1K;
 
 
                 if (!service) {
 
-             showAlert(
-                       "Please select a service.",
-                       "Select Service",
-                               "🛒"
-                     );
+                    showAlert(
+                        "Please select a service.",
+                        "Select Service",
+                        "🛒"
+                    );
 
                     return;
                 }
@@ -510,96 +374,81 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (!link) {
 
                     showAlert(
-                              "Please enter the Instagram link.",
-                              "Link Required",
-                              "🔗"
-                             );
+                        "Please enter the Instagram link.",
+                        "Link Required",
+                        "🔗"
+                    );
 
                     return;
                 }
 
 
-                if (!quantity ||
-    quantity <= 0) {
+                if (!quantity || quantity <= 0) {
 
-    showAlert(
-        "Please enter a valid quantity.",
-        "Invalid Quantity",
-        "🔢"
-    );
+                    showAlert(
+                        "Please enter a valid quantity.",
+                        "Invalid Quantity",
+                        "🔢"
+                    );
 
-    return;
+                    return;
                 }
 
 
                 if (total <= 0) {
 
-    showAlert(
-        "The order amount is invalid.",
-        "Invalid Amount",
-        "⚠️"
-    );
+                    showAlert(
+                        "The order amount is invalid.",
+                        "Invalid Amount",
+                        "⚠️"
+                    );
 
-    return;
+                    return;
                 }
 
 
                 if (balance < total) {
 
                     showAlert(
-                              "Your balance is too low. Please add funds first.",
-                              "Insufficient Balance",
-                              "💰"
-                             );
+                        "Your balance is too low. Please add funds first.",
+                        "Insufficient Balance",
+                        "💰"
+                    );
 
                     return;
                 }
 
 
-                // Deduct balance
-
                 balance -= total;
 
 
-                const order = {
+                orders.unshift({
 
-                    id:
-                        "ORD-" +
-                        Date.now(),
+                    id: "ORD-" + Date.now(),
 
-                    service:
-                        service,
+                    service: service,
 
-                    link:
-                        link,
+                    link: link,
 
-                    quantity:
-                        quantity,
+                    quantity: quantity,
 
-                    amount:
-                        Number(total.toFixed(2)),
+                    amount: Number(total.toFixed(2)),
 
-                    status:
-                        "Pending",
+                    status: "Pending",
 
-                    date:
-                        new Date().toLocaleString()
+                    date: new Date().toLocaleString()
 
-                };
+                });
 
-
-                orders.unshift(order);
 
                 saveData();
-
                 updateBalance();
-
                 renderHistory();
 
 
-                orderModal.classList.remove(
-                    "active"
-                );
+                if (orderModal) {
+                    orderModal.classList.remove("active");
+                }
 
 
                 showSuccess(
@@ -609,36 +458,30 @@ document.addEventListener("DOMContentLoaded", function () {
 
             }
         );
+
     }
 
 
     // ================================
-    // ADD FUNDS
+    // FUNDS
     // ================================
 
     function openFunds() {
 
         if (!fundsModal) return;
 
-        fundsModal.classList.add(
-            "active"
-        );
+        fundsModal.classList.add("active");
 
         if (depositAmount) {
-
             depositAmount.value = "";
-
         }
 
     }
 
 
-    // Account Add Funds
-
     const accountAddFunds =
-        document.getElementById(
-            "accountAddFunds"
-        );
+        document.getElementById("accountAddFunds");
+
 
     if (accountAddFunds) {
 
@@ -649,8 +492,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     }
 
-
-    // Bottom Add Funds
 
     document.querySelectorAll(
         '[data-page="funds"]'
@@ -664,8 +505,22 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 
+    if (closeFunds) {
+
+        closeFunds.addEventListener(
+            "click",
+            function () {
+
+                fundsModal.classList.remove("active");
+
+            }
+        );
+
+    }
+
+
     // ================================
-    // PROCEED TO PAYMENT
+    // PAYMENT
     // ================================
 
     if (proceedPayBtn) {
@@ -675,62 +530,45 @@ document.addEventListener("DOMContentLoaded", function () {
             function () {
 
                 const amount =
-                    Number(
-                        depositAmount.value
+                    depositAmount
+                        ? Number(depositAmount.value)
+                        : 0;
+
+
+                if (!amount || amount <= 9) {
+
+                    showAlert(
+                        "Please enter a valid amount.",
+                        "Invalid Amount",
+                        "💰"
                     );
 
-
-                if (!amount ||
-    amount <= 9) {
-
-    showAlert(
-        "Please enter a valid amount.",
-        "Invalid Amount",
-        "💰"
-    );
-
-    return;
+                    return;
                 }
 
 
-                /*
-                  Deposit is initially Pending.
-
-                  IMPORTANT:
-                  Real bank/payment verification
-                  must happen on a secure backend.
-                */
-
                 const deposit = {
 
-                    id:
-                        "DEP-" +
-                        Date.now(),
+                    id: "DEP-" + Date.now(),
 
-                    amount:
-                        Number(
-                            amount.toFixed(2)
-                        ),
+                    amount: Number(
+                        amount.toFixed(2)
+                    ),
 
-                    status:
-                        "Pending",
+                    status: "Pending",
 
-                    date:
-                        new Date().toLocaleString()
+                    date: new Date().toLocaleString()
 
                 };
 
 
-                deposits.unshift(
-                    deposit
-                );
+                deposits.unshift(deposit);
 
                 saveData();
 
-                fundsModal.classList.remove(
-                    "active"
-                );
-
+                if (fundsModal) {
+                    fundsModal.classList.remove("active");
+                }
 
                 openPayment(
                     amount,
@@ -739,113 +577,74 @@ document.addEventListener("DOMContentLoaded", function () {
 
             }
         );
+
     }
 
 
-    // ================================
-    // PAYMENT SCREEN
-    // ================================
-
-    function openPayment(
-        amount,
-        depositId
-    ) {
+    function openPayment(amount, depositId) {
 
         if (!paymentModal) return;
 
-        paymentModal.classList.add(
-            "active"
-        );
+        paymentModal.classList.add("active");
 
         if (paymentAmount) {
-
             paymentAmount.textContent =
                 amount.toFixed(2);
-
         }
-
 
         if (paymentExpired) {
-
-            paymentExpired.style.display =
-                "none";
-
+            paymentExpired.style.display = "none";
         }
 
-
-        startPaymentTimer(
-            depositId
-        );
+        startPaymentTimer(depositId);
 
     }
 
 
-    // ================================
-    // 5 MINUTE TIMER
-    // ================================
-
-    function startPaymentTimer(
-        depositId
-    ) {
+    function startPaymentTimer(depositId) {
 
         stopPaymentTimer();
 
-        let remaining =
-            5 * 60;
-
+        let remaining = 5 * 60;
 
         if (paymentTimer) {
-
-            paymentTimer.textContent =
-                "05:00";
-
+            paymentTimer.textContent = "05:00";
         }
 
-
         paymentTimerInterval =
-            setInterval(
-                function () {
+            setInterval(function () {
 
-                    remaining--;
+                remaining--;
 
+                const minutes =
+                    Math.floor(remaining / 60);
 
-                    const minutes =
-                        Math.floor(
-                            remaining / 60
-                        );
-
-                    const seconds =
-                        remaining % 60;
+                const seconds =
+                    remaining % 60;
 
 
-                    if (paymentTimer) {
+                if (paymentTimer) {
 
-                        paymentTimer.textContent =
-                            String(minutes)
-                                .padStart(2, "0")
-                            + ":" +
-                            String(seconds)
-                                .padStart(2, "0");
+                    paymentTimer.textContent =
+                        String(minutes).padStart(2, "0")
+                        + ":" +
+                        String(seconds).padStart(2, "0");
 
+                }
+
+
+                if (remaining <= 0) {
+
+                    stopPaymentTimer();
+
+                    if (paymentExpired) {
+                        paymentExpired.style.display = "block";
                     }
 
+                }
 
-                    if (remaining <= 0) {
+            }, 1000);
 
-                        stopPaymentTimer();
-
-                        if (paymentExpired) {
-
-                            paymentExpired.style.display =
-                                "block";
-
-                        }
-
-                    }
-
-                },
-                1000
-            );
     }
 
 
@@ -853,9 +652,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (paymentTimerInterval) {
 
-            clearInterval(
-                paymentTimerInterval
-            );
+            clearInterval(paymentTimerInterval);
 
             paymentTimerInterval = null;
 
@@ -864,49 +661,60 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
+    if (closePayment) {
+
+        closePayment.addEventListener(
+            "click",
+            function () {
+
+                paymentModal.classList.remove("active");
+
+                stopPaymentTimer();
+
+            }
+        );
+
+    }
+
+
     // ================================
-    // SUCCESS MESSAGE
+    // SUCCESS
     // ================================
 
-    function showSuccess(
-        title,
-        message
-    ) {
+    function showSuccess(title, message) {
 
         const successTitle =
-            document.getElementById(
-                "successTitle"
-            );
+            document.getElementById("successTitle");
 
         const successMessage =
-            document.getElementById(
-                "successMessage"
-            );
+            document.getElementById("successMessage");
 
 
         if (successTitle) {
-
-            successTitle.textContent =
-                title;
-
+            successTitle.textContent = title;
         }
-
 
         if (successMessage) {
-
-            successMessage.textContent =
-                message;
-
+            successMessage.textContent = message;
         }
-
 
         if (successModal) {
-
-            successModal.classList.add(
-                "active"
-            );
-
+            successModal.classList.add("active");
         }
+
+    }
+
+
+    if (successCloseBtn) {
+
+        successCloseBtn.addEventListener(
+            "click",
+            function () {
+
+                successModal.classList.remove("active");
+
+            }
+        );
 
     }
 
@@ -916,8 +724,6 @@ document.addEventListener("DOMContentLoaded", function () {
     // ================================
 
     function renderHistory() {
-
-        // Orders
 
         if (orderHistory) {
 
@@ -932,8 +738,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     orders.map(function (order) {
 
                         const statusClass =
-                            order.status
-                                .toLowerCase();
+                            String(order.status).toLowerCase();
 
                         return `
                             <div class="history-item">
@@ -981,8 +786,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
 
-        // Deposits
-
         if (depositHistory) {
 
             if (deposits.length === 0) {
@@ -996,8 +799,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     deposits.map(function (deposit) {
 
                         const statusClass =
-                            deposit.status
-                                .toLowerCase();
+                            String(deposit.status).toLowerCase();
 
                         return `
                             <div class="history-item">
@@ -1038,7 +840,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     // ================================
-    // BASIC HTML ESCAPE
+    // ESCAPE HTML
     // ================================
 
     function escapeHTML(value) {
@@ -1052,556 +854,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
     }
 
+
     // ================================
-// BOTTOM NAVIGATION
-// ================================
+    // BOTTOM NAVIGATION
+    // ================================
 
-const bottomItems =
-    document.querySelectorAll(".bottom-nav-item");
+    const bottomItems =
+        document.querySelectorAll(".bottom-nav-item");
 
 
-// ================================
-// SUPABASE LOGIN ELEMENTS
-// ================================
+    bottomItems.forEach(function (item) {
 
-const accountBtn =
-    document.getElementById("accountBtn");
+        item.addEventListener(
+            "click",
+            async function () {
 
-const accountEmail =
-    document.getElementById("accountEmail");
-
-const logoutBtn =
-    document.getElementById("logoutBtn");
-
-const authModal =
-    document.getElementById("authModal");
-
-const authClose =
-    document.getElementById("authClose");
-
-const authTitle =
-    document.getElementById("authTitle");
-
-const authSubtitle =
-    document.getElementById("authSubtitle");
-
-const authEmail =
-    document.getElementById("authEmail");
-
-const authPassword =
-    document.getElementById("authPassword");
-
-const authSubmit =
-    document.getElementById("authSubmit");
-
-const authSwitch =
-    document.getElementById("authSwitch");
-
-const authSwitchText =
-    document.getElementById("authSwitchText");
-
-let authMode = "login";
-
-
-// ================================
-// BOTTOM NAVIGATION
-// ================================
-
-bottomItems.forEach(function (item) {
-
-    item.addEventListener("click", async function () {
-
-        bottomItems.forEach(function (btn) {
-            btn.classList.remove("active");
-        });
-
-        item.classList.add("active");
-
-        const page = item.dataset.page;
-
-
-        // HOME
-        if (page === "home") {
-
-            if (mainWebsite) {
-                mainWebsite.style.display = "block";
-            }
-
-            if (accountPage) {
-                accountPage.style.display = "none";
-            }
-
-            window.scrollTo({
-                top: 0,
-                behavior: "smooth"
-            });
-
-        }
-
-
-        // SERVICES
-        if (page === "services") {
-
-            if (mainWebsite) {
-                mainWebsite.style.display = "block";
-            }
-
-            if (accountPage) {
-                accountPage.style.display = "none";
-            }
-
-            const services =
-                document.getElementById("services");
-
-            if (services) {
-                services.scrollIntoView({
-                    behavior: "smooth"
-                });
-            }
-
-        }
-
-
-        // ACCOUNT
-        if (page === "account") {
-
-            const {
-                data: { session }
-            } = await supabaseClient.auth.getSession();
-
-
-            // NOT LOGGED IN
-            if (!session) {
-
-                if (accountPage) {
-                    accountPage.style.display = "none";
-                }
-
-                if (mainWebsite) {
-                    mainWebsite.style.display = "block";
-                }
-
-                if (authModal) {
-                    authModal.classList.add("active");
-                }
-
-                return;
-            }
-
-
-            // LOGGED IN
-            if (mainWebsite) {
-                mainWebsite.style.display = "none";
-            }
-
-            if (accountPage) {
-                accountPage.style.display = "block";
-            }
-
-            if (accountEmail) {
-                accountEmail.textContent =
-                    session.user.email || "";
-            }
-
-            updateBalance();
-            renderHistory();
-
-            window.scrollTo({
-                top: 0,
-                behavior: "smooth"
-            });
-
-        }
-
-    });
-
-});
-
-
-// ================================
-// INITIAL LOAD
-// ================================
-
-updateBalance();
-renderHistory();
-
-
-// ================================
-// CHECK EXISTING LOGIN
-// ================================
-
-async function checkLogin() {
-
-    const {
-        data: { session }
-    } = await supabaseClient.auth.getSession();
-
-
-    if (session && session.user) {
-
-        if (accountEmail) {
-            accountEmail.textContent =
-                session.user.email || "";
-        }
-
-        // Login hone par account button
-        // ko hide nahi karenge.
-        // Neeche wala Account button hi rahega.
-
-    }
-
-}
-
-checkLogin();
-
-
-// ================================
-// LOGOUT
-// ================================
-
-if (logoutBtn) {
-
-    logoutBtn.addEventListener(
-        "click",
-        async function () {
-
-            const { error } =
-                await supabaseClient.auth.signOut();
-
-
-            if (error) {
-
-                showAlert(
-                    error.message,
-                    "Logout Error",
-                    "❌"
-                );
-
-                return;
-            }
-
-
-            if (accountEmail) {
-                accountEmail.textContent = "";
-            }
-
-            if (accountPage) {
-                accountPage.style.display = "none";
-            }
-
-            if (mainWebsite) {
-                mainWebsite.style.display = "block";
-            }
-
-
-            // Home ko active karo
-            bottomItems.forEach(function (btn) {
-                btn.classList.remove("active");
-            });
-
-
-            const homeBtn =
-                document.querySelector(
-                    '.bottom-nav-item[data-page="home"]'
-                );
-
-            if (homeBtn) {
-                homeBtn.classList.add("active");
-            }
-
-
-            showAlert(
-                "Aap successfully logout ho gaye.",
-                "Logout Successful",
-                "✅"
-            );
-
-        }
-    );
-
-}
-
-
-// ================================
-// TOP LOGIN BUTTON
-// ================================
-
-if (accountBtn) {
-
-    accountBtn.addEventListener(
-        "click",
-        async function () {
-
-            const {
-                data: { session }
-            } = await supabaseClient.auth.getSession();
-
-
-            // Logged in hai
-            if (session && session.user) {
-
-                if (mainWebsite) {
-                    mainWebsite.style.display = "none";
-                }
-
-                if (accountPage) {
-                    accountPage.style.display = "block";
-                }
-
-                if (accountEmail) {
-                    accountEmail.textContent =
-                        session.user.email || "";
-                }
-
-                updateBalance();
-                renderHistory();
-
-                window.scrollTo({
-                    top: 0,
-                    behavior: "smooth"
-                });
-
-                return;
-            }
-
-
-            // Logged out hai
-            if (authModal) {
-                authModal.classList.add("active");
-            }
-
-        }
-    );
-
-}
-
-
-// ================================
-// CLOSE LOGIN
-// ================================
-
-if (authClose) {
-
-    authClose.addEventListener(
-        "click",
-        function () {
-
-            if (authModal) {
-                authModal.classList.remove("active");
-            }
-
-        }
-    );
-
-}
-
-
-// ================================
-// LOGIN / SIGN UP SWITCH
-// ================================
-
-if (authSwitch) {
-
-    authSwitch.addEventListener(
-        "click",
-        function () {
-
-            if (authMode === "login") {
-
-                authMode = "signup";
-
-                authTitle.textContent =
-                    "Sign Up";
-
-                authSubtitle.textContent =
-                    "Apna SarkAura account banayein.";
-
-                authSubmit.textContent =
-                    "Create Account";
-
-                authSwitchText.textContent =
-                    "Already have an account?";
-
-                authSwitch.textContent =
-                    "Login";
-
-            } else {
-
-                authMode = "login";
-
-                authTitle.textContent =
-                    "Login";
-
-                authSubtitle.textContent =
-                    "Apne SarkAura account mein login karein.";
-
-                authSubmit.textContent =
-                    "Login";
-
-                authSwitchText.textContent =
-                    "Account nahi hai?";
-
-                authSwitch.textContent =
-                    "Sign Up";
-
-            }
-
-        }
-    );
-
-}
-
-
-// ================================
-// LOGIN / SIGN UP
-// ================================
-
-if (authSubmit) {
-
-    authSubmit.addEventListener(
-        "click",
-        async function () {
-
-            const email =
-                authEmail.value.trim();
-
-            const password =
-                authPassword.value;
-
-
-            if (!email || !password) {
-
-                showAlert(
-                    "Email aur password dono enter karein.",
-                    "Details Required",
-                    "⚠️"
-                );
-
-                return;
-            }
-
-
-            if (password.length < 6) {
-
-                showAlert(
-                    "Password kam se kam 6 characters ka hona chahiye.",
-                    "Password Too Short",
-                    "🔐"
-                );
-
-                return;
-            }
-
-
-            authSubmit.disabled = true;
-
-            authSubmit.textContent =
-                "Please wait...";
-
-
-            try {
-
-                // LOGIN
-                if (authMode === "login") {
-
-                    const { error } =
-                        await supabaseClient.auth.signInWithPassword({
-                            email: email,
-                            password: password
-                        });
-
-
-                    if (error) {
-                        throw error;
-                    }
-
-
-                    const {
-                        data: { user }
-                    } =
-                        await supabaseClient.auth.getUser();
-
-
-                    if (user && accountEmail) {
-
-                        accountEmail.textContent =
-                            user.email || "";
-
-                    }
-
-
-                    if (authModal) {
-                        authModal.classList.remove("active");
-                    }
-
-
-                    // Account page directly open
-                    if (mainWebsite) {
-                        mainWebsite.style.display = "none";
-                    }
-
-                    if (accountPage) {
-                        accountPage.style.display = "block";
-                    }
-
-
-                    updateBalance();
-                    renderHistory();
-
-
-                    showAlert(
-                        "Login successful!",
-                        "Welcome",
-                        "✅"
-                    );
-
-                }
-
-
-                // SIGN UP
-                else {
-
-                    const { error } =
-                        await supabaseClient.auth.signUp({
-                            email: email,
-                            password: password
-                        });
-
-
-                    if (error) {
-                        throw error;
-                    }
-
-
-                    showAlert(
-                        "Account create ho gaya. Agar email confirmation enabled hai to email verify karein.",
-                        "Sign Up Successful",
-                        "✅"
-                    );
-
-                }
-
-
-            } catch (error) {
-
-                showAlert(
-                    error.message,
-                    "Authentication Error",
-                    "❌"
-                );
-
-            }
-
-
-            authSubmit.disabled = false;
-
-            authSubmit.textContent =
-                authMode === "login"
-                    ? "Login"
-                    : "Create Account";
-
-                }
-    );
-
-});
-            
+                
