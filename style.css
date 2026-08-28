@@ -1391,3 +1391,48 @@ button {
 .floating-contact:active {
     transform: scale(0.95);
     }
+
+/* ================================
+   ACCOUNT ADD FUNDS BUTTON
+================================ */
+
+.balance-card .main-order-btn {
+    width: 100%;
+    max-width: 260px;
+
+    margin: 18px auto 0;
+
+    padding: 13px 22px;
+
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 14px;
+
+    background: linear-gradient(
+        135deg,
+        #ffffff,
+        #e8e8ee
+    );
+
+    color: #08080d;
+
+    font-size: 15px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.25);
+
+    transition: all 0.25s ease;
+}
+
+.balance-card .main-order-btn:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 12px 30px rgba(0, 0, 0, 0.35);
+}
+
+.balance-card .main-order-btn:active {
+    transform: scale(0.97);
+    }
