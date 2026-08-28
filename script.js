@@ -511,23 +511,27 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
                 if (!quantity ||
-                    quantity <= 0) {
+    quantity <= 0) {
 
-                    alert(
-                        "Please enter a valid quantity."
-                    );
+    showAlert(
+        "Please enter a valid quantity.",
+        "Invalid Quantity",
+        "🔢"
+    );
 
-                    return;
+    return;
                 }
 
 
                 if (total <= 0) {
 
-                    alert(
-                        "Invalid order amount."
-                    );
+    showAlert(
+        "The order amount is invalid.",
+        "Invalid Amount",
+        "⚠️"
+    );
 
-                    return;
+    return;
                 }
 
 
