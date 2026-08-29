@@ -211,7 +211,27 @@ const supabaseClient = supabase.createClient(
     SUPABASE_KEY
 );
         function showPopup(message) {
-    alert(message);
+
+    const popup =
+        document.getElementById("popup");
+
+    const popupMessage =
+        document.getElementById("popupMessage");
+
+    const popupBtn =
+        document.getElementById("popupBtn");
+
+    if (!popup || !popupMessage || !popupBtn) {
+        return;
+    }
+
+    popupMessage.textContent = message;
+
+    popup.style.display = "flex";
+
+    popupBtn.onclick = function () {
+        popup.style.display = "none";
+    };
         }
         const loginBtn = document.getElementById("loginBtn");
 
