@@ -437,6 +437,44 @@ loadDeposits();
 
     loadDeposits();
         }
+
+    async function rejectDeposit(depositId) {
+
+    const { data: deposit, error: depositError } =
+        await supabaseClient
+            .from("deposits")
+            .select("*")
+            .eq("id", depositId)
+            .single();
+
+    if (depositError || !deposit) {
+        alert("Deposit not found.");
+        return;
+    }
+
+    if (deposit.status !== "pending") {
+        alert("This deposit is already processed.");
+        return;
+    }
+
+    const { error: statusError } =
+        await supabaseClient
+            .from("deposits")
+            .update({
+                status: "rejected"
+            })
+            .eq("id", depositId)
+            .eq("status", "pending");
+
+    if (statusError) {
+        alert(statusError.message);
+        return;
+    }
+
+    alert("Deposit rejected successfully.");
+
+    loadDeposits();
+           }
            </script>
 
 </body>
