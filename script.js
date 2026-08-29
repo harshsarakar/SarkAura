@@ -663,7 +663,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         proceedPayBtn.addEventListener(
             "click",
-            function () {
+            async function () {
 
                 const amount =
                     Number(
@@ -711,7 +711,26 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 };
 
+  if (typeof supabaseClient !== "undefined") {
 
+    const { data: sessionData } =
+        await supabaseClient.auth.getSession();
+
+    if (sessionData.session) {
+
+        await supabaseClient
+            .from("deposits")
+            .insert({
+                user_id: sessionData.session.user.id,
+                amount: deposit.amount,
+                status: "Pending",
+                payment_reference: deposit.id,
+                payment_method: "QR"
+            });
+
+    }
+  }
+                
                 deposits.unshift(
                     deposit
                 );
