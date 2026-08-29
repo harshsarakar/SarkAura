@@ -25,6 +25,12 @@
 </head>
 
 <body>
+    <script>
+    if (sessionStorage.getItem("loginSuccess") === "true") {
+        sessionStorage.removeItem("loginSuccess");
+        alert("Login Successful! Welcome to SarkAura.");
+    }
+    </script>
 
 <!-- =========================
      NAVBAR
