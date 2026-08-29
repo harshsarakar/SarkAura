@@ -571,7 +571,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         Number(total.toFixed(2)),
 
                     status:
-                        "Pending",
+                        "pending",
 
                     date:
                         new Date().toLocaleString()
