@@ -954,124 +954,174 @@ if (paymentQR) {
     // HISTORY
     // ================================
 
-    function renderHistory() {
+    async function renderHistory() {
 
-        // Orders
+    // Current logged-in user
+    const { data: sessionData, error: sessionError } =
+        await supabaseClient.auth.getSession();
 
-        if (orderHistory) {
+    if (sessionError || !sessionData.session) {
+        return;
+    }
 
-            if (orders.length === 0) {
+    const userId = sessionData.session.user.id;
 
-                orderHistory.innerHTML =
-                    '<div class="empty-history">No orders yet.</div>';
 
-            } else {
+    // ================================
+    // ORDERS
+    // ================================
 
-                orderHistory.innerHTML =
-                    orders.map(function (order) {
+    if (orderHistory) {
 
-                        const statusClass =
-                            order.status
-                                .toLowerCase();
+        const { data: userOrders, error: orderError } =
+            await supabaseClient
+                .from("orders")
+                .select("*")
+                .eq("user_id", userId)
+                .order("created_at", {
+                    ascending: false
+                });
 
-                        return `
-                            <div class="history-item">
+        if (orderError) {
 
-                                <div class="history-top">
+            orderHistory.innerHTML =
+                '<div class="empty-history">Unable to load orders.</div>';
 
-                                    <div class="history-service">
-                                        ${escapeHTML(order.service)}
-                                    </div>
+        } else if (!userOrders || userOrders.length === 0) {
 
-                                    <div class="history-status ${statusClass}">
-                                        ${escapeHTML(order.status)}
-                                    </div>
+            orderHistory.innerHTML =
+                '<div class="empty-history">No orders yet.</div>';
 
+        } else {
+
+            orderHistory.innerHTML =
+                userOrders.map(function (order) {
+
+                    const statusClass =
+                        String(order.status || "")
+                            .toLowerCase();
+
+                    return `
+                        <div class="history-item">
+
+                            <div class="history-top">
+
+                                <div class="history-service">
+                                    ${escapeHTML(order.service || "")}
                                 </div>
 
-                                <div class="history-details">
-
-                                    Quantity:
-                                    ${Number(order.quantity).toLocaleString()}
-
-                                    <br>
-
-                                    Amount:
-                                    ₹${Number(order.amount).toFixed(2)}
-
-                                    <br>
-
-                                    Link:
-                                    ${escapeHTML(order.link)}
-
-                                    <br>
-
-                                    ${escapeHTML(order.date)}
-
-                                </div>
-
-                            </div>
-                        `;
-
-                    }).join("");
-
-            }
-
-        }
-
-
-        // Deposits
-
-        if (depositHistory) {
-
-       if (deposits.length === 0) {
-
-                depositHistory.innerHTML =
-                    '<div class="empty-history">No deposits yet.</div>';
-
-            } else {
-
-                depositHistory.innerHTML =
-                    deposits.map(function (deposit) {
-
-                        const statusClass =
-                            deposit.status
-                                .toLowerCase();
-
-                        return `
-                            <div class="history-item">
-
-                                <div class="history-top">
-
-                                    <div class="history-service">
-                                        Deposit
-                                    </div>
-
-                                    <div class="history-status ${statusClass}">
-                                        ${escapeHTML(deposit.status)}
-                                    </div>
-
-                                </div>
-
-                                <div class="history-details">
-
-                                    Amount:
-                                    ₹${Number(deposit.amount).toFixed(2)}
-
-                                    <br>
-
-                                    ${escapeHTML(deposit.date)}
-
+                                <div class="history-status ${statusClass}">
+                                    ${escapeHTML(order.status || "")}
                                 </div>
 
                             </div>
-                        `;
 
-                    }).join("");
+                            <div class="history-details">
 
-            }
+                                Quantity:
+                                ${Number(order.quantity || 0).toLocaleString()}
+
+                                <br>
+
+                                Amount:
+                                ₹${Number(order.amount || 0).toFixed(2)}
+
+                                <br>
+
+                                Link:
+                                ${escapeHTML(order.link || "-")}
+
+                                <br>
+
+                                ${escapeHTML(order.created_at || order.date || "")}
+
+                            </div>
+
+                        </div>
+                    `;
+
+                }).join("");
 
         }
+    }
+
+
+    // ================================
+    // DEPOSITS - ONLY CURRENT USER
+    // ================================
+
+    if (depositHistory) {
+
+        const { data: userDeposits, error: depositError } =
+            await supabaseClient
+                .from("deposits")
+                .select("*")
+                .eq("user_id", userId)
+                .order("created_at", {
+                    ascending: false
+                });
+
+        if (depositError) {
+
+            depositHistory.innerHTML =
+                '<div class="empty-history">Unable to load deposits.</div>';
+
+            console.error(
+                "Deposit history error:",
+                depositError
+            );
+
+        } else if (!userDeposits || userDeposits.length === 0) {
+
+            depositHistory.innerHTML =
+                '<div class="empty-history">No deposits yet.</div>';
+
+        } else {
+
+            depositHistory.innerHTML =
+                userDeposits.map(function (deposit) {
+
+                    const statusClass =
+                        String(deposit.status || "")
+                            .toLowerCase();
+
+                    return `
+                        <div class="history-item">
+
+                            <div class="history-top">
+
+                                <div class="history-service">
+                                    Deposit
+                                </div>
+
+                                <div class="history-status ${statusClass}">
+                                    ${escapeHTML(deposit.status || "")}
+                                </div>
+
+                            </div>
+
+                            <div class="history-details">
+
+                                Amount:
+                                ₹${Number(deposit.amount || 0).toFixed(2)}
+
+                                <br>
+
+                                ${escapeHTML(
+                                    deposit.created_at ||
+                                    deposit.date ||
+                                    ""
+                                )}
+
+                            </div>
+
+                        </div>
+                    `;
+
+                }).join("");
+
+        }
+    }
 
     }
 
