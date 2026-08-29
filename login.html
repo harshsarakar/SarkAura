@@ -267,9 +267,13 @@ loginBtn.addEventListener("click", async function () {
             .single();
 
     if (profileError || !profile) {
-        showPopup("Profile not found.");
-        return;
-    }
+    showPopup(
+        "Profile Error: " +
+        (profileError ? profileError.message : "Profile not found")
+    );
+    console.error("Profile error:", profileError);
+    return;
+        }
 
     sessionStorage.setItem("loginSuccess", "true");
 
