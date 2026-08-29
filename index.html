@@ -1622,16 +1622,28 @@ const supabaseClient = supabase.createClient(
 
         const { data } = await supabaseClient.auth.getSession();
 
-        if (data.session && accountBtn) {
-            accountBtn.innerHTML = "👤 Account";
-        }
+        <script>
+const accountBtn = document.getElementById("accountBtn");
 
-    }
-        if (accountBtn) {
-    accountBtn.addEventListener("click", function (event) {
+async function checkLoginStatus() {
 
-        if (data.session) {
+    const { data } = await supabaseClient.auth.getSession();
+
+    if (data.session && accountBtn) {
+
+        accountBtn.innerHTML = "👤 Account";
+
+        accountBtn.href = "#";
+
+        accountBtn.addEventListener("click", function (event) {
+
             event.preventDefault();
+
+            const mainWebsite =
+                document.getElementById("mainWebsite");
+
+            const accountPage =
+                document.getElementById("accountPage");
 
             if (mainWebsite) {
                 mainWebsite.style.display = "none";
@@ -1645,14 +1657,14 @@ const supabaseClient = supabase.createClient(
                 top: 0,
                 behavior: "smooth"
             });
-        }
 
-    });
-        }
+        });
 
-    checkLoginStatus();
-    </script>
-    
+    }
+
+}
+
+checkLoginStatus();
+</script>
 </body>
-
-            </html>
+</html>
