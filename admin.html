@@ -372,6 +372,71 @@ async function loadDeposits() {
 }
 
 loadDeposits();
+    async function approveDeposit(depositId) {
+
+    const { data: deposit, error: depositError } =
+        await supabaseClient
+            .from("deposits")
+            .select("*")
+            .eq("id", depositId)
+            .single();
+
+    if (depositError || !deposit) {
+        alert("Deposit not found.");
+        return;
+    }
+
+    if (deposit.status !== "pending") {
+        alert("This deposit is already processed.");
+        return;
+    }
+
+    const { data: profile, error: profileError } =
+        await supabaseClient
+            .from("profiles")
+            .select("balance")
+            .eq("id", deposit.user_id)
+            .single();
+
+    if (profileError || !profile) {
+        alert("User profile not found.");
+        return;
+    }
+
+    const newBalance =
+        Number(profile.balance || 0) +
+        Number(deposit.amount);
+
+    const { error: balanceError } =
+        await supabaseClient
+            .from("profiles")
+            .update({
+                balance: newBalance
+            })
+            .eq("id", deposit.user_id);
+
+    if (balanceError) {
+        alert(balanceError.message);
+        return;
+    }
+
+    const { error: statusError } =
+        await supabaseClient
+            .from("deposits")
+            .update({
+                status: "approved"
+            })
+            .eq("id", depositId);
+
+    if (statusError) {
+        alert(statusError.message);
+        return;
+    }
+
+    alert("Deposit approved successfully.");
+
+    loadDeposits();
+        }
            </script>
 
 </body>
