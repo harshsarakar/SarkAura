@@ -1627,6 +1627,28 @@ const supabaseClient = supabase.createClient(
         }
 
     }
+        if (accountBtn) {
+    accountBtn.addEventListener("click", function (event) {
+
+        if (data.session) {
+            event.preventDefault();
+
+            if (mainWebsite) {
+                mainWebsite.style.display = "none";
+            }
+
+            if (accountPage) {
+                accountPage.style.display = "block";
+            }
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        }
+
+    });
+        }
 
     checkLoginStatus();
     </script>
