@@ -718,15 +718,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (sessionData.session) {
 
-        await supabaseClient
-            .from("deposits")
-            .insert({
+        const { error: depositError } =
+    await supabaseClient
+        .from("deposits")
+        .insert({
                 user_id: sessionData.session.user.id,
                 amount: deposit.amount,
                 status: "Pending",
                 payment_reference: deposit.id,
                 payment_method: "QR"
             });
+        if (depositError) {
+    console.error("Deposit save error:", depositError);
+        }
 
     }
   }
