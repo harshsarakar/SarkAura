@@ -269,7 +269,110 @@ const supabaseClient = supabase.createClient(
         </div>
 
     </main>
+    
+<script>
+async function loadDeposits() {
 
+    const depositList =
+        document.getElementById("depositList");
+
+    if (!depositList) return;
+
+    const { data, error } =
+        await supabaseClient
+            .from("deposits")
+            .select("*")
+            .eq("status", "pending")
+            .order("created_at", {
+                ascending: false
+            });
+
+    if (error) {
+
+        depositList.innerHTML =
+            "<p style='color:#ff6b6b;text-align:center;'>" +
+            error.message +
+            "</p>";
+
+        return;
+    }
+
+    if (!data || data.length === 0) {
+
+        depositList.innerHTML =
+            "<p style='color:#999;text-align:center;'>" +
+            "No pending deposits." +
+            "</p>";
+
+        return;
+    }
+
+    depositList.innerHTML =
+        data.map(function (deposit) {
+
+            return `
+                <div style="
+                    border:1px solid #24242d;
+                    border-radius:12px;
+                    padding:18px;
+                    margin-bottom:12px;
+                ">
+
+                    <div style="margin-bottom:8px;">
+                        <strong>💳 ₹${Number(deposit.amount).toFixed(2)}</strong>
+                    </div>
+
+                    <div style="
+                        color:#999;
+                        font-size:13px;
+                        word-break:break-all;
+                    ">
+                        User ID: ${deposit.user_id}
+                    </div>
+
+                    <div style="
+                        color:#999;
+                        font-size:13px;
+                        margin-top:5px;
+                    ">
+                        Reference: ${deposit.payment_reference || "-"}
+                    </div>
+
+                    <div style="margin-top:14px;">
+
+                        <button
+                            onclick="approveDeposit('${deposit.id}')"
+                            style="
+                                padding:10px 16px;
+                                border:0;
+                                border-radius:8px;
+                                cursor:pointer;
+                                margin-right:8px;
+                            ">
+                            ✅ Approve
+                        </button>
+
+                        <button
+                            onclick="rejectDeposit('${deposit.id}')"
+                            style="
+                                padding:10px 16px;
+                                border:0;
+                                border-radius:8px;
+                                cursor:pointer;
+                            ">
+                            ❌ Reject
+                        </button>
+
+                    </div>
+
+                </div>
+            `;
+
+        }).join("");
+}
+
+loadDeposits();
+           </script>
 
 </body>
 
