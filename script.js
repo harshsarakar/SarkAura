@@ -782,7 +782,27 @@ document.addEventListener("DOMContentLoaded", function () {
                 amount.toFixed(2);
 
         }
+        
+const paymentQR =
+    document.getElementById("paymentQR");
 
+if (paymentQR) {
+
+    const upiId = "6300807984@ybl";
+
+    const upiUrl =
+        "upi://pay?pa=" +
+        encodeURIComponent(upiId) +
+        "&pn=" +
+        encodeURIComponent("SarkAura") +
+        "&am=" +
+        amount.toFixed(2) +
+        "&cu=INR";
+
+    paymentQR.src =
+        "https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=" +
+        encodeURIComponent(upiUrl);
+}
 
         if (paymentExpired) {
 
