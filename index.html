@@ -1603,6 +1603,21 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="script.js"></script>
+    <script>
+    const accountBtn = document.getElementById("accountBtn");
+
+    async function checkLoginStatus() {
+
+        const { data } = await supabaseClient.auth.getSession();
+
+        if (data.session && accountBtn) {
+            accountBtn.innerHTML = "👤 Account";
+        }
+
+    }
+
+    checkLoginStatus();
+    </script>
     
 </body>
 
