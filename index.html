@@ -26,10 +26,46 @@
 
 <body>
     <script>
+document.addEventListener("DOMContentLoaded", function () {
+
     if (sessionStorage.getItem("loginSuccess") === "true") {
+
         sessionStorage.removeItem("loginSuccess");
-        alert("Login Successful! Welcome to SarkAura.");
-}
+
+        const customAlert =
+            document.getElementById("customAlert");
+
+        const customAlertTitle =
+            document.getElementById("customAlertTitle");
+
+        const customAlertMessage =
+            document.getElementById("customAlertMessage");
+
+        const customAlertIcon =
+            document.getElementById("customAlertIcon");
+
+        const customAlertBtn =
+            document.getElementById("customAlertBtn");
+
+        if (customAlert) {
+
+            customAlertTitle.textContent =
+                "Login Successful";
+
+            customAlertMessage.textContent =
+                "Welcome to SarkAura!";
+
+            customAlertIcon.textContent = "✓";
+
+            customAlert.style.display = "flex";
+
+            customAlertBtn.onclick = function () {
+                customAlert.style.display = "none";
+            };
+        }
+    }
+
+});
     </script>
 
 <!-- =========================
