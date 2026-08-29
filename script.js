@@ -704,7 +704,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         ),
 
                     status:
-                        "Pending",
+                        "pending",
 
                     date:
                         new Date().toLocaleString()
@@ -724,7 +724,7 @@ document.addEventListener("DOMContentLoaded", function () {
         .insert({
                 user_id: sessionData.session.user.id,
                 amount: deposit.amount,
-                status: "Pending",
+                status: "pending",
                 payment_reference: deposit.id,
                 payment_method: "QR"
             });
