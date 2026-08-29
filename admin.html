@@ -271,6 +271,32 @@ const supabaseClient = supabase.createClient(
     </main>
     
 <script>
+    async function loadAdminStats() {
+
+    const { data, error } =
+        await supabaseClient.rpc("get_admin_stats");
+
+    if (error) {
+        console.error("Admin stats error:", error);
+        return;
+    }
+
+    const stats = data;
+
+    document.getElementById("totalUsers").textContent =
+        stats.total_users;
+
+    document.getElementById("totalOrders").textContent =
+        stats.total_orders;
+
+    document.getElementById("pendingDeposits").textContent =
+        stats.pending_deposits;
+
+    document.getElementById("totalBalance").textContent =
+        Number(stats.total_balance).toFixed(2);
+}
+
+loadAdminStats();
 async function loadDeposits() {
 
     const depositList =
