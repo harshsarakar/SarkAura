@@ -1659,6 +1659,14 @@ async function checkLoginStatus() {
 
     const { data } = await supabaseClient.auth.getSession();
 
+    const accountEmail =
+    document.getElementById("accountEmail");
+
+if (data.session && accountEmail) {
+    accountEmail.textContent =
+        "📧 " + data.session.user.email;
+}
+
     if (data.session && accountBtn) {
 
         accountBtn.innerHTML = "👤 Account";
