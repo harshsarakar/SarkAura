@@ -1176,4 +1176,32 @@ document.addEventListener("DOMContentLoaded", function () {
 
     renderHistory();
 
+    // ================================
+// LOGOUT
+// ================================
+
+const logoutBtn =
+    document.getElementById("logoutBtn");
+
+if (logoutBtn) {
+
+    logoutBtn.addEventListener(
+        "click",
+        async function () {
+
+            const { error } =
+                await supabaseClient.auth.signOut();
+
+            if (error) {
+                alert(error.message);
+                return;
+            }
+
+            window.location.href = "login.html";
+
+        }
+    );
+
+}
+
 });
