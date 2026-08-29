@@ -729,6 +729,11 @@ document.addEventListener("DOMContentLoaded", function () {
                 payment_method: "QR"
             });
         if (depositError) {
+    showAlert(
+        depositError.message,
+        "Deposit Error",
+        "❌"
+    );
     console.error("Deposit save error:", depositError);
         }
 
