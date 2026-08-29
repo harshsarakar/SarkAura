@@ -260,7 +260,23 @@ loginBtn.addEventListener("click", async function () {
     }
     sessionStorage.setItem("loginSuccess", "true");
 
+const { data: profile, error: profileError } =
+    await supabaseClient
+        .from("profiles")
+        .select("role")
+        .eq("id", data.user.id)
+        .single();
+
+if (profileError || !profile) {
+    showPopup("Profile not found.");
+    return;
+}
+
+if (profile.role === "admin") {
+    window.location.href = "admin.html";
+} else {
     window.location.href = "index.html";
+        }
 
 });
 
