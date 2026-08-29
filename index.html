@@ -1674,6 +1674,29 @@ if (data.session && accountEmail) {
     accountEmail.textContent =
         "📧 " + data.session.user.email;
 }
+    if (data.session) {
+
+    const accountUserId =
+        document.getElementById("accountUserId");
+
+    const accountCreated =
+        document.getElementById("accountCreated");
+
+    if (accountUserId) {
+        accountUserId.textContent =
+            "🆔 User ID: " + data.session.user.id;
+    }
+
+    if (accountCreated) {
+        const createdDate =
+            new Date(data.session.user.created_at);
+
+        accountCreated.textContent =
+            "📅 Account Created: " +
+            createdDate.toLocaleDateString("en-IN");
+    }
+
+    }
 
     if (data.session && accountBtn) {
 
