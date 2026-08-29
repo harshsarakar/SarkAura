@@ -244,7 +244,7 @@ loginBtn.addEventListener("click", async function () {
         document.getElementById("loginPassword").value;
 
     if (!email || !password) {
-        alert("Please enter email and password.");
+        showPopup("Please enter email and password.");
         return;
     }
 
@@ -255,7 +255,7 @@ loginBtn.addEventListener("click", async function () {
         });
 
     if (error) {
-        alert(error.message);
+        showPopup(error.message);
         return;
     }
     sessionStorage.setItem("loginSuccess", "true");
@@ -288,11 +288,11 @@ signupBtn.addEventListener("click", async function (event) {
         });
 
     if (error) {
-        alert(error.message);
+        showPopup(error.message);
         return;
     }
 
-    alert("Account created successfully! Please login.");
+    showPopup("Account created successfully! Please login.");
 
 });
 
