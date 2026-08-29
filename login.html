@@ -143,6 +143,9 @@ const supabaseClient = supabase.createClient(
     SUPABASE_URL,
     SUPABASE_KEY
 );
+        function showPopup(message) {
+    alert(message);
+        }
         const loginBtn = document.getElementById("loginBtn");
 
 loginBtn.addEventListener("click", async function () {
@@ -187,7 +190,7 @@ signupBtn.addEventListener("click", async function (event) {
         document.getElementById("loginPassword").value;
 
     if (!email || !password) {
-        alert("Please enter email and password.");
+        showPopup("Please enter email and password.");
         return;
     }
 
