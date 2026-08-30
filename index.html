@@ -1869,13 +1869,18 @@ const closePaymentScreenshot =
 
 if (paymentSuccessfulBtn && paymentScreenshotModal) {
 
-    paymentSuccessfulBtn.addEventListener("click", function () {
+    paymentSuccessfulBtn.addEventListener("click", async function () {
 
-        paymentScreenshotModal.style.display = "flex";
+    const uploaded =
+        await uploadPaymentScreenshot();
 
-    });
+    if (!uploaded) {
+        return;
+    }
 
-}
+    paymentScreenshotModal.style.display = "flex";
+
+});
 
 if (closePaymentScreenshot && paymentScreenshotModal) {
 
