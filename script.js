@@ -75,9 +75,7 @@ document.addEventListener("DOMContentLoaded", function () {
         "Views Only": 4
     };
 
-    let balance = Number(
-        localStorage.getItem("sarkaura_balance") || 0
-    );
+    let balance = 0;
 
     let orders = JSON.parse(
         localStorage.getItem("sarkaura_orders") || "[]"
