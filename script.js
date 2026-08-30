@@ -823,50 +823,6 @@ if (placeOrderBtn) {
 
     let currentPaymentDepositId = null;
 
-    const userId =
-        sessionData.session.user.id;
-
-    const filePath =
-        userId + "/" +
-        currentPaymentDepositId + ".png";
-
-    const { error: uploadError } =
-        await supabaseClient
-            .storage
-            .from("payment-screenshots")
-            .upload(
-                filePath,
-                file,
-                {
-                    upsert: true,
-                    contentType: file.type
-                }
-            );
-
-    if (uploadError) {
-
-        console.error(
-            "Screenshot upload error:",
-            uploadError
-        );
-
-        showAlert(
-            uploadError.message,
-            "Upload Error",
-            "❌"
-        );
-
-        return false;
-    }
-
-    const { error: updateError } =
-        await supabaseClient
-            .from("deposits")
-            .update({
-                payment_screenshot: filePath
-            })
-            .
-
     function openPayment(
         amount,
         depositId
