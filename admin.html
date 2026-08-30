@@ -609,6 +609,12 @@ loadDeposits();
     })
 );
 
+        if (currentOrderFilter !== "all") {
+    ordersWithEmail = ordersWithEmail.filter(function (order) {
+        return order.status === currentOrderFilter;
+    });
+    }
+        
 orderList.innerHTML =
     ordersWithEmail.map(function (order) {
 
