@@ -188,6 +188,58 @@ document.addEventListener("DOMContentLoaded", function () {
     // ================================
 
     // ================================
+// UPDATE BALANCE FROM SUPABASE
+// ================================
+
+async function updateBalance() {
+
+    const { data: sessionData, error: sessionError } =
+        await supabaseClient.auth.getSession();
+
+    if (sessionError || !sessionData.session) {
+        return;
+    }
+
+    const userId =
+        sessionData.session.user.id;
+
+    const { data: profile, error } =
+        await supabaseClient
+            .from("profiles")
+            .select("balance")
+            .eq("id", userId)
+            .single();
+
+    if (error || !profile) {
+
+        console.error(
+            "Balance load error:",
+            error
+        );
+
+        return;
+    }
+
+    balance =
+        Number(profile.balance || 0);
+
+    if (accountBalance) {
+
+        accountBalance.textContent =
+            balance.toFixed(2);
+
+    }
+
+    if (orderBalance) {
+
+        orderBalance.textContent =
+            balance.toFixed(2);
+
+    }
+
+}
+
+    // ================================
     // FAQ
     // ================================
 
