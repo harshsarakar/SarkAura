@@ -276,6 +276,35 @@ const supabaseClient = supabase.createClient(
 
     <div class="panel">
 
+        <div style="
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+    margin-bottom:16px;
+">
+
+    <button onclick="filterOrders('all')">
+        All
+    </button>
+
+    <button onclick="filterOrders('pending')">
+        Pending
+    </button>
+
+    <button onclick="filterOrders('processing')">
+        Processing
+    </button>
+
+    <button onclick="filterOrders('completed')">
+        Completed
+    </button>
+
+    <button onclick="filterOrders('cancelled')">
+        Cancelled
+    </button>
+
+        </div>
+
         <div id="orderList">
 
             <p style="color:#999;text-align:center;">
