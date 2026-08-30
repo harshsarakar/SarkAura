@@ -773,6 +773,13 @@ orderList.innerHTML =
 
 
     loadOrders();
+    
+    let currentOrderFilter = "all";
+
+function filterOrders(status) {
+    currentOrderFilter = status;
+    loadOrders();
+}
            </script>
 
 </body>
