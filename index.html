@@ -1382,6 +1382,69 @@ margin-bottom:30px;
 
 </div>
 
+    <!-- PAYMENT SCREENSHOT POPUP -->
+
+<div class="order-modal" id="paymentScreenshotModal">
+
+    <div class="order-box">
+
+        <button
+            class="close-order"
+            id="closePaymentScreenshot">
+            ×
+        </button>
+
+        <div style="
+            font-size:42px;
+            text-align:center;
+            margin-bottom:10px;
+        ">
+            📸
+        </div>
+
+        <h2 style="text-align:center;">
+            Payment Screenshot
+        </h2>
+
+        <p style="
+            text-align:center;
+            color:#aaa;
+            line-height:1.6;
+            margin-top:12px;
+        ">
+            अपने payment का screenshot इस WhatsApp number पर भेज दें।
+            आपका payment verify करने के बाद amount आपके account में add कर दिया जाएगा।
+        </p>
+
+        <div style="
+            text-align:center;
+            font-size:18px;
+            font-weight:bold;
+            margin:18px 0;
+        ">
+            📱 9837429842
+        </div>
+
+        <a
+            href="https://wa.me/919837429842"
+            target="_blank"
+            style="
+                display:block;
+                text-align:center;
+                text-decoration:none;
+                padding:13px;
+                border-radius:10px;
+                background:#25D366;
+                color:white;
+                font-weight:bold;
+            ">
+            💬 Send Screenshot on WhatsApp
+        </a>
+
+    </div>
+
+</div>
+
 
 <!-- =========================
      SUCCESS PAGE
@@ -1764,23 +1827,6 @@ checkLoginStatus();
 setTimeout(function () {
     updateBalance();
 }, 1000);
-
-    const paymentSuccessfulBtn =
-    document.getElementById("paymentSuccessfulBtn");
-
-if (paymentSuccessfulBtn) {
-
-    paymentSuccessfulBtn.addEventListener("click", function () {
-
-        alert(
-            "📸 Payment Screenshot भेजें\n\n" +
-            "अपने payment का screenshot WhatsApp नंबर 9837429842 पर भेज दें।\n\n" +
-            "आपका payment verify करने के बाद amount आपके account में add कर दिया जाएगा।"
-        );
-
-    });
-
-}
 </script>
 
 </body>
