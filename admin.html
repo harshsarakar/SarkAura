@@ -739,12 +739,30 @@ orderList.innerHTML =
                         padding:18px;
                         margin-bottom:12px;
                     ">
+                    
 
-                        <div style="margin-bottom:8px;">
-                            <strong>
-                                📦 ${order.service_name}
-                            </strong>
-                        </div>
+                        <div style="
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+    margin-bottom:12px;
+">
+
+    <strong style="font-size:16px;">
+        📦 ${order.service_name}
+    </strong>
+
+    <span style="
+        padding:5px 9px;
+        border-radius:20px;
+        font-size:12px;
+        background:#24242d;
+    ">
+        ${order.status}
+    </span>
+
+</div>
 
                         <div style="
                             color:#999;
@@ -795,14 +813,6 @@ orderList.innerHTML =
                             margin-top:5px;
                         ">
                             Amount: ₹${Number(order.amount).toFixed(2)}
-                        </div>
-
-                        <div style="
-                            margin-top:8px;
-                            font-size:14px;
-                        ">
-                            Status:
-                            <strong>${order.status}</strong>
                         </div>
 
     <div style="
