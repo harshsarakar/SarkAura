@@ -637,6 +637,23 @@ loadDeposits();
         return order.status === currentOrderFilter;
     });
     }
+
+        const searchText =
+    (document.getElementById("orderSearch")?.value || "")
+        .trim()
+        .toLowerCase();
+
+if (searchText) {
+    ordersWithEmail = ordersWithEmail.filter(function (order) {
+
+        return (
+            String(order.id).toLowerCase().includes(searchText) ||
+            String(order.user_id).toLowerCase().includes(searchText) ||
+            String(order.link).toLowerCase().includes(searchText)
+        );
+
+    });
+    }
         
 orderList.innerHTML =
     ordersWithEmail.map(function (order) {
@@ -809,6 +826,14 @@ function filterOrders(status) {
     currentOrderFilter = status;
     loadOrders();
 }
+    const orderSearch =
+    document.getElementById("orderSearch");
+
+if (orderSearch) {
+    orderSearch.addEventListener("input", function () {
+        loadOrders();
+    });
+    }
            </script>
 
 </body>
