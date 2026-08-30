@@ -1763,6 +1763,23 @@ checkLoginStatus();
 setTimeout(function () {
     updateBalance();
 }, 1000);
+
+    const paymentSuccessfulBtn =
+    document.getElementById("paymentSuccessfulBtn");
+
+if (paymentSuccessfulBtn) {
+
+    paymentSuccessfulBtn.addEventListener("click", function () {
+
+        alert(
+            "📸 Payment Screenshot भेजें\n\n" +
+            "अपने payment का screenshot WhatsApp नंबर 9837429842 पर भेज दें।\n\n" +
+            "आपका payment verify करने के बाद amount आपके account में add कर दिया जाएगा।"
+        );
+
+    });
+
+}
 </script>
 
 </body>
