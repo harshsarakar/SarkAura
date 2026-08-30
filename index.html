@@ -1858,6 +1858,69 @@ setTimeout(function () {
     updateBalance();
 }, 1000);
 
+    supabaseClient.auth.onAuthStateChange(
+    function (event, session) {
+
+        if (!session || !accountBtn) return;
+
+        accountBtn.innerHTML = "👤 Account";
+        accountBtn.href = "#";
+
+        accountBtn.onclick = function (event) {
+
+            event.preventDefault();
+
+            const mainWebsite =
+                document.getElementById("mainWebsite");
+
+            const accountPage =
+                document.getElementById("accountPage");
+
+            if (mainWebsite) {
+                mainWebsite.style.display = "none";
+            }
+
+            if (accountPage) {
+                accountPage.style.display = "block";
+            }
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+
+        };
+
+        const accountEmail =
+            document.getElementById("accountEmail");
+
+        const accountUserId =
+            document.getElementById("accountUserId");
+
+        const accountCreated =
+            document.getElementById("accountCreated");
+
+        if (accountEmail) {
+            accountEmail.textContent =
+                "📧 " + session.user.email;
+        }
+
+        if (accountUserId) {
+            accountUserId.textContent =
+                "🆔 User ID: " + session.user.id;
+        }
+
+        if (accountCreated) {
+            accountCreated.textContent =
+                "📅 Account Created: " +
+                new Date(
+                    session.user.created_at
+                ).toLocaleDateString("en-IN");
+        }
+
+    }
+);
+
     const paymentSuccessfulBtn =
     document.getElementById("paymentSuccessfulBtn");
 
