@@ -414,6 +414,15 @@ const supabaseClient = supabase.createClient(
 
     document.getElementById("totalBalance").textContent =
         Number(stats.total_balance).toFixed(2);
+
+        document.getElementById("pendingOrders").textContent =
+    stats.pending_orders || 0;
+
+document.getElementById("processingOrders").textContent =
+    stats.processing_orders || 0;
+
+document.getElementById("completedOrders").textContent =
+    stats.completed_orders || 0;
 }
 
 loadAdminStats();
