@@ -821,12 +821,16 @@ if (placeOrderBtn) {
     // PAYMENT SCREEN
     // ================================
 
+    let currentPaymentDepositId = null;
+
     function openPayment(
         amount,
         depositId
     ) {
 
-        if (!paymentModal) return;
+        if (!paymentModal) return
+            
+            currentPaymentDepositId = depositId;;
 
         paymentModal.classList.add(
             "active"
