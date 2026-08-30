@@ -459,149 +459,174 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-    // ================================
-    // PLACE ORDER
-    // ================================
+    
+// ================================
+// PLACE ORDER
+// ================================
 
-    if (placeOrderBtn) {
+if (placeOrderBtn) {
 
-        placeOrderBtn.addEventListener(
-            "click",
-            function () {
+    placeOrderBtn.addEventListener(
+        "click",
+        async function () {
 
-                const service =
-                    serviceSelect.value;
+            const service =
+                serviceSelect.value;
 
-                const link =
-                    orderLink.value.trim();
+            const link =
+                orderLink.value.trim();
 
-                const quantity =
-                    Number(orderQuantity.value);
+            const quantity =
+                Number(orderQuantity.value);
 
-                const pricePer1K =
-                    servicePrices[service] || 0;
+            const pricePer1K =
+                servicePrices[service] || 0;
 
-                const total =
-                    (quantity / 1000) *
-                    pricePer1K;
-
-
-                if (!service) {
-
-             showAlert(
-                       "Please select a service.",
-                       "Select Service",
-                               "🛒"
-                     );
-
-                    return;
-                }
+            const total =
+                (quantity / 1000) *
+                pricePer1K;
 
 
-                if (!link) {
+            if (!service) {
 
-                    showAlert(
-                              "Please enter the Instagram link.",
-                              "Link Required",
-                              "🔗"
-                             );
-
-                    return;
-                }
-
-
-                if (!quantity ||
-    quantity <= 0) {
-
-    showAlert(
-        "Please enter a valid quantity.",
-        "Invalid Quantity",
-        "🔢"
-    );
-
-    return;
-                }
-
-
-                if (total <= 0) {
-
-    showAlert(
-        "The order amount is invalid.",
-        "Invalid Amount",
-        "⚠️"
-    );
-
-    return;
-                }
-
-
-                if (balance < total) {
-
-                    showAlert(
-                              "Your balance is too low. Please add funds first.",
-                              "Insufficient Balance",
-                              "💰"
-                             );
-
-                    return;
-                }
-
-
-                // Deduct balance
-
-                balance -= total;
-
-
-                const order = {
-
-                    id:
-                        "ORD-" +
-                        Date.now(),
-
-                    service:
-                        service,
-
-                    link:
-                        link,
-
-                    quantity:
-                        quantity,
-
-                    amount:
-                        Number(total.toFixed(2)),
-
-                    status:
-                        "pending",
-
-                    date:
-                        new Date().toLocaleString()
-
-                };
-
-
-                orders.unshift(order);
-
-                saveData();
-
-                updateBalance();
-
-                renderHistory();
-
-
-                orderModal.classList.remove(
-                    "active"
+                showAlert(
+                    "Please select a service.",
+                    "Select Service",
+                    "🛒"
                 );
 
-
-                showSuccess(
-                    "Order Successful",
-                    "Your service order has been placed successfully. Your service will be delivered within 24 hours."
-                );
-
+                return;
             }
-        );
-    }
 
+
+            if (!link) {
+
+                showAlert(
+                    "Please enter the Instagram link.",
+                    "Link Required",
+                    "🔗"
+                );
+
+                return;
+            }
+
+
+            if (!quantity || quantity <= 0) {
+
+                showAlert(
+                    "Please enter a valid quantity.",
+                    "Invalid Quantity",
+                    "🔢"
+                );
+
+                return;
+            }
+
+
+            if (total <= 0) {
+
+                showAlert(
+                    "The order amount is invalid.",
+                    "Invalid Amount",
+                    "⚠️"
+                );
+
+                return;
+            }
+
+
+            // Get current logged-in user
+
+            const { data: sessionData, error: sessionError } =
+                await supabaseClient.auth.getSession();
+
+            if (
+                sessionError ||
+                !sessionData.session
+            ) {
+
+                showAlert(
+                    "Please login first.",
+                    "Login Required",
+                    "🔐"
+                );
+
+                return;
+            }
+
+
+            // Place order through secure database function
+
+            const { data, error } =
+                await supabaseClient.rpc(
+                    "place_order",
+                    {
+                        p_service_name: service,
+                        p_link: link,
+                        p_quantity: quantity,
+                        p_amount: Number(total.toFixed(2))
+                    }
+                );
+
+
+            if (error) {
+
+                console.error(
+                    "Order error:",
+                    error
+                );
+
+                showAlert(
+                    error.message,
+                    "Order Failed",
+                    "⚠️"
+                );
+
+                return;
+            }
+
+
+            if (!data || !data.success) {
+
+                showAlert(
+                    "Unable to place the order.",
+                    "Order Failed",
+                    "⚠️"
+                );
+
+                return;
+            }
+
+
+            // Update displayed balance
+
+            balance =
+                Number(data.balance || 0);
+
+            updateBalance();
+
+
+            // Refresh history
+
+            renderHistory();
+
+
+            // Close modal
+
+            orderModal.classList.remove(
+                "active"
+            );
+
+
+            showSuccess(
+                "Order Successful",
+                "Your service order has been placed successfully. Your service will be delivered within 24 hours."
+            );
+
+        }
+    );
+
+        }
 
     // ================================
     // ADD FUNDS
