@@ -1040,10 +1040,17 @@ if (paymentQR) {
 
         if (orderError) {
 
-            orderHistory.innerHTML =
-                '<div class="empty-history">Unable to load orders.</div>';
+    console.error("ORDER HISTORY ERROR:", orderError);
 
-        } else if (!userOrders || userOrders.length === 0) {
+    orderHistory.innerHTML =
+        '<div class="empty-history">' +
+        'Unable to load orders: ' +
+        escapeHTML(orderError.message || "Unknown error") +
+        '</div>';
+
+        }
+
+         else if (!userOrders || userOrders.length === 0) {
 
             orderHistory.innerHTML =
                 '<div class="empty-history">No orders yet.</div>';
