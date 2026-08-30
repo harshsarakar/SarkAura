@@ -172,11 +172,6 @@ document.addEventListener("DOMContentLoaded", function () {
     function saveData() {
 
         localStorage.setItem(
-            "sarkaura_balance",
-            balance.toFixed(2)
-        );
-
-        localStorage.setItem(
             "sarkaura_orders",
             JSON.stringify(orders)
         );
@@ -191,20 +186,6 @@ document.addEventListener("DOMContentLoaded", function () {
     // ================================
     // UPDATE BALANCE
     // ================================
-
-    function updateBalance() {
-
-        if (accountBalance) {
-            accountBalance.textContent =
-                balance.toFixed(2);
-        }
-
-        if (orderBalance) {
-            orderBalance.textContent =
-                balance.toFixed(2);
-        }
-    }
-
 
     // ================================
     // FAQ
