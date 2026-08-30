@@ -1734,7 +1734,42 @@ if (data.session && accountEmail) {
 
 }
 
+    async function updateBalance() {
+
+    const { data: sessionData, error: sessionError } =
+        await supabaseClient.auth.getSession();
+
+    if (sessionError || !sessionData.session) {
+        return;
+    }
+
+    const userId = sessionData.session.user.id;
+
+    const { data: profile, error } =
+        await supabaseClient
+            .from("profiles")
+            .select("balance")
+            .eq("id", userId)
+            .single();
+
+    if (error || !profile) {
+        console.error("Balance error:", error);
+        return;
+    }
+
+    const balance = Number(profile.balance || 0).toFixed(2);
+
+    const orderBalance =
+        document.getElementById("orderBalance");
+
+    if (orderBalance) {
+        orderBalance.textContent = balance;
+    }
+
+    }
+
 checkLoginStatus();
+    updateBalance();
 </script>
 
 </body>
