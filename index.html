@@ -1827,6 +1827,35 @@ checkLoginStatus();
 setTimeout(function () {
     updateBalance();
 }, 1000);
+
+    const paymentSuccessfulBtn =
+    document.getElementById("paymentSuccessfulBtn");
+
+const paymentScreenshotModal =
+    document.getElementById("paymentScreenshotModal");
+
+const closePaymentScreenshot =
+    document.getElementById("closePaymentScreenshot");
+
+if (paymentSuccessfulBtn && paymentScreenshotModal) {
+
+    paymentSuccessfulBtn.addEventListener("click", function () {
+
+        paymentScreenshotModal.style.display = "flex";
+
+    });
+
+}
+
+if (closePaymentScreenshot && paymentScreenshotModal) {
+
+    closePaymentScreenshot.addEventListener("click", function () {
+
+        paymentScreenshotModal.style.display = "none";
+
+    });
+
+}
 </script>
 
 </body>
