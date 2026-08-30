@@ -590,7 +590,7 @@ loadDeposits();
             return;
         }
 
-        const ordersWithEmail = await Promise.all(
+        let ordersWithEmail = await Promise.all(
     data.map(async function (order) {
 
         const { data: email } =
