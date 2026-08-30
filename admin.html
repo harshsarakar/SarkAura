@@ -462,8 +462,27 @@ async function loadDeposits() {
         return;
     }
 
-    depositList.innerHTML =
-        data.map(function (deposit) {
+    const depositsWithEmail = await Promise.all(
+    data.map(async function (deposit) {
+
+        const { data: email } =
+            await supabaseClient.rpc(
+                "get_deposit_user_email",
+                {
+                    p_user_id: deposit.user_id
+                }
+            );
+
+        return {
+            ...deposit,
+            user_email: email || "-"
+        };
+
+    })
+);
+
+depositList.innerHTML =
+    depositsWithEmail.map(function (deposit) {
 
             return `
                 <div style="
