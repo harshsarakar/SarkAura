@@ -823,66 +823,6 @@ if (placeOrderBtn) {
 
     let currentPaymentDepositId = null;
 
-    const paymentScreenshotInput =
-    document.getElementById("paymentScreenshotInput");
-
-const selectedScreenshotName =
-    document.getElementById("selectedScreenshotName");
-
-if (paymentScreenshotInput) {
-
-    paymentScreenshotInput.addEventListener(
-        "change",
-        function () {
-
-            const file = this.files[0];
-
-            if (!file) return;
-
-            if (selectedScreenshotName) {
-                selectedScreenshotName.textContent =
-                    "📸 Selected: " + file.name;
-            }
-
-        }
-    );
-
-}
-
-    async function uploadPaymentScreenshot() {
-
-    const file = paymentScreenshotInput?.files[0];
-
-    if (!file) {
-        showAlert(
-            "Please select your payment screenshot first.",
-            "Screenshot Required",
-            "📸"
-        );
-        return false;
-    }
-
-    if (!currentPaymentDepositId) {
-        showAlert(
-            "Payment session not found. Please create a new payment.",
-            "Error",
-            "❌"
-        );
-        return false;
-    }
-
-    const { data: sessionData } =
-        await supabaseClient.auth.getSession();
-
-    if (!sessionData.session) {
-        showAlert(
-            "Please login first.",
-            "Login Required",
-            "🔐"
-        );
-        return false;
-    }
-
     const userId =
         sessionData.session.user.id;
 
