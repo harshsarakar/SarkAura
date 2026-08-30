@@ -689,6 +689,23 @@ loadDeposits();
     })
 );
 
+                // ORDER STATUS COUNTS
+
+        document.getElementById("pendingOrders").textContent =
+            ordersWithEmail.filter(function(order) {
+                return order.status === "pending";
+            }).length;
+
+        document.getElementById("processingOrders").textContent =
+            ordersWithEmail.filter(function(order) {
+                return order.status === "processing";
+            }).length;
+
+        document.getElementById("completedOrders").textContent =
+            ordersWithEmail.filter(function(order) {
+                return order.status === "completed";
+            }).length;
+
         if (currentOrderFilter !== "all") {
     ordersWithEmail = ordersWithEmail.filter(function (order) {
         return order.status === currentOrderFilter;
