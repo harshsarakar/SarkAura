@@ -628,6 +628,18 @@ loadDeposits();
                             <strong>${order.status}</strong>
                         </div>
 
+    <div style="
+    color:#999;
+    font-size:13px;
+    margin-top:5px;
+">
+    🕒 Time: ${
+        order.created_at
+            ? new Date(order.created_at).toLocaleString("en-IN")
+            : "-"
+    }
+</div>
+
                         <div style="margin-top:14px;">
 
                             <button
