@@ -1855,7 +1855,9 @@ if (data.session && accountEmail) {
 
 }
 
-checkLoginStatus();
+setTimeout(function () {
+    checkLoginStatus();
+}, 500);
 
 setTimeout(function () {
     updateBalance();
