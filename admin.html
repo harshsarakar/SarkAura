@@ -513,6 +513,18 @@ depositList.innerHTML =
     📧 Email: ${deposit.user_email}
 </div>
 
+<div style="
+    color:#999;
+    font-size:13px;
+    margin-top:5px;
+">
+    🕒 Time: ${
+        deposit.created_at
+            ? new Date(deposit.created_at).toLocaleString("en-IN")
+            : "-"
+    }
+</div>
+
                     <div style="
                         color:#999;
                         font-size:13px;
@@ -520,6 +532,23 @@ depositList.innerHTML =
                     ">
                         Reference: ${deposit.payment_reference || "-"}
                     </div>
+
+                    <div style="
+    color:#999;
+    font-size:13px;
+    margin-top:5px;
+    word-break:break-all;
+">
+    🆔 Deposit ID: ${deposit.id}
+</div>
+
+<div style="
+    color:#999;
+    font-size:13px;
+    margin-top:5px;
+">
+    📊 Status: ${deposit.status}
+</div>
 
                     <div style="margin-top:14px;">
 
