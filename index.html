@@ -1759,12 +1759,19 @@ if (data.session && accountEmail) {
 
     const balance = Number(profile.balance || 0).toFixed(2);
 
-    const orderBalance =
-        document.getElementById("orderBalance");
+    const accountBalance =
+    document.getElementById("accountBalance");
 
-    if (orderBalance) {
-        orderBalance.textContent = balance;
-    }
+if (accountBalance) {
+    accountBalance.textContent = balance;
+}
+
+const orderBalance =
+    document.getElementById("orderBalance");
+
+if (orderBalance) {
+    orderBalance.textContent = balance;
+        }
 
     }
 
