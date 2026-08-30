@@ -830,7 +830,7 @@ if (placeOrderBtn) {
 
         if (!paymentModal) return
             
-            currentPaymentDepositId = depositId;;
+            currentPaymentDepositId = depositId;
 
         paymentModal.classList.add(
             "active"
