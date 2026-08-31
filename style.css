@@ -1579,3 +1579,17 @@ button {
     font-weight: 700;
     cursor: pointer;
 }
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.logo small {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    opacity: 0.8;
+    margin-top: 3px;
+}
