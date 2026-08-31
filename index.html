@@ -1937,19 +1937,17 @@ const closePaymentScreenshot =
 
 if (paymentSuccessfulBtn && paymentScreenshotModal) {
 
-    paymentSuccessfulBtn.addEventListener("click", async function () {
+    paymentSuccessfulBtn.addEventListener(
+        "click",
+        function () {
 
-    const uploaded =
-        await uploadPaymentScreenshot();
+            paymentScreenshotModal.style.display =
+                "flex";
 
-    if (!uploaded) {
-        return;
-    }
-
-    paymentScreenshotModal.style.display = "flex";
-
-});
         }
+    );
+
+           }
 
 if (closePaymentScreenshot && paymentScreenshotModal) {
 
